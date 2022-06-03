@@ -10,23 +10,34 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": ["input", "outdir"],
+            "required": ["input", "primers"],
             "properties": {
                 "input": {
                     "type": "string",
                     "format": "file-path",
-                    "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
                     "schema": "assets/schema_input.json",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/isoseq/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "primers": {
+                    "type": "string",
+                    "fa_icon": "fas fa-grip-lines",
+                    "description": "Fasta file of primers sequences",
+                    "help_text": "The provided file must contains all primers sequences used for sequencing. \nGziped files are accepted. "
+                },
+                "gtf": {
+                    "type": "string",
+                    "fa_icon": "fas fa-stream",
+                    "description": "Genome annotation file",
+                    "help_text": "Provide a GTF annotation file (sorted by sequence and start) if you set the `--aligner` option to `uLTRA`\nGziped files are accepted. "
+                },
                 "outdir": {
                     "type": "string",
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
-                    "fa_icon": "fas fa-folder-open"
+                    "fa_icon": "fas fa-folder-open",
+                    "default": "results"
                 },
                 "email": {
                     "type": "string",
@@ -41,6 +52,117 @@
                     "fa_icon": "fas fa-file-signature"
                 }
             }
+        },
+        "ccs_options": {
+            "title": "ccs options",
+            "type": "object",
+            "description": "Set options for each program",
+            "default": "",
+            "properties": {
+                "chunk": {
+                    "type": "integer",
+                    "default": 40,
+                    "description": "ccs --chunk option",
+                    "help_text": "CCS workload can be split into to chunks for a faster running time. \nThis value must be a positive integer greater than 1. \n```bash\n--chunk 1/10 \n```",
+                    "fa_icon": "fas fa-cog"
+                },
+                "rq": {
+                    "type": "number",
+                    "default": 0.9,
+                    "description": "ccs --rq option",
+                    "help_text": "Minimum read quaiity for a consensus. \nUnder this threshold the sequence is discarded. \nThis value must be in range [0-1]. \n```bash\n--rq 0.9\n```",
+                    "fa_icon": "fas fa-cog"
+                },
+                "min_passes": {
+                    "type": "integer",
+                    "default": 3,
+                    "description": "ccs --min-passes option",
+                    "help_text": "Minimum number of full-length subreads required to generate CCS for a ZMW.",
+                    "fa_icon": "fas fa-cog"
+                },
+                "min_snr": {
+                    "type": "number",
+                    "default": 2.5,
+                    "description": "ccs --min-snr option",
+                    "help_text": "Minimum SNR of subreads to use for generating CCS",
+                    "fa_icon": "fas fa-cog"
+                },
+                "min_length": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "ccs --min-length option",
+                    "help_text": "Minimum draft length before polishing",
+                    "fa_icon": "fas fa-cog"
+                },
+                "max_length": {
+                    "type": "integer",
+                    "default": 50000,
+                    "description": "ccs --max-length option",
+                    "help_text": "Maximum draft length before polishing",
+                    "fa_icon": "fas fa-cog"
+                },
+                "top_passes": {
+                    "type": "integer",
+                    "default": 60,
+                    "description": "ccs --top-passes option",
+                    "help_text": "Pick at maximum the top N passes for each ZMW",
+                    "fa_icon": "fas fa-cog"
+                }
+            },
+            "fa_icon": "fas fa-cogs"
+        },
+        "aligner_option": {
+            "title": "Aligner option",
+            "type": "object",
+            "description": "uLTRA options",
+            "default": "",
+            "fa_icon": "fas fa-stream",
+            "properties": {
+                "aligner": {
+                    "type": "string",
+                    "description": "Aligner to use for mapping: minimap2 or ultra",
+                    "help_text": "The `uLTRA` aligner improve detection of small exons but require an annotation in GTF format to run. \nIf the genome don't have any reference annotation, you have to use `minimap2`. ",
+                    "fa_icon": "fas fa-stream",
+                    "enum": ["minimap2", "ultra"]
+                }
+            },
+            "required": ["aligner"]
+        },
+        "tama_options": {
+            "title": "TAMA options",
+            "type": "object",
+            "description": "TAMA collapse and TAMA merge options",
+            "default": "",
+            "properties": {
+                "capped": {
+                    "type": "boolean",
+                    "description": "TAMA collapse: Capped RNA?",
+                    "help_text": "Set this option if the RNAs are capped. \n```bash\n--capped\n```",
+                    "fa_icon": "fas fa-graduation-cap"
+                },
+                "five_prime": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "TAMA collapse: 5 prime wobble threshold",
+                    "help_text": "Set the maximum threshold for collapsing 5 prime exon.\n```\n--five_prime 100\n```",
+                    "fa_icon": "fas fa-cog"
+                },
+                "splice_junction": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "TAMA collapse: Splice junction / exon wobble threshold",
+                    "help_text": "Set the maximum threshold for collapsing spliced exons.\n```\n--splice_junction 10\n```",
+                    "fa_icon": "fas fa-cog"
+                },
+                "three_prime": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "TAMA collapse: 3 prime wobble threshold",
+                    "help_text": "Set the maximum threshold for collapsing 3 prime exon.\n```\n--three_prime 100\n```",
+                    "fa_icon": "fas fa-cog"
+                }
+            },
+            "fa_icon": "fas fa-cogs"
         },
         "reference_genome_options": {
             "title": "Reference genome options",
@@ -60,7 +182,7 @@
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs. Gziped files are accepted. ",
                     "fa_icon": "far fa-file-code"
                 },
                 "igenomes_base": {
@@ -78,7 +200,8 @@
                     "hidden": true,
                     "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
                 }
-            }
+            },
+            "required": ["fasta"]
         },
         "institutional_config_options": {
             "title": "Institutional config options",
@@ -252,6 +375,15 @@
     "allOf": [
         {
             "$ref": "#/definitions/input_output_options"
+        },
+        {
+            "$ref": "#/definitions/ccs_options"
+        },
+        {
+            "$ref": "#/definitions/aligner_option"
+        },
+        {
+            "$ref": "#/definitions/tama_options"
         },
         {
             "$ref": "#/definitions/reference_genome_options"

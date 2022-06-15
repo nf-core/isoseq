@@ -16,7 +16,7 @@ workflow SET_VALUE_CHANNEL {
             .set { data }
     }
     else {
-        Channel // Prepare value channel for primers used for the library preparation
+        Channel // Prepare value channel
             .value(file(infile))
             .set { data }
     }

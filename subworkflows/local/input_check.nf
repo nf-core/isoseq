@@ -7,7 +7,7 @@ include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet_check'
 workflow INPUT_CHECK {
     take:
     samplesheet // file: /path/to/samplesheet.csv
-    chunk // value: integer (number of chunk to create)
+    chunk       // value: integer (number of chunk to create)
 
     main:
     SAMPLESHEET_CHECK ( samplesheet )

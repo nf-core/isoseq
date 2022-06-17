@@ -53,18 +53,19 @@ include { GSTAMA_FILELIST } from '../modules/local/gstama/filelist/main'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { PBCCS }               from '../modules/nf-core/modules/pbccs/main'
-include { LIMA }                from '../modules/nf-core/modules/lima/main'
-include { ISOSEQ3_REFINE }      from '../modules/nf-core/modules/isoseq3/refine/main'
-include { BAMTOOLS_CONVERT }    from '../modules/nf-core/modules/bamtools/convert/main'
-include { GSTAMA_POLYACLEANUP } from '../modules/nf-core/modules/gstama/polyacleanup/main'
-include { GUNZIP }              from '../modules/nf-core/modules/gunzip/main'
-include { MINIMAP2_ALIGN }      from '../modules/nf-core/modules/minimap2/align/main'
-include { ULTRA_PIPELINE }      from '../modules/nf-core/modules/ultra/pipeline/main'
-include { SAMTOOLS_SORT }       from '../modules/nf-core/modules/samtools/sort/main'
-include { GSTAMA_COLLAPSE }     from '../modules/nf-core/modules/gstama/collapse/main'
-include { GSTAMA_MERGE }        from '../modules/nf-core/modules/gstama/merge/main'
-include { MULTIQC }             from '../modules/nf-core/modules/multiqc/main'
+include { PBCCS }                       from '../modules/nf-core/modules/pbccs/main'
+include { LIMA }                        from '../modules/nf-core/modules/lima/main'
+include { ISOSEQ3_REFINE }              from '../modules/nf-core/modules/isoseq3/refine/main'
+include { BAMTOOLS_CONVERT }            from '../modules/nf-core/modules/bamtools/convert/main'
+include { GSTAMA_POLYACLEANUP }         from '../modules/nf-core/modules/gstama/polyacleanup/main'
+include { GUNZIP }                      from '../modules/nf-core/modules/gunzip/main'
+include { MINIMAP2_ALIGN }              from '../modules/nf-core/modules/minimap2/align/main'
+include { ULTRA_PIPELINE }              from '../modules/nf-core/modules/ultra/pipeline/main'
+include { SAMTOOLS_SORT }               from '../modules/nf-core/modules/samtools/sort/main'
+include { GSTAMA_COLLAPSE }             from '../modules/nf-core/modules/gstama/collapse/main'
+include { GSTAMA_MERGE }                from '../modules/nf-core/modules/gstama/merge/main'
+include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/dumpsoftwareversions/main' addParams( options: [publish_files : ['_versions.yml':'']] )
+include { MULTIQC }                     from '../modules/nf-core/modules/multiqc/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -176,6 +177,14 @@ workflow ISOSEQ {
 
 
     //
+    // MODULE: CUSTOM_DUMPSOFTWAREVERSIONS
+    //
+    CUSTOM_DUMPSOFTWAREVERSIONS (
+        ch_versions.unique().collectFile(name: 'collated_versions.yml')
+    )
+
+
+    //
     // MODULE: MultiQC
     //
     workflow_summary    = WorkflowIsoseq.paramsSummaryMultiqc(workflow, summary_params)
@@ -188,6 +197,7 @@ workflow ISOSEQ {
     ch_multiqc_files = ch_multiqc_files.mix(PBCCS.out.report_json.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.summary.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.counts.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
 
     MULTIQC (
         ch_multiqc_files.collect()

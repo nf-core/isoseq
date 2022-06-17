@@ -69,7 +69,7 @@ On release, automated continuous integration tests run the pipeline on a full-si
 4. Start running your own analysis!
 
    ```console
-   nextflow run nf-core/isoseq --input samplesheet.csv --fasta <GENOME FASTA> --primers <PRIMER FASTA> -profile <docker/singularity/podman/shifter/charliecloud/conda/institute>
+   nextflow run nf-core/isoseq --input samplesheet.csv  --outdir <OUTDIR> --fasta <GENOME FASTA> --primers <PRIMER FASTA> -profile <docker/singularity/podman/shifter/charliecloud/conda/institute>
    ```
 
 ## Documentation

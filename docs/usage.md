@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This pipeline has been designed to analyse several samples or sequencing runs in the same time. It reads all samples from a samplesheet file and and parallelize computation for each of them.
+This pipeline has been designed to analyse several samples or sequencing runs at the same time. It reads all samples from a samplesheet file and parallelizes computation for each of them.
 
 ### Samplesheet input
 

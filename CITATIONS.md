@@ -30,6 +30,8 @@
 
 - [BAMTOOLS](https://github.com/pezmaster31/bamtools)
 
+  > Barnett DW, Garrison EK, Quinlan AR, Strömberg MP, Marth GT. BamTools: a C++ API and toolkit for analyzing and managing BAM files. Bioinformatics. 2011 Jun 15;27(12):1691-2. doi: 10.1093/bioinformatics/btr174. Epub 2011 Apr 14. PubMed PMID: 21493652; PubMed Central PMCID: PMC3106182.
+
 - [TAMA](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-07123-7)
 
   > Kuo, R.I., Cheng, Y., Zhang, R. et al. Illuminating the dark side of the human transcriptome with long read transcript sequencing. BMC Genomics 21, 751 (2020).

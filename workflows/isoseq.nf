@@ -147,33 +147,26 @@ workflow ISOSEQ {
 
     GSTAMA_MERGE(ch_tmerge_in.map { [ it[0], it[1] ] }, ch_tmerge_in.map { it[2] }) // Merge all bed files from one sample into a uniq bed file
 
+
     //
     // MODULE: Pipeline reporting
     //
-    ch_versions = ch_versions.mix(PBCCS.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(LIMA.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(ISOSEQ3_REFINE.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(BAMTOOLS_CONVERT.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(GSTAMA_COLLAPSE.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(GSTAMA_MERGE.out.versions.first().ifEmpty(null))
-    ch_versions = ch_versions.mix(GSTAMA_POLYACLEANUP.out.versions.first().ifEmpty(null))
+    ch_versions = ch_versions.mix(PBCCS.out.versions)
+    ch_versions = ch_versions.mix(LIMA.out.versions)
+    ch_versions = ch_versions.mix(ISOSEQ3_REFINE.out.versions)
+    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions)
+    ch_versions = ch_versions.mix(BAMTOOLS_CONVERT.out.versions)
+    ch_versions = ch_versions.mix(GSTAMA_COLLAPSE.out.versions)
+    ch_versions = ch_versions.mix(GSTAMA_MERGE.out.versions)
+    ch_versions = ch_versions.mix(GSTAMA_POLYACLEANUP.out.versions)
 
     if (params.aligner == "ultra") {
-        ch_versions = ch_versions.mix(ULTRA_PIPELINE.out.versions.first().ifEmpty(null))
-        ch_versions = ch_versions.mix(PERL_BIOPERL.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(ULTRA_PIPELINE.out.versions)
+        ch_versions = ch_versions.mix(PERL_BIOPERL.out.versions)
     }
     else if (params.aligner == "minimap2") {
-        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
     }
-
-    ch_versions
-        .map { it -> if (it) [ it.baseName, it ] }
-        .groupTuple()
-        .map { it[1][0] }
-        .flatten()
-        .collect()
-        .set { ch_versions }
 
 
     //

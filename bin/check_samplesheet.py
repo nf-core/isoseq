@@ -173,7 +173,7 @@ def check_samplesheet(file_in, file_out):
 
     Example:
         This function checks that the samplesheet follows the following structure,
-        see also the `viral recon samplesheet`_::
+        see also the `isoseq samplesheet`_::
 
             sample,bam,pbi
             Brian,Brian.bam,Brian.pbi
@@ -181,7 +181,7 @@ def check_samplesheet(file_in, file_out):
             Lung,Lung.bam,Lung.pbi
 
     .. _viral recon samplesheet:
-        https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+        https://raw.githubusercontent.com/nf-core/test-datasets/isoseq/samplesheet_full.csv
 
     """
     required_columns = {"sample", "bam", "pbi"}

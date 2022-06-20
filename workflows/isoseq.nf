@@ -193,7 +193,8 @@ workflow ISOSEQ {
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
 
     MULTIQC (
-        ch_multiqc_files.collect()
+        ch_multiqc_files.collect(),
+        [ ch_multiqc_config, file("$projectDir/assets/nf-core-isoseq_logo_light.png", checkIfExists: true) ]
     )
     multiqc_report = MULTIQC.out.report.toList()
     ch_versions    = ch_versions.mix(MULTIQC.out.versions)

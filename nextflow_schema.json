@@ -54,9 +54,9 @@
             }
         },
         "ccs_options": {
-            "title": "ccs options",
+            "title": "CCS options",
             "type": "object",
-            "description": "Set options for each program",
+            "description": "Use these options to set CCS parameters",
             "default": "",
             "properties": {
                 "chunk": {
@@ -114,7 +114,7 @@
         "aligner_option": {
             "title": "Aligner option",
             "type": "object",
-            "description": "uLTRA options",
+            "description": "Aligner selection",
             "default": "",
             "fa_icon": "fas fa-stream",
             "properties": {
@@ -131,7 +131,7 @@
         "tama_options": {
             "title": "TAMA options",
             "type": "object",
-            "description": "TAMA collapse and TAMA merge options",
+            "description": "Use these options to set TAMA collapse and TAMA merge parameters",
             "default": "",
             "properties": {
                 "capped": {

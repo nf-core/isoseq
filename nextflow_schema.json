@@ -62,49 +62,49 @@
                 "chunk": {
                     "type": "integer",
                     "default": 40,
-                    "description": "ccs --chunk option",
+                    "description": "ccs --chunk option, define the number of batches to run in parallel",
                     "help_text": "CCS workload can be split into to chunks for a faster running time. \nThis value must be a positive integer greater than 1. \n```bash\n--chunk 1/10 \n```",
                     "fa_icon": "fas fa-cog"
                 },
                 "rq": {
                     "type": "number",
                     "default": 0.9,
-                    "description": "ccs --rq option",
-                    "help_text": "Minimum read quaiity for a consensus. \nUnder this threshold the sequence is discarded. \nThis value must be in range [0-1]. \n```bash\n--rq 0.9\n```",
+                    "description": "ccs --rq option, define the minimum read quality for CCS selection",
+                    "help_text": "Minimum read quality for a consensus. \nUnder this threshold the sequence is discarded. \nThis value must be in range [0-1]. \n```bash\n--rq 0.9\n```",
                     "fa_icon": "fas fa-cog"
                 },
                 "min_passes": {
                     "type": "integer",
                     "default": 3,
-                    "description": "ccs --min-passes option",
+                    "description": "ccs --min-passes option, define the minimum number of passes to select a CCS",
                     "help_text": "Minimum number of full-length subreads required to generate CCS for a ZMW.",
                     "fa_icon": "fas fa-cog"
                 },
                 "min_snr": {
                     "type": "number",
                     "default": 2.5,
-                    "description": "ccs --min-snr option",
+                    "description": "ccs --min-snr option, minimum SNR of subreads to use for generating CCS",
                     "help_text": "Minimum SNR of subreads to use for generating CCS",
                     "fa_icon": "fas fa-cog"
                 },
                 "min_length": {
                     "type": "integer",
                     "default": 10,
-                    "description": "ccs --min-length option",
+                    "description": "ccs --min-length option, minimum CCS length for CCS selection",
                     "help_text": "Minimum draft length before polishing",
                     "fa_icon": "fas fa-cog"
                 },
                 "max_length": {
                     "type": "integer",
                     "default": 50000,
-                    "description": "ccs --max-length option",
+                    "description": "ccs --max-length option, maximum CCS length for CCS selection",
                     "help_text": "Maximum draft length before polishing",
                     "fa_icon": "fas fa-cog"
                 },
                 "top_passes": {
                     "type": "integer",
                     "default": 60,
-                    "description": "ccs --top-passes option",
+                    "description": "ccs --top-passes option, maximum number of passes to use for CCS generation",
                     "help_text": "Pick at maximum the top N passes for each ZMW",
                     "fa_icon": "fas fa-cog"
                 }

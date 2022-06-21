@@ -120,7 +120,7 @@ workflow ISOSEQ {
         PERL_BIOPERL(ULTRA_PIPELINE.out.sam)                                                    // Remove remove reads ending with GAP (N) in CIGAR string
         // `-> Related to issue https://github.com/ksahlin/ultra/issues/11
         // `-> Maybe should be removed?
-        SAMTOOLS_SORT(PERL_BIOPERL.out.out)   // Sort and convert sam to bam
+        SAMTOOLS_SORT(PERL_BIOPERL.out.txt)   // Sort and convert sam to bam
     }
     else if (params.aligner == "minimap2") {
         MINIMAP2_ALIGN(                       // Align read against genome

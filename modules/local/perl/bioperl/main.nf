@@ -11,7 +11,7 @@ process PERL_BIOPERL {
     tuple val(meta), path(file)
 
     output:
-    tuple val(meta), path("${task.ext.prefix}"), emit: out
+    tuple val(meta), path("${task.ext.prefix}"), emit: txt
     path "versions.yml"                        , emit: versions
 
     script:

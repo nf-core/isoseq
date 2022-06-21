@@ -33,7 +33,7 @@ output:
       description: File containing software version
       pattern: "*.{version.txt}"
 
-  - out:
+  - txt:
       type: file
       description: The updated input file.
 

@@ -19,7 +19,10 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-ch_multiqc_config        = file("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+ch_multiqc_config = [
+                        file("$projectDir/assets/multiqc_config.yml"           , checkIfExists: true),
+                        file("$projectDir/assets/nf-core-isoseq_logo_light.png", checkIfExists: true)
+                    ]
 ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multiqc_config) : Channel.empty()
 
 /*
@@ -194,7 +197,7 @@ workflow ISOSEQ {
 
     MULTIQC (
         ch_multiqc_files.collect(),
-        [ ch_multiqc_config, file("$projectDir/assets/nf-core-isoseq_logo_light.png", checkIfExists: true) ]
+        ch_multiqc_config
     )
     multiqc_report = MULTIQC.out.report.toList()
     ch_versions    = ch_versions.mix(MULTIQC.out.versions)

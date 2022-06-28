@@ -3,13 +3,43 @@
     "homePage": "https://github.com/nf-core/isoseq",
     "repos": {
         "nf-core/modules": {
+            "bamtools/convert": {
+                "git_sha": "8296a28346919c6739bec81fd6a041cd08d487a4"
+            },
             "custom/dumpsoftwareversions": {
                 "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
             },
-            "fastqc": {
+            "gstama/collapse": {
+                "git_sha": "e20e57f90b6787ac9a010a980cf6ea98bd990046"
+            },
+            "gstama/merge": {
                 "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
             },
+            "gstama/polyacleanup": {
+                "git_sha": "794f84534b0b259662199b7f3a67baa3c3ef9b62"
+            },
+            "gunzip": {
+                "git_sha": "9aadd9a6d3f5964476582319b3a1c54a3e3fe7c9"
+            },
+            "isoseq3/refine": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
+            "lima": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
+            "minimap2/align": {
+                "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b"
+            },
             "multiqc": {
+                "git_sha": "e5f8924fabf4c8380f55fb7aee89fd2c268161b1"
+            },
+            "pbccs": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
+            "samtools/sort": {
+                "git_sha": "897c33d5da084b61109500ee44c01da2d3e4e773"
+            },
+            "ultra/pipeline": {
                 "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
             }
         }

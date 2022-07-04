@@ -11,6 +11,7 @@ Split `uLTRA pipeline` into two processes, `uLTRA index` and `uLTRA align`. `GTF
 The `bioperl` module objective was to deal with [spurious alignments produced by uLTRA if a malformed GTF is used](https://github.com/ksahlin/ultra/issues/11). Removing it will stop the pipeline in case of malformed `GTF`.
 
 ### `Added`
+
 - Add `uLTRA index` and `uLTRA align` to replace `uLTRA pipeline` [PR 1830](https://github.com/nf-core/modules/pull/1830)
 
 ### `Fixed`
@@ -18,10 +19,10 @@ The `bioperl` module objective was to deal with [spurious alignments produced by
 ### `Dependencies`
 
 ### `Deprecated`
+
 - Remove `uLTRA pipeline`
 - Remove `samtools sort` module
 - Remove `bioperl` module
-
 
 ## v1.0.0 - Silver Swan [28/06/2022]
 

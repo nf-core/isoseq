@@ -3,6 +3,26 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.0 - Black Crow [XX/07/2022]
+
+Improves computation time.
+Split `uLTRA pipeline` into two processes, `uLTRA index` and `uLTRA align`. `GTF` index is computed once and not `chunk` times.
+`uLTRA align` sort and convert `sam` output into `bam` files. Aligned reads are already sorted by `minimap2` module. Therefore, `samtools sort` module is not needed anymore and has been removed.
+The `bioperl` module objective was to deal with [spurious alignments produced by uLTRA if a malformed GTF is used](https://github.com/ksahlin/ultra/issues/11). Removing it will stop the pipeline in case of malformed `GTF`.
+
+### `Added`
+- Add `uLTRA index` and `uLTRA align` to replace `uLTRA pipeline` [PR 1830](https://github.com/nf-core/modules/pull/1830)
+
+### `Fixed`
+
+### `Dependencies`
+
+### `Deprecated`
+- Remove `uLTRA pipeline`
+- Remove `samtools sort` module
+- Remove `bioperl` module
+
+
 ## v1.0.0 - Silver Swan [28/06/2022]
 
 Initial release of nf-core/isoseq, created with the [nf-core](https://nf-co.re/) template.

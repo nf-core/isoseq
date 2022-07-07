@@ -9,10 +9,13 @@ Improves computation time.
 Split `uLTRA pipeline` into two processes, `uLTRA index` and `uLTRA align`. `GTF` index is computed once and not `chunk` times.
 `uLTRA align` sort and convert `sam` output into `bam` files. Aligned reads are already sorted by `minimap2` module. Therefore, `samtools sort` module is not needed anymore and has been removed.
 The `bioperl` module objective was to deal with [spurious alignments produced by uLTRA if a malformed GTF is used](https://github.com/ksahlin/ultra/issues/11). Removing it will stop the pipeline in case of malformed `GTF`.
+Module resource requirements have been revised for four modules (`gstama/merge`, `isoseq3/refine`, `lima`, `ultra/align`) to reduce requested resources.
+AWS runs with shows better run time and CPU/RAM usage ([Results](docs/images/Isoseq_pipeline_v1.0.0_v1.1.0.png)).
 
 ### `Added`
 
 - Add `uLTRA index` and `uLTRA align` to replace `uLTRA pipeline` [PR 1830](https://github.com/nf-core/modules/pull/1830)
+- Module resources adjustments: `gstama/merge`, `isoseq3/refine`, `lima`, `ultra/align` [PR1858](https://github.com/nf-core/modules/pull/1858), `gunzip`, `MultiQC`
 
 ### `Fixed`
 

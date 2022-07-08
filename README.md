@@ -82,6 +82,7 @@ nf-core/isoseq was originally written by Sébastien Guizard.
 We thank the following people for their extensive assistance in the development of this pipeline:
 
 - Thanks to [Jose Espinosa-Carrasco](https://github.com/JoseEspinosa), [Daniel Schreyer](https://github.com/DSchreyer) and [Gisela Gabernet](https://github.com/ggabernet) for their reviews and contributions
+- [Kristoffer Sahlin](https://github.com/ksahlin) for `uLTRA` and the help he provided
 - [Richard Kuo](https://github.com/GenomeRIK) ([Wobble Genomics](https://www.wobblegenomics.com/)) for his valuable advices on isoseq analysis
 - The Workpackage 2 of [GENE-SWitCH Project](https://www.gene-switch.eu/) for their fruitful discussions and remarks
 - [Mick Watson](https://twitter.com/BioMickWatson) group for their support

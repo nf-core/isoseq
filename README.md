@@ -41,11 +41,10 @@ On release, automated continuous integration tests run the pipeline on a full-si
 4. Convert bam file into fasta file ([`BAMTOOLS CONVERT`](https://github.com/pezmaster31/bamtools))
 5. Select reads with a polyA tail and trim it ([`GSTAMA_POLYACLEANUP`](https://github.com/GenomeRIK/tama))
 6. uLTRA path: decompress FLNCs ([`GUNZIP`](https://www.gnu.org/software/gzip/))
-7. Map consensuses on the reference genome ([`MINIMAP2`](https://github.com/lh3/minimap2) or [`uLTRA`](https://github.com/ksahlin/ultra))
-8. uLTRA path remove spurious alignments ([`BIOPERL`](https://bioperl.org/))
-9. Sort sam file and convert bam ([`SAMTOOLS SORT`](http://www.htslib.org/doc/samtools-sort.html))
-10. Clean gene models ([`TAMA collapse`](https://github.com/GenomeRIK/tama))
-11. Merge annotations by sample ([`TAMA merge`](https://github.com/GenomeRIK/tama))
+7. uLTRA path: index `GTF` file for mapping ([`uLTRA`](https://github.com/ksahlin/ultra))
+8. Map consensuses on the reference genome ([`MINIMAP2`](https://github.com/lh3/minimap2) or [`uLTRA`](https://github.com/ksahlin/ultra))
+9. Clean gene models ([`TAMA collapse`](https://github.com/GenomeRIK/tama))
+10. Merge annotations by sample ([`TAMA merge`](https://github.com/GenomeRIK/tama))
 
 ## Quick Start
 
@@ -83,6 +82,7 @@ nf-core/isoseq was originally written by Sébastien Guizard.
 We thank the following people for their extensive assistance in the development of this pipeline:
 
 - Thanks to [Jose Espinosa-Carrasco](https://github.com/JoseEspinosa), [Daniel Schreyer](https://github.com/DSchreyer) and [Gisela Gabernet](https://github.com/ggabernet) for their reviews and contributions
+- [Kristoffer Sahlin](https://github.com/ksahlin) for `uLTRA` and the help he provided
 - [Richard Kuo](https://github.com/GenomeRIK) ([Wobble Genomics](https://www.wobblegenomics.com/)) for his valuable advices on isoseq analysis
 - The Workpackage 2 of [GENE-SWitCH Project](https://www.gene-switch.eu/) for their fruitful discussions and remarks
 - [Mick Watson](https://twitter.com/BioMickWatson) group for their support

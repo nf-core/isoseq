@@ -43,9 +43,7 @@ include { SET_VALUE_CHANNEL as SET_PRIMERS_CHANNEL } from '../subworkflows/local
 //
 // MODULE: Local to the pipeline
 //
-include { PERL_BIOPERL }    from '../modules/local/perl/bioperl/main'
 include { GSTAMA_FILELIST } from '../modules/local/gstama/filelist/main'
-
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,8 +61,8 @@ include { BAMTOOLS_CONVERT }            from '../modules/nf-core/modules/bamtool
 include { GSTAMA_POLYACLEANUP }         from '../modules/nf-core/modules/gstama/polyacleanup/main'
 include { GUNZIP }                      from '../modules/nf-core/modules/gunzip/main'
 include { MINIMAP2_ALIGN }              from '../modules/nf-core/modules/minimap2/align/main'
-include { ULTRA_PIPELINE }              from '../modules/nf-core/modules/ultra/pipeline/main'
-include { SAMTOOLS_SORT }               from '../modules/nf-core/modules/samtools/sort/main'
+include { ULTRA_INDEX }                 from '../modules/nf-core/modules/ultra/index/main'
+include { ULTRA_ALIGN }                 from '../modules/nf-core/modules/ultra/align/main'
 include { GSTAMA_COLLAPSE }             from '../modules/nf-core/modules/gstama/collapse/main'
 include { GSTAMA_MERGE }                from '../modules/nf-core/modules/gstama/merge/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/dumpsoftwareversions/main' addParams( options: [publish_files : ['_versions.yml':'']] )
@@ -115,24 +113,20 @@ workflow ISOSEQ {
 
     // Align FLNCs: User can choose between minimap2 and uLTRA aligners
     if (params.aligner == "ultra") {
-        GUNZIP(GSTAMA_POLYACLEANUP.out.fasta)                                                   // uncompress fastas (gz not supported by uLTRA)
-        ULTRA_PIPELINE(GUNZIP.out.gunzip, SET_FASTA_CHANNEL.out.data, SET_GTF_CHANNEL.out.data) // Align read against genome
-        PERL_BIOPERL(ULTRA_PIPELINE.out.sam)                                                    // Remove remove reads ending with GAP (N) in CIGAR string
-        // `-> Related to issue https://github.com/ksahlin/ultra/issues/11
-        // `-> Maybe should be removed?
-        SAMTOOLS_SORT(PERL_BIOPERL.out.txt)   // Sort and convert sam to bam
+        ULTRA_INDEX(SET_FASTA_CHANNEL.out.data, SET_GTF_CHANNEL.out.data)                 // Index GTF file before alignment
+        GUNZIP(GSTAMA_POLYACLEANUP.out.fasta)                                             // uncompress fastas (gz not supported by uLTRA)
+        ULTRA_ALIGN(GUNZIP.out.gunzip, SET_FASTA_CHANNEL.out.data, ULTRA_INDEX.out.index) // Align read against genome
+        GSTAMA_COLLAPSE(ULTRA_ALIGN.out.bam, SET_FASTA_CHANNEL.out.data)                  // Clean gene models
     }
     else if (params.aligner == "minimap2") {
-        MINIMAP2_ALIGN(                       // Align read against genome
+        MINIMAP2_ALIGN(                    // Align read against genome
             GSTAMA_POLYACLEANUP.out.fasta,
             SET_FASTA_CHANNEL.out.data,
             Channel.value('bam'),
             Channel.value(false),
             Channel.value(false))
-        SAMTOOLS_SORT(MINIMAP2_ALIGN.out.bam) // Sort and convert sam to bam
+        GSTAMA_COLLAPSE(MINIMAP2_ALIGN.out.bam, SET_FASTA_CHANNEL.out.data) // Clean gene models
     }
-
-    GSTAMA_COLLAPSE(SAMTOOLS_SORT.out.bam, SET_FASTA_CHANNEL.out.data) // Clean gene models
 
     GSTAMA_COLLAPSE.out.bed // replace id with the former sample id and group files by sample
         .map { [ [id:it[0].id_former], it[1] ] }
@@ -157,15 +151,14 @@ workflow ISOSEQ {
     ch_versions = ch_versions.mix(PBCCS.out.versions)
     ch_versions = ch_versions.mix(LIMA.out.versions)
     ch_versions = ch_versions.mix(ISOSEQ3_REFINE.out.versions)
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions)
     ch_versions = ch_versions.mix(BAMTOOLS_CONVERT.out.versions)
     ch_versions = ch_versions.mix(GSTAMA_COLLAPSE.out.versions)
     ch_versions = ch_versions.mix(GSTAMA_MERGE.out.versions)
     ch_versions = ch_versions.mix(GSTAMA_POLYACLEANUP.out.versions)
 
     if (params.aligner == "ultra") {
-        ch_versions = ch_versions.mix(ULTRA_PIPELINE.out.versions)
-        ch_versions = ch_versions.mix(PERL_BIOPERL.out.versions)
+        ch_versions = ch_versions.mix(ULTRA_INDEX.out.versions)
+        ch_versions = ch_versions.mix(ULTRA_ALIGN.out.versions)
     }
     else if (params.aligner == "minimap2") {
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)

@@ -66,7 +66,7 @@ The reference genome annotation in `GTF` format is required if `uLTRA` aligner i
 Two aligners are available. The `uLTRA` aligner helps to detect small exons with the help of reference genome. However if no annotation is available for your genome you can use minimap2.
 
 ```console
---fasta '[ultra,minimap2]'
+--aligner '[ultra,minimap2]'
 ```
 
 ## Running the pipeline

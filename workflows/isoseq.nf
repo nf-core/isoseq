@@ -190,7 +190,9 @@ workflow ISOSEQ {
 
     MULTIQC (
         ch_multiqc_files.collect(),
-        ch_multiqc_config
+        ch_multiqc_config,
+        [],
+        []
     )
     multiqc_report = MULTIQC.out.report.toList()
     ch_versions    = ch_versions.mix(MULTIQC.out.versions)

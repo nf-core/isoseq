@@ -12,7 +12,7 @@ This pipeline has been designed to analyse several samples or sequencing runs at
 
 You will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use `--input` parameter to specify its location.
 
-```console
+```bash
 --input '[path to samplesheet file]'
 ```
 
@@ -66,14 +66,14 @@ The reference genome annotation in `GTF` format is required if `uLTRA` aligner i
 Two aligners are available. The `uLTRA` aligner helps to detect small exons with the help of reference genome. However if no annotation is available for your genome you can use minimap2.
 
 ```console
---fasta '[ultra,minimap2]'
+--aligner '[ultra,minimap2]'
 ```
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
-```console
+```bash
 nextflow run nf-core/isoseq --input samplesheet.csv --outdir <OUTDIR> --primers primers.fasta --fasta Gallus_gallus.GRCg6a.dna.toplevel.fasta -profile singularity
 ```
 
@@ -81,9 +81,9 @@ This will launch the pipeline with the `singularity` configuration profile. See 
 
 Note that the pipeline will create the following files in your working directory:
 
-```console
+```bash
 work                # Directory containing the nextflow working files
-<OUTIDR>            # Finished results in specified location (defined with --outdir, default = 'results')
+<OUTDIR>            # Finished results in specified location (defined with --outdir)
 .nextflow_log       # Log file from Nextflow
 # Other nextflow hidden files, eg. history of pipeline runs and old logs.
 ```
@@ -92,7 +92,7 @@ work                # Directory containing the nextflow working files
 
 When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
 
-```console
+```bash
 nextflow pull nf-core/isoseq
 ```
 
@@ -268,6 +268,6 @@ Some HPC setups also allow you to run nextflow within a cluster job submitted yo
 In some cases, the Nextflow Java virtual machines can start to request a large amount of memory.
 We recommend adding the following line to your environment to limit this (typically in `~/.bashrc` or `~./bash_profile`):
 
-```console
+```bash
 NXF_OPTS='-Xms1g -Xmx4g'
 ```

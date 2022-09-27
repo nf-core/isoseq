@@ -3,44 +3,60 @@
     "homePage": "https://github.com/nf-core/isoseq",
     "repos": {
         "nf-core/modules": {
-            "bamtools/convert": {
-                "git_sha": "8296a28346919c6739bec81fd6a041cd08d487a4"
-            },
-            "custom/dumpsoftwareversions": {
-                "git_sha": "682f789f93070bd047868300dd018faf3d434e7c"
-            },
-            "gstama/collapse": {
-                "git_sha": "e20e57f90b6787ac9a010a980cf6ea98bd990046"
-            },
-            "gstama/merge": {
-                "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
-            },
-            "gstama/polyacleanup": {
-                "git_sha": "794f84534b0b259662199b7f3a67baa3c3ef9b62"
-            },
-            "gunzip": {
-                "git_sha": "fa37e0662690c4ec4260dae282fbce08777503e6"
-            },
-            "isoseq3/refine": {
-                "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
-            },
-            "lima": {
-                "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
-            },
-            "minimap2/align": {
-                "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b"
-            },
-            "multiqc": {
-                "git_sha": "5138acca0985ca01c38a1c4fba917d83772b1106"
-            },
-            "pbccs": {
-                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
-            },
-            "ultra/align": {
-                "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
-            },
-            "ultra/index": {
-                "git_sha": "60c65fb3864c2389b041c7d2bdf1a4332ff7d0b2"
+            "git_url": "https://github.com/nf-core/modules.git",
+            "modules": {
+                "bamtools/convert": {
+                    "branch": "master",
+                    "git_sha": "8296a28346919c6739bec81fd6a041cd08d487a4"
+                },
+                "custom/dumpsoftwareversions": {
+                    "branch": "master",
+                    "git_sha": "82501fe6d0d12614db67751d30af98d16e63dc59"
+                },
+                "gstama/collapse": {
+                    "branch": "master",
+                    "git_sha": "e20e57f90b6787ac9a010a980cf6ea98bd990046"
+                },
+                "gstama/merge": {
+                    "branch": "master",
+                    "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                },
+                "gstama/polyacleanup": {
+                    "branch": "master",
+                    "git_sha": "794f84534b0b259662199b7f3a67baa3c3ef9b62"
+                },
+                "gunzip": {
+                    "branch": "master",
+                    "git_sha": "90aef30f432332bdf0ce9f4b9004aa5d5c4960bb"
+                },
+                "isoseq3/refine": {
+                    "branch": "master",
+                    "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                },
+                "lima": {
+                    "branch": "master",
+                    "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                },
+                "minimap2/align": {
+                    "branch": "master",
+                    "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b"
+                },
+                "multiqc": {
+                    "branch": "master",
+                    "git_sha": "90aef30f432332bdf0ce9f4b9004aa5d5c4960bb"
+                },
+                "pbccs": {
+                    "branch": "master",
+                    "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+                },
+                "ultra/align": {
+                    "branch": "master",
+                    "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                },
+                "ultra/index": {
+                    "branch": "master",
+                    "git_sha": "60c65fb3864c2389b041c7d2bdf1a4332ff7d0b2"
+                }
             }
         }
     }

@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.1 - White Hawk [26/09/2022]
+
+Update the pipeline to nf-core 2.5.1, update modules, and fix documentation.
+
+### `Added`
+
+### `Fixed`
+
+- Documentation: Correct aligner option documentation
+
+### `Dependencies`
+
+- Update `samplesheet_check` module
+- Update `dumpsoftwareversion` module
+- Update `MultiQC` module
+
+### `Deprecated`
+
 ## v1.1.0 - Black Crow [12/07/2022]
 
 Improves computation time.

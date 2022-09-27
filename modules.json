@@ -11,7 +11,7 @@
                 },
                 "custom/dumpsoftwareversions": {
                     "branch": "master",
-                    "git_sha": "de7b50fdd07f7f81849d582e731b784ee75b20e5"
+                    "git_sha": "82501fe6d0d12614db67751d30af98d16e63dc59"
                 },
                 "gstama/collapse": {
                     "branch": "master",

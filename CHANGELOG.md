@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v1.1.1 - White Hawk [26/09/2022]
 
-Initial release of nf-core/isoseq, created with the [nf-core](https://nf-co.re/) template.
+Update the pipeline to nf-core 2.5.1, update modules, and fix documentation.
 
 ### `Added`
 
@@ -14,6 +14,10 @@ Initial release of nf-core/isoseq, created with the [nf-core](https://nf-co.re/)
 - Documentation: Correct aligner option documentation
 
 ### `Dependencies`
+
+- Update `samplesheet_check` module
+- Update `dumpsoftwareversion` module
+- Update `MultiQC` module
 
 ### `Deprecated`
 

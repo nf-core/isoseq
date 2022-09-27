@@ -11,7 +11,7 @@
                 },
                 "custom/dumpsoftwareversions": {
                     "branch": "master",
-                    "git_sha": "682f789f93070bd047868300dd018faf3d434e7c"
+                    "git_sha": "de7b50fdd07f7f81849d582e731b784ee75b20e5"
                 },
                 "gstama/collapse": {
                     "branch": "master",
@@ -27,7 +27,7 @@
                 },
                 "gunzip": {
                     "branch": "master",
-                    "git_sha": "fa37e0662690c4ec4260dae282fbce08777503e6"
+                    "git_sha": "90aef30f432332bdf0ce9f4b9004aa5d5c4960bb"
                 },
                 "isoseq3/refine": {
                     "branch": "master",
@@ -43,7 +43,7 @@
                 },
                 "multiqc": {
                     "branch": "master",
-                    "git_sha": "5138acca0985ca01c38a1c4fba917d83772b1106"
+                    "git_sha": "90aef30f432332bdf0ce9f4b9004aa5d5c4960bb"
                 },
                 "pbccs": {
                     "branch": "master",

@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.2 - Gray Eagle [XX/XX/2022]
+
+
+
+### `Added`
+- Zenodo DOI
+
+### `Fixed`
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.1 - White Hawk [26/09/2022]
 
 Update the pipeline to nf-core 2.5.1, update modules, and fix documentation.

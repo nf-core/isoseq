@@ -9,13 +9,53 @@
                         "branch": "master",
                         "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
                     },
-                    "fastqc": {
-                        "branch": "master",
-                        "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                    },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
+                    },
+                    "bamtools/convert": {
+                        "branch": "master",
+                        "git_sha": "8296a28346919c6739bec81fd6a041cd08d487a4"
+                    },
+                    "gstama/collapse": {
+                        "branch": "master",
+                        "git_sha": "e20e57f90b6787ac9a010a980cf6ea98bd990046"
+                    },
+                    "gstama/merge": {
+                        "branch": "master",
+                        "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                    },
+                    "gstama/polyacleanup": {
+                        "branch": "master",
+                        "git_sha": "794f84534b0b259662199b7f3a67baa3c3ef9b62"
+                    },
+                    "gunzip": {
+                        "branch": "master",
+                        "git_sha": "90aef30f432332bdf0ce9f4b9004aa5d5c4960bb"
+                    },
+                    "isoseq3/refine": {
+                        "branch": "master",
+                        "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                    },
+                    "lima": {
+                        "branch": "master",
+                        "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                    },
+                    "minimap2/align": {
+                        "branch": "master",
+                        "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b"
+                    },
+                    "pbccs": {
+                        "branch": "master",
+                        "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+                    },
+                    "ultra/align": {
+                        "branch": "master",
+                        "git_sha": "2f1eca7467b254ebbac147fbddf36402ea120f01"
+                    },
+                    "ultra/index": {
+                        "branch": "master",
+                        "git_sha": "60c65fb3864c2389b041c7d2bdf1a4332ff7d0b2"
                     }
                 }
             }

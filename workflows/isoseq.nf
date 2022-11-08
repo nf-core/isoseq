@@ -58,19 +58,19 @@ include { GSTAMA_FILELIST } from '../modules/local/gstama/filelist/main'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { PBCCS }                       from '../modules/nf-core/modules/pbccs/main'
-include { LIMA }                        from '../modules/nf-core/modules/lima/main'
-include { ISOSEQ3_REFINE }              from '../modules/nf-core/modules/isoseq3/refine/main'
-include { BAMTOOLS_CONVERT }            from '../modules/nf-core/modules/bamtools/convert/main'
-include { GSTAMA_POLYACLEANUP }         from '../modules/nf-core/modules/gstama/polyacleanup/main'
-include { GUNZIP }                      from '../modules/nf-core/modules/gunzip/main'
-include { MINIMAP2_ALIGN }              from '../modules/nf-core/modules/minimap2/align/main'
-include { ULTRA_INDEX }                 from '../modules/nf-core/modules/ultra/index/main'
-include { ULTRA_ALIGN }                 from '../modules/nf-core/modules/ultra/align/main'
-include { GSTAMA_COLLAPSE }             from '../modules/nf-core/modules/gstama/collapse/main'
-include { GSTAMA_MERGE }                from '../modules/nf-core/modules/gstama/merge/main'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/dumpsoftwareversions/main' addParams( options: [publish_files : ['_versions.yml':'']] )
-include { MULTIQC }                     from '../modules/nf-core/modules/multiqc/main'
+include { PBCCS }                       from '../modules/nf-core/pbccs/main'
+include { LIMA }                        from '../modules/nf-core/lima/main'
+include { ISOSEQ3_REFINE }              from '../modules/nf-core/isoseq3/refine/main'
+include { BAMTOOLS_CONVERT }            from '../modules/nf-core/bamtools/convert/main'
+include { GSTAMA_POLYACLEANUP }         from '../modules/nf-core/gstama/polyacleanup/main'
+include { GUNZIP }                      from '../modules/nf-core/gunzip/main'
+include { MINIMAP2_ALIGN }              from '../modules/nf-core/minimap2/align/main'
+include { ULTRA_INDEX }                 from '../modules/nf-core/ultra/index/main'
+include { ULTRA_ALIGN }                 from '../modules/nf-core/ultra/align/main'
+include { GSTAMA_COLLAPSE }             from '../modules/nf-core/gstama/collapse/main'
+include { GSTAMA_MERGE }                from '../modules/nf-core/gstama/merge/main'
+include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main' addParams( options: [publish_files : ['_versions.yml':'']] )
+include { MULTIQC }                     from '../modules/nf-core/multiqc/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

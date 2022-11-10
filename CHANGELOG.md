@@ -3,13 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.1.2 - Gray Eagle [XX/XX/2022]
+## v1.1.2 - Gray Eagle [10/11/2022]
 
 ### `Added`
 
+- Update module pbccs (v6.2.0)
+- Update module isoseq refine (v3.4.0)
+- Update module lima (v2.2.0)
+- Update module uLTRA (v0.0.4.2). Fix [issue #17](https://github.com/ksahlin/ultra/issues/17). Thanks to [Husen M. Umer](https://github.com/husensofteng).
 - Zenodo DOI
 
 ### `Fixed`
+
+- Remove hard coded capped option for GSTAMA_FILELIST step. Now follow user choice. Thanks to [Mazdak Salavati](https://github.com/MazdaX).
 
 ### `Dependencies`
 

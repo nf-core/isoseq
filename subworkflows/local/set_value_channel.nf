@@ -2,7 +2,7 @@
 // Check input samplesheet and get read channels
 //
 
-include { GUNZIP } from '../../modules/nf-core/modules/gunzip/main'
+include { GUNZIP } from '../../modules/nf-core/gunzip/main'
 
 workflow SET_VALUE_CHANNEL {
     take:

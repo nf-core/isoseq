@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.nf_core_bot_auth_token }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v2
 
       - name: Install Prettier
         run: npm install -g prettier @prettier/plugin-php
@@ -34,9 +34,9 @@ jobs:
         id: prettier_status
         run: |
           if prettier --check ${GITHUB_WORKSPACE}; then
-            echo "result=pass" >> $GITHUB_OUTPUT
+            echo "::set-output name=result::pass"
           else
-            echo "result=fail" >> $GITHUB_OUTPUT
+            echo "::set-output name=result::fail"
           fi
 
       - name: Run 'prettier --write'

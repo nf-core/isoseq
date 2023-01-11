@@ -7,10 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- Update module pbccs (v6.4.0)
-- Update module isoseq refine (v3.8.1)
-- Update module lima (v2.6.0)
-- Update module uLTRA (v0.0.4.2). Fix [issue #17](https://github.com/ksahlin/ultra/issues/17). Thanks to [Husen M. Umer](https://github.com/husensofteng).
+- Fix [issue #17](https://github.com/ksahlin/ultra/issues/17). Thanks to [Husen M. Umer](https://github.com/husensofteng).
 - Zenodo DOI
 - Update to template v2.7.2
 
@@ -19,6 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove hard coded capped option for GSTAMA_FILELIST step. Now follow user choice. Thanks to [Mazdak Salavati](https://github.com/MazdaX).
 
 ### `Dependencies`
+
+| Tool                 | Previous version | New version |
+| -------------------- | ---------------- | ----------- |
+| isoseq3              | 3.4.0            | 3.8.1       |
+| lima                 | 2.2.0            | 2.6.0       |
+| minimap2             | 2.21             | 2.24        |
+| samtools             | 1.12             | 1.14        |
+| multiqc              | 1.13             | 1.14        |
+| pbccs                | 6.2.0            | 6.4.0       |
+| ultra_bioinformatics | 0.0.4            | 0.0.4.2     |
+| samtools             | 1.15.1           | 1.16.1      |
 
 ### `Deprecated`
 

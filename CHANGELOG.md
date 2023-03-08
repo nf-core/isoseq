@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - Fix pipeline image path
-- params.input invalid type if pipeline is run with local file (working with URL with URL)
+- params.input invalid type if pipeline is run with local file in samplesheet (was working with URL)
 
 ### `Dependencies`
 

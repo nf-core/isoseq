@@ -84,7 +84,6 @@ class RowChecker:
         row[self._sample_col] = row[self._sample_col].replace(" ", "_")
 
     def _validate_first(self, row):
-
         """Assert that the BAM entry is non-empty and has the right format."""
         assert len(row[self._first_col]) > 0, "The BAM file is required."
         self._validate_format(row[self._first_col])

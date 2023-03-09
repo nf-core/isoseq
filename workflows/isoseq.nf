@@ -91,7 +91,7 @@ workflow ISOSEQ {
     //
     // START PIPELINE
     //
-    INPUT_CHECK(params.input, params.chunk) // Check samplesheet input for PBCCS module
+    INPUT_CHECK(file(params.input), params.chunk) // Check samplesheet input for PBCCS module
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     SET_CHUNK_NUM_CHANNEL(params.input, params.chunk) // Prepare channels for:

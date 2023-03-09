@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.3 - Blue Grouse [06/03/2023]
+
+### `Added`
+
+### `Fixed`
+
+- Fix pipeline image path
+- params.input invalid type if pipeline is run with local file in samplesheet (was working with URL)
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.2 - Gray Eagle [11/01/2023]
 
 ### `Added`

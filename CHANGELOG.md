@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## v1.1.4 - Teal Albatross [13/03/2023]
+
+### `Added`
+
+### `Fixed`
+
+- Update minimap2 path test: Don't set gtf option. It is not expected to be used with minimap2 is chosen.
+- FIX: Don't prepare gtf channel when minimap2 is chosen.
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.3 - Blue Grouse [06/03/2023]
 
 ### `Added`

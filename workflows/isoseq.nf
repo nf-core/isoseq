@@ -93,12 +93,13 @@ workflow ISOSEQ {
     //
     INPUT_CHECK(file(params.input), params.chunk) // Check samplesheet input for PBCCS module
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
-
-    SET_CHUNK_NUM_CHANNEL(params.input, params.chunk) // Prepare channels for:
+                                                      // Prepare channels for:
+    SET_CHUNK_NUM_CHANNEL(params.input, params.chunk) // - PBCCS parallelization
     SET_FASTA_CHANNEL(params.fasta)                   // - genome fasta
-    SET_GTF_CHANNEL(params.gtf)                       // - primers fasta
-    SET_PRIMERS_CHANNEL(params.primers)               // - genome gtf
-                                                      // - PBCCS parallelization
+    SET_PRIMERS_CHANNEL(params.primers)               // - primers fasta
+    if (params.aligner == "ultra") {
+        SET_GTF_CHANNEL(params.gtf)                   // - genome gtf
+    }
 
     PBCCS(INPUT_CHECK.out.reads, SET_CHUNK_NUM_CHANNEL.out.chunk_num, params.chunk) // Generate CCS from raw reads
     PBCCS.out.bam // Update meta: update id (+chunkX) and store former id

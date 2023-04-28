@@ -4,7 +4,6 @@
     nf-core/isoseq
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Github : https://github.com/nf-core/isoseq
-
     Website: https://nf-co.re/isoseq
     Slack  : https://nfcore.slack.com/channels/isoseq
 ----------------------------------------------------------------------------------------

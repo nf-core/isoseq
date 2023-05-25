@@ -3,7 +3,103 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.1.3 - [date]
+
+## v1.1.4 - Teal Albatross [13/03/2023]
+
+### `Added`
+
+### `Fixed`
+
+- Update minimap2 path test: Don't set gtf option. It is not expected to be used with minimap2 is chosen.
+- FIX: Don't prepare gtf channel when minimap2 is chosen.
+
+### `Dependencies`
+
+### `Deprecated`
+
+## v1.1.3 - Blue Grouse [06/03/2023]
+
+### `Added`
+
+### `Fixed`
+
+- Fix pipeline image path
+- params.input invalid type if pipeline is run with local file in samplesheet (was working with URL)
+
+### `Dependencies`
+
+### `Deprecated`
+
+## v1.1.2 - Gray Eagle [11/01/2023]
+
+### `Added`
+
+- Fix [issue #17](https://github.com/ksahlin/ultra/issues/17). Thanks to [Husen M. Umer](https://github.com/husensofteng).
+- Zenodo DOI
+- Update to template v2.7.2
+
+### `Fixed`
+
+- Remove hard coded capped option for GSTAMA_FILELIST step. Now follow user choice. Thanks to [Mazdak Salavati](https://github.com/MazdaX).
+
+### `Dependencies`
+
+| Tool                 | Previous version | New version |
+| -------------------- | ---------------- | ----------- |
+| isoseq3              | 3.4.0            | 3.8.1       |
+| lima                 | 2.2.0            | 2.6.0       |
+| minimap2             | 2.21             | 2.24        |
+| samtools             | 1.12             | 1.14        |
+| multiqc              | 1.13             | 1.14        |
+| pbccs                | 6.2.0            | 6.4.0       |
+| ultra_bioinformatics | 0.0.4            | 0.0.4.2     |
+| samtools             | 1.15.1           | 1.16.1      |
+
+### `Deprecated`
+
+## v1.1.1 - White Hawk [26/09/2022]
+
+Update the pipeline to nf-core 2.5.1, update modules, and fix documentation.
+
+### `Added`
+
+### `Fixed`
+
+- Documentation: Correct aligner option documentation
+
+### `Dependencies`
+
+- Update `samplesheet_check` module
+- Update `dumpsoftwareversion` module
+- Update `MultiQC` module
+
+### `Deprecated`
+
+## v1.1.0 - Black Crow [12/07/2022]
+
+Improves computation time.
+Split `uLTRA pipeline` into two processes, `uLTRA index` and `uLTRA align`. `GTF` index is computed once and not `chunk` times.
+`uLTRA align` sort and convert `sam` output into `bam` files. Aligned reads are already sorted by `minimap2` module. Therefore, `samtools sort` module is not needed anymore and has been removed.
+The `bioperl` module objective was to deal with [spurious alignments produced by uLTRA if a malformed GTF is used](https://github.com/ksahlin/ultra/issues/11). Removing it will stop the pipeline in case of malformed `GTF`.
+Module resource requirements have been revised for four modules (`gstama/merge`, `isoseq3/refine`, `lima`, `ultra/align`) to reduce requested resources.
+AWS runs with shows better run time and CPU/RAM usage ([Results](docs/images/Isoseq_pipeline_v1.0.0_v1.1.0.png)).
+
+### `Added`
+
+- Add `uLTRA index` and `uLTRA align` to replace `uLTRA pipeline` [PR 1830](https://github.com/nf-core/modules/pull/1830)
+- Module resources adjustments: `gstama/merge`, `isoseq3/refine`, `lima`, `ultra/align` [PR1858](https://github.com/nf-core/modules/pull/1858), `gunzip`, `MultiQC`
+
+### `Fixed`
+
+### `Dependencies`
+
+### `Deprecated`
+
+- Remove `uLTRA pipeline`
+- Remove `samtools sort` module
+- Remove `bioperl` module
+
+## v1.0.0 - Silver Swan [28/06/2022]
 
 Initial release of nf-core/isoseq, created with the [nf-core](https://nf-co.re/) template.
 

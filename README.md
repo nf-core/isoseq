@@ -70,12 +70,12 @@ Now, you can run the pipeline using:
 <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
 ```bash
-nextflow run nf-core/isoseq 
+nextflow run nf-core/isoseq
    -profile <docker/singularity/podman/shifter/charliecloud/conda/institute>
-   --input samplesheet.csv 
-   --outdir <OUTDIR> 
-   --genome <GENOME NAME (e.g. GRCh37)> 
-   --primers <PRIMER FASTA> 
+   --input samplesheet.csv
+   --outdir <OUTDIR>
+   --genome <GENOME NAME (e.g. GRCh37)>
+   --primers <PRIMER FASTA>
 ```
 
 > **Warning:**

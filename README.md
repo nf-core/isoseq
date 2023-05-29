@@ -49,32 +49,25 @@ On release, automated continuous integration tests run the pipeline on a full-si
 > to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline)
 > with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
-
 First, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
 ```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+sample,bam,pbi
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
-
--->
+Each row represents a pair of rqw subreads and it's associated pacbio index (pbi) file fastq files.
 
 Now, you can run the pipeline using:
 
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
-
 ```bash
-nextflow run nf-core/isoseq
-   -profile <docker/singularity/podman/shifter/charliecloud/conda/institute>
-   --input samplesheet.csv
-   --outdir <OUTDIR>
-   --genome <GENOME NAME (e.g. GRCh37)>
+nextflow run nf-core/isoseq \
+   -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> \
+   --input samplesheet.csv \
+   --outdir <OUTDIR> \
+   --genome <GENOME NAME (e.g. GRCh37)> \
    --primers <PRIMER FASTA>
 ```
 
@@ -115,15 +108,14 @@ For further information or help, don't hesitate to get in touch on the [Slack `#
 
 ## Citations
 
-<!-- If you use  nf-core/isoseq for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+You can cite the `nf-core/isoseq` publication as follows:
 
-- [Isoseq3](https://github.com/PacificBiosciences/IsoSeq)
-- TAMA: Kuo, R.I., Cheng, Y., Zhang, R. et al. Illuminating the dark side of the human transcriptome with long read transcript sequencing. BMC Genomics 21, 751 (2020). [10.1186/s12864-020-07123-7](https://doi.org/10.1186/s12864-020-07123-7)
-- Minimap2: Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics, 34:3094-3100., Li, H. (2021). New strategies to improve minimap2 alignment accuracy. Bioinformatics, 37:4572-4574. [10.1093/bioinformatics/btab705](https://doi.org/10.1093/bioinformatics/btab705)
-- uLTRA: Kristoffer Sahlin, Veli Mäkinen, Accurate spliced alignment of long RNA sequencing reads, Bioinformatics, Volume 37, Issue 24, 15 December 2021, Pages 4643–4651. [10.1093/bioinformatics/btab540](https://doi.org/10.1093/bioinformatics/btab540)
-- Samtools: Danecek P, Bonfield JK, Liddle J, Marshall J, Ohan V, Pollard MO, Whitwham A, Keane T, McCarthy SA, Davies RM, Li H, Twelve years of SAMtools and BCFtools, GigaScience (2021) 10(2) giab008. [10.1093/gigascience/giab007](https://doi.org/10.1093/gigascience/giab007)
-- MultiQC: Philip Ewels, Måns Magnusson, Sverker Lundin, Max Käller, MultiQC: summarize analysis results for multiple tools and samples in a single report, Bioinformatics, Volume 32, Issue 19, 1 October 2016, Pages 3047–3048. [10.1093/bioinformatics/btw354](https://doi.org/10.1093/bioinformatics/btw354)
-- samtools: Danecek P, Bonfield JK, Liddle J, Marshall J, Ohan V, Pollard MO, Whitwham A, Keane T, McCarthy SA, Davies RM, Li H, Twelve years of SAMtools and BCFtools, GigaScience (2021) 10(2) [10.1093/gigascience/giab008](https://academic.oup.com/gigascience/article/10/2/giab008/6137722?login=false)
+> **nf-core/isoseq: simple gene and isoform annotation with PacBio Iso-Seq long-read sequencing**
+>
+> Sébastien Guizard, Katarzyna Miedzinska, Jacqueline Smith, Jonathan Smith, Richard I Kuo, Megan Davey, Alan Archibald & Mick Watson.
+>
+> Bioinformatics, Volume 39, Issue 5, May 2023. doi: [10.1093/bioinformatics/btad150](https://doi.org/10.1093/bioinformatics/btad150)
+>
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 

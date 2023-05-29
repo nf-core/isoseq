@@ -115,7 +115,6 @@ You can cite the `nf-core/isoseq` publication as follows:
 > Sébastien Guizard, Katarzyna Miedzinska, Jacqueline Smith, Jonathan Smith, Richard I Kuo, Megan Davey, Alan Archibald & Mick Watson.
 >
 > Bioinformatics, Volume 39, Issue 5, May 2023. doi: [10.1093/bioinformatics/btad150](https://doi.org/10.1093/bioinformatics/btad150)
->
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 

@@ -37,12 +37,12 @@
                     },
                     "isoseq3/refine": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "0513f9322cd96d97e5c47e768945030235cd0256",
                         "installed_by": ["modules"]
                     },
                     "lima": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "0513f9322cd96d97e5c47e768945030235cd0256",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
@@ -57,7 +57,7 @@
                     },
                     "pbccs": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "0513f9322cd96d97e5c47e768945030235cd0256",
                         "installed_by": ["modules"]
                     },
                     "ultra/align": {

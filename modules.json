@@ -22,7 +22,7 @@
                     },
                     "gstama/merge": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "b2c97d94552d0760490c8839ac49efc8734dd1ff",
                         "installed_by": ["modules"]
                     },
                     "gstama/polyacleanup": {

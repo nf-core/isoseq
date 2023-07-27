@@ -124,8 +124,8 @@ workflow ISOSEQ {
 
     // Align FLNCs: User can choose between minimap2 and uLTRA aligners
     if (params.aligner == "ultra") {
-        GNU_SORT([[], SET_GTF_CHANNEL.out.data])                                          // Sort GTF on sequence and start, uLTRA index fails with topological sort
-        ULTRA_INDEX(SET_FASTA_CHANNEL.out.data, GNU_SORT.out.sorted)                      // Index GTF file before alignment
+        GNU_SORT(SET_GTF_CHANNEL.out.data.map { it -> [ [id:'genome'], it ]  } )          // Sort GTF on sequence and start, uLTRA index fails with topological sort
+        ULTRA_INDEX(SET_FASTA_CHANNEL.out.data, GNU_SORT.out.sorted.map { it[1] })        // Index GTF file before alignment
         GUNZIP(GSTAMA_POLYACLEANUP.out.fasta)                                             // uncompress fastas (gz not supported by uLTRA)
         ULTRA_ALIGN(GUNZIP.out.gunzip, SET_FASTA_CHANNEL.out.data, ULTRA_INDEX.out.index) // Align read against genome
         GSTAMA_COLLAPSE(ULTRA_ALIGN.out.bam, SET_FASTA_CHANNEL.out.data)                  // Clean gene models

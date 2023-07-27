@@ -3,6 +3,35 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.5 - Byzantium Buzzard [13/03/2023]
+
+Update the pipeline to nf-core 2.8.
+
+### `Added`
+
+### `Fixed`
+
+- Update docker container name for modules:
+  - gunzip
+  - gstama/filelist
+  - bamtools/convert
+  - custom/dumpsoftwareversion
+  - gs-tama/collapse
+  - gs-tama/merge
+  - gs-tama/polyacleanup
+  - isoseq3/refine
+  - lima
+  - minimap2
+  - multiqc
+  - pbccs
+  - ultra
+- Update citations.
+- Add background to pipeline png.
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.4 - Teal Albatross [13/03/2023]
 
 ### `Added`

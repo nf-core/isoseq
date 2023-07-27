@@ -67,6 +67,7 @@ include { BAMTOOLS_CONVERT }            from '../modules/nf-core/bamtools/conver
 include { GSTAMA_POLYACLEANUP }         from '../modules/nf-core/gstama/polyacleanup/main'
 include { GUNZIP }                      from '../modules/nf-core/gunzip/main'
 include { MINIMAP2_ALIGN }              from '../modules/nf-core/minimap2/align/main'
+include { GNU_SORT }                    from '../modules/nf-core/gnu/sort/main'
 include { ULTRA_INDEX }                 from '../modules/nf-core/ultra/index/main'
 include { ULTRA_ALIGN }                 from '../modules/nf-core/ultra/align/main'
 include { GSTAMA_COLLAPSE }             from '../modules/nf-core/gstama/collapse/main'
@@ -123,7 +124,8 @@ workflow ISOSEQ {
 
     // Align FLNCs: User can choose between minimap2 and uLTRA aligners
     if (params.aligner == "ultra") {
-        ULTRA_INDEX(SET_FASTA_CHANNEL.out.data, SET_GTF_CHANNEL.out.data)                 // Index GTF file before alignment
+        GNU_SORT([[], SET_GTF_CHANNEL.out.data])                                          // Sort GTF on sequence and start, uLTRA index fails with topological sort
+        ULTRA_INDEX(SET_FASTA_CHANNEL.out.data, GNU_SORT.out.sorted)                      // Index GTF file before alignment
         GUNZIP(GSTAMA_POLYACLEANUP.out.fasta)                                             // uncompress fastas (gz not supported by uLTRA)
         ULTRA_ALIGN(GUNZIP.out.gunzip, SET_FASTA_CHANNEL.out.data, ULTRA_INDEX.out.index) // Align read against genome
         GSTAMA_COLLAPSE(ULTRA_ALIGN.out.bam, SET_FASTA_CHANNEL.out.data)                  // Clean gene models
@@ -169,6 +171,7 @@ workflow ISOSEQ {
     ch_versions = ch_versions.mix(GSTAMA_POLYACLEANUP.out.versions)
 
     if (params.aligner == "ultra") {
+        ch_versions = ch_versions.mix(GNU_SORT.out.versions)
         ch_versions = ch_versions.mix(ULTRA_INDEX.out.versions)
         ch_versions = ch_versions.mix(ULTRA_ALIGN.out.versions)
     }

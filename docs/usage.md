@@ -77,7 +77,7 @@ The typical command for running the pipeline is as follows:
 nextflow run nf-core/isoseq --input ./samplesheet.csv --outdir ./results --primers primers.fasta --fasta genome.fasta -profile docker
 ```
 
-This will launch the pipeline with the `singularity` configuration profile. See below for more information about profiles.
+This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
 
 Note that the pipeline will create the following files in your working directory:
 

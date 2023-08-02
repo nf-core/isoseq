@@ -3,6 +3,32 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.5 - Byzantium Buzzard [02/08/2023]
+
+Update the pipeline to nf-core 2.9.
+
+### `Added`
+
+### `Fixed`
+
+- Add gnu/sort to sort annotation before uLTRA index
+- Update citations
+- Add background to pipeline png
+  | Tool | Previous version | New version |
+  | -------------------- | ---------------- | ----------- |
+  | isoseq3 | 3.8.1 | 3.8.2 |
+  | lima | 2.6.0 | 2.7.1 |
+  | bamtools/convert | 2.5.1 | 2.5.2 |
+  | gstama/merge | 1.0.2 | 1.0.3 |
+  | uLTRA/index | 0.0.4.2 | 0.1 |
+  | uLTRA/align | 0.0.4.2 | 0.1 |
+  | samtools | 1.17 | 1.17 |
+  | gnu/sort | ---- | 8.25 |
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.4 - Teal Albatross [13/03/2023]
 
 ### `Added`

@@ -51,9 +51,7 @@ workflow NFCORE_ISOSEQ {
     //
     // WORKFLOW: Run pipeline
     //
-    ISOSEQ (
-        samplesheet
-    )
+    ISOSEQ ()
 
     emit:
     multiqc_report = ISOSEQ.out.multiqc_report // channel: /path/to/multiqc_report.html

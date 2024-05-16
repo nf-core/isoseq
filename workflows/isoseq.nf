@@ -125,7 +125,7 @@ workflow ISOSEQ {
     else if (params.aligner == "minimap2") {
         MINIMAP2_ALIGN(                    // Align read against genome
             GSTAMA_POLYACLEANUP.out.fasta,
-            SET_FASTA_CHANNEL.out.data,
+            [ [id:"Dummy"], file(params.fasta) ],
             Channel.value('bam'),
             Channel.value(false),
             Channel.value(false))

@@ -4,7 +4,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -58,7 +57,7 @@ include { GSTAMA_FILELIST } from '../modules/local/gstama/filelist/main'
 //
 include { PBCCS }                       from '../modules/nf-core/pbccs/main'
 include { LIMA }                        from '../modules/nf-core/lima/main'
-include { ISOSEQ3_REFINE }              from '../modules/nf-core/isoseq3/refine/main'
+include { ISOSEQ_REFINE }               from '../modules/nf-core/isoseq/refine/main'
 include { BAMTOOLS_CONVERT }            from '../modules/nf-core/bamtools/convert/main'
 include { GSTAMA_POLYACLEANUP }         from '../modules/nf-core/gstama/polyacleanup/main'
 include { GUNZIP }                      from '../modules/nf-core/gunzip/main'
@@ -69,7 +68,6 @@ include { ULTRA_ALIGN }                 from '../modules/nf-core/ultra/align/mai
 include { GSTAMA_COLLAPSE }             from '../modules/nf-core/gstama/collapse/main'
 include { GSTAMA_MERGE }                from '../modules/nf-core/gstama/merge/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main' addParams( options: [publish_files : ['_versions.yml':'']] )
-include { MULTIQC }                     from '../modules/nf-core/multiqc/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,8 +110,8 @@ workflow ISOSEQ {
     .set { ch_pbccs_bam_updated }
 
     LIMA(ch_pbccs_bam_updated, SET_PRIMERS_CHANNEL.out.data)   // Remove primers from CCS
-    ISOSEQ3_REFINE(LIMA.out.bam, SET_PRIMERS_CHANNEL.out.data) // Discard CCS without polyA tails, remove it from the other
-    BAMTOOLS_CONVERT(ISOSEQ3_REFINE.out.bam)                   // Convert bam to fasta
+    ISOSEQ_REFINE(LIMA.out.bam, SET_PRIMERS_CHANNEL.out.data) // Discard CCS without polyA tails, remove it from the other
+    BAMTOOLS_CONVERT(ISOSEQ_REFINE.out.bam)                   // Convert bam to fasta
     GSTAMA_POLYACLEANUP(BAMTOOLS_CONVERT.out.data)             // Clean polyA tails from reads
 
     // Align FLNCs: User can choose between minimap2 and uLTRA aligners
@@ -158,7 +156,7 @@ workflow ISOSEQ {
     //
     ch_versions = ch_versions.mix(PBCCS.out.versions)
     ch_versions = ch_versions.mix(LIMA.out.versions)
-    ch_versions = ch_versions.mix(ISOSEQ3_REFINE.out.versions)
+    ch_versions = ch_versions.mix(ISOSEQ_REFINE.out.versions)
     ch_versions = ch_versions.mix(BAMTOOLS_CONVERT.out.versions)
     ch_versions = ch_versions.mix(GSTAMA_COLLAPSE.out.versions)
     ch_versions = ch_versions.mix(GSTAMA_MERGE.out.versions)
@@ -200,7 +198,7 @@ workflow ISOSEQ {
 
     ch_multiqc_files = Channel.empty()
     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
+    // ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(PBCCS.out.report_json.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.summary.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.counts.collect{it[1]}.ifEmpty([]))
@@ -208,13 +206,13 @@ workflow ISOSEQ {
 
     ch_multiqc_files = ch_multiqc_files.mix(
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
-    ch_multiqc_files = ch_multiqc_files.mix(
-        ch_methods_description.collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: true
-        )
-    )
+    // ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
+    // ch_multiqc_files = ch_multiqc_files.mix(
+    //     ch_methods_description.collectFile(
+    //         name: 'methods_description_mqc.yaml',
+    //         sort: true
+    //     )
+    // )
 
     MULTIQC (
         ch_multiqc_files.collect(),

@@ -7,73 +7,101 @@
                 "nf-core": {
                     "bamtools/convert": {
                         "branch": "master",
-                        "git_sha": "b2c97d94552d0760490c8839ac49efc8734dd1ff",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "custom/dumpsoftwareversions": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"]
+                        "git_sha": "de45447d060b8c8b98575bc637a4a575fd0638e1",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "gnu/sort": {
                         "branch": "master",
-                        "git_sha": "88f6e982fb8bd40488d837b3b08a65008e602840",
-                        "installed_by": ["modules"]
+                        "git_sha": "ca199cfe5aa4f1ea3c41302158f0af2cfaa58957",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "gstama/collapse": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "gstama/merge": {
                         "branch": "master",
-                        "git_sha": "b2c97d94552d0760490c8839ac49efc8734dd1ff",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "gstama/polyacleanup": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "gunzip": {
                         "branch": "master",
-                        "git_sha": "e06548bfa36ee31869b81041879dd6b3a83b1d57",
-                        "installed_by": ["modules"]
+                        "git_sha": "3a5fef109d113b4997c9822198664ca5f2716208",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
-                    "isoseq3/refine": {
+                    "isoseq/refine": {
                         "branch": "master",
-                        "git_sha": "0513f9322cd96d97e5c47e768945030235cd0256",
-                        "installed_by": ["modules"]
+                        "git_sha": "8da47884cbd6c7a8d849f8cf53340511ab00df51",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "lima": {
                         "branch": "master",
-                        "git_sha": "0513f9322cd96d97e5c47e768945030235cd0256",
-                        "installed_by": ["modules"]
+                        "git_sha": "8da47884cbd6c7a8d849f8cf53340511ab00df51",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "603ecbd9f45300c9788f197d2a15a005685b4220",
-                        "installed_by": ["modules"]
+                        "git_sha": "72e277acfd9e61a9f1368eafb4a9e83f5bcaa9f5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"]
+                        "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "pbccs": {
                         "branch": "master",
-                        "git_sha": "0513f9322cd96d97e5c47e768945030235cd0256",
-                        "installed_by": ["modules"]
+                        "git_sha": "8da47884cbd6c7a8d849f8cf53340511ab00df51",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "ultra/align": {
                         "branch": "master",
-                        "git_sha": "b2c97d94552d0760490c8839ac49efc8734dd1ff",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "ultra/index": {
                         "branch": "master",
-                        "git_sha": "b2c97d94552d0760490c8839ac49efc8734dd1ff",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": [
+                            "modules"
+                        ]
                     }
                 }
             },
@@ -82,17 +110,23 @@
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
                         "git_sha": "92de218a329bfc9a9033116eb5f65fd270e72ba3",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     },
                     "utils_nfvalidation_plugin": {
                         "branch": "master",
                         "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     }
                 }
             }

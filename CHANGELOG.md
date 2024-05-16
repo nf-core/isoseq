@@ -3,30 +3,23 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.1.6 - Byzantium Buzzard [16/05/2024]
+## v1.1.6 - Sapphire Duck [16/05/2024]
 
 Update the pipeline to nf-core 2.14.1.
-Update modules
+Update modules.
 
 ### `Added`
 
 ### `Fixed`
+- Update modules to their nf-test version (bamtools/convert, custom/dumpsoftwareversions, gnu/sort, gstama/collapse/ gstama/merge, gstama/polyacleanup, gunzip, isoseq/refine, lima, minimap2/align, pbccs,ultra/align, ultra/index)
+- Since isoseq3 switch to version 4, it has been rename isoseq
 
   | Tool                        | Previous version | New version |
   | --------------------------- | ---------------- | ----------- |
-  | bamtools/convert            | 2.5.2            |             |
-  | custom/dumpsoftwareversions |                  |             |
-  | gstama/collapse             | 1.0.2            | 1.0.3       |
-  | gstama/merge                | 1.0.2            | 1.0.3       |
-  | gstama/polyacleanup         | 1.0.2            | 1.0.3       |
-  | gunzip                      | 1.0.2            | 1.0.3       |
-  | gnu/sort                    | ----             | 8.25        |
-  | isoseq                      | 3.8.2            | 3.8.2       |
-  | lima                        | 2.6.0            | 2.7.1       |
-  | minimap2/align              | 2.6.0            | 2.7.1       |
-  | pbccs                       | 2.6.0            | 2.7.1       |
-  | uLTRA/index                 | 0.0.4.2          | 0.1         |
-  | uLTRA/align                 | 0.0.4.2          | 0.1         |
+  | bamtools/convert            | 2.5.2            | 2.5.2       |
+  | isoseq                      | 3.8.2            | 4.0.0       |
+  | lima                        | 2.7.1            | 2.9.0       |
+  | minimap2/align              | 2.24             | 2.28        |
 
 ### `Dependencies`
 

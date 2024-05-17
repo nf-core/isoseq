@@ -80,25 +80,31 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
-    Channel
-        .fromSamplesheet("input")
-        .map {
-            meta, fastq_1, fastq_2 ->
-                if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-                } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-                }
-        }
-        .groupTuple()
-        .map {
-            validateInputSamplesheet(it)
-        }
-        .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
-        }
-        .set { ch_samplesheet }
+    if (params.entrypoint == "isoseq") {
+        Channel
+            .fromSamplesheet("input")
+            .flatMap { create_pbccs_channel(it, params.chunk) }
+            .set { ch_samplesheet }
+    }
+
+    if (params.entrypoint == "map") {
+        Channel
+            .fromSamplesheet("input")
+            .flatMap { create_reads_channel(it) }
+            .splitFasta(
+                by: params.chunk,
+                decompress: true,
+                file: "chunk",
+                compress: true
+            )
+            .map {
+                def chk = (it[1] =~ /(chunk\.\d+)\.gz/)[ 0 ][ 1 ]
+                def id_former = it[0].id
+                def id_new    = it[0].id + "." + chk
+                [ [ id:id_new, id_former:id_former ] , it[1] ]
+            }
+            .set { ch_samplesheet }
+    }
 
     emit:
     samplesheet = ch_samplesheet
@@ -260,4 +266,32 @@ def methodsDescriptionText(mqc_methods_yaml) {
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
+}
+
+// Function to get to create samplesheet channel for isoseq entrypoint [ meta, bam, pbi  ]
+def create_pbccs_channel(row, chunk) {
+
+    if (!file(row[1]).exists()) {
+        exit 1, "ERROR: Please check input samplesheet -> BAM file does not exist!\n${row[1]}"
+    }
+
+    if (!file(row[2]).exists()) {
+        exit 1, "ERROR: Please check input samplesheet -> PBI file does not exist!\n${row[2]}"
+    }
+
+    def array = []
+    for ( i = 1 ; i <= chunk ; i++ ) {
+        array << [ row[0], file(row[1]), file(row[2]) ]
+    }
+
+    return array
+}
+
+// Function to get to create samplesheet channel for map entrypoint [ meta, reads ]
+def create_reads_channel(row) {
+    if (!file(row[3]).exists()) {
+        exit 1, "ERROR: Please check input samplesheet -> reads file does not exist!\n${row[3]}"
+    }
+
+    return [ [ row[0], file(row[3]) ] ]
 }

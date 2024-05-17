@@ -23,6 +23,12 @@
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/isoseq/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open"
+                },
                 "primers": {
                     "type": "string",
                     "fa_icon": "fas fa-grip-lines",
@@ -35,12 +41,20 @@
                     "description": "Genome annotation file",
                     "help_text": "Provide a GTF annotation file (sorted by sequence and start) if you set the `--aligner` option to `uLTRA`\nGziped files are accepted. "
                 },
-                "outdir": {
+                "entrypoint": {
                     "type": "string",
-                    "format": "directory-path",
-                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
-                    "fa_icon": "fas fa-folder-open",
-                    "default": "null"
+                    "fa_icon": "fas fa-dungeon",
+                    "description": "Run complete pipeline or TAMA only?",
+                    "enum": ["isoseq", "map"],
+                    "default": "isoseq",
+                    "help_text": "If you don't have the subreads sequences, because of the provider or last PacBio sequencer or because you used Oxford Nanopore, you'll to run the pipeline from the mapping step to advantage of the TAMA processing. \nThis option allows you to change the entry point from subread (--entrypoint isoseq) processing to mapping (--entrypoint map). "
+                },
+                "chunk": {
+                    "type": "integer",
+                    "default": 40,
+                    "description": "If entrypoint 'isoseq', ccs --chunk option, define the number of batches to run in parallel. If entrypoint 'map', split fasta in files of 'chunk' sequences.",
+                    "help_text": "If selected entrypoint is 'isoseq' (default): \nCCS workload can be split into to chunks for a faster running time. \nThis value must be a positive integer greater than 1. \n```bash\n--chunk 1/10 \n```\n\nif selected entrypoint is 'map': the reads files will be split into files of 'chunk' sequences.",
+                    "fa_icon": "fas fa-cog"
                 },
                 "email": {
                     "type": "string",
@@ -62,13 +76,6 @@
             "description": "Use these options to set CCS parameters",
             "default": "",
             "properties": {
-                "chunk": {
-                    "type": "integer",
-                    "default": 40,
-                    "description": "ccs --chunk option, define the number of batches to run in parallel",
-                    "help_text": "CCS workload can be split into to chunks for a faster running time. \nThis value must be a positive integer greater than 1. \n```bash\n--chunk 1/10 \n```",
-                    "fa_icon": "fas fa-cog"
-                },
                 "rq": {
                     "type": "number",
                     "default": 0.9,

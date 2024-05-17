@@ -16,18 +16,25 @@
             "bam": {
                 "type": "string",
                 "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.bam$",
-                "errorMessage": "Subreads BAM file must be provided, cannot contain spaces and must have extension '.bam''"
+                "exists": false,
+                "pattern": "(^\\S+\\.bam$|^None$)",
+                "errorMessage": "Subreads BAM file must be provided, cannot contain spaces and must have extension '.bam' or being 'None' if the entrypoint is 'map'"
             },
             "pbi": {
                 "type": "string",
                 "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.bam\\.pbi$",
-                "errorMessage": "PacBio Index file for BAM subreads cannot contain spaces and must have extension '.bam.pbi'"
+                "exists": false,
+                "pattern": "(^\\S+\\.bam\\.pbi$|^None$)",
+                "errorMessage": "PacBio Index file for BAM subreads cannot contain spaces and must have extension '.bam.pbi' or being 'None' if the entrypoint is 'map'"
+            },
+            "reads": {
+                "type": "string",
+                "format": "file-path",
+                "exists": false,
+                "pattern": "(^\\S+\\.fa\\.gz$|^None$)",
+                "errorMessage": "Long reads file cannot contain spaces and must have extension '.bam.pbi' or being 'None' if the entrypoint is 'isoseq'"
             }
         },
-        "required": ["sample", "bam", "pbi" ]
+        "required": ["sample" ]
     }
 }

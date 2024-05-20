@@ -35,6 +35,6 @@
                 "errorMessage": "Long reads file cannot contain spaces and must have extension '.bam.pbi' or being 'None' if the entrypoint is 'isoseq'"
             }
         },
-        "required": ["sample" ]
+        "required": ["sample"]
     }
 }

@@ -9,21 +9,23 @@ Update the pipeline to nf-core 2.14.1.
 Update modules.
 
 ### `Added`
+
 A new entreypoint system has been implemented to allow the user to choose which step to run.
 The `isoseq` entrypoint runs the full pipeline.
 The `map` entrypoint runs the pipeline from the mapping step.
 This new `entreypoint` option make possible to use the isoseq pipeline for analysis PacBio data when subreads are not provided, or for users who want to benefit from the mapping + TAMA analysis for their Nanopore data.
 
 ### `Fixed`
+
 - Update modules to their nf-test version (bamtools/convert, custom/dumpsoftwareversions, gnu/sort, gstama/collapse/ gstama/merge, gstama/polyacleanup, gunzip, isoseq/refine, lima, minimap2/align, pbccs,ultra/align, ultra/index)
 - Since isoseq3 switch to version 4, it has been rename isoseq
 
-  | Tool                        | Previous version | New version |
-  | --------------------------- | ---------------- | ----------- |
-  | bamtools/convert            | 2.5.2            | 2.5.2       |
-  | isoseq                      | 3.8.2            | 4.0.0       |
-  | lima                        | 2.7.1            | 2.9.0       |
-  | minimap2/align              | 2.24             | 2.28        |
+  | Tool             | Previous version | New version |
+  | ---------------- | ---------------- | ----------- |
+  | bamtools/convert | 2.5.2            | 2.5.2       |
+  | isoseq           | 3.8.2            | 4.0.0       |
+  | lima             | 2.7.1            | 2.9.0       |
+  | minimap2/align   | 2.24             | 2.28        |
 
 ### `Dependencies`
 
@@ -40,16 +42,16 @@ Update the pipeline to nf-core 2.9.
 - Add gnu/sort to sort annotation before uLTRA index
 - Update citations
 - Add background to pipeline png
-  | Tool                    | Previous version | New version |
+  | Tool | Previous version | New version |
   | ----------------------- | ---------------- | ----------- |
-  | isoseq3                 | 3.8.1            | 3.8.2       |
-  | lima                    | 2.6.0            | 2.7.1       |
-  | bamtools/convert        | 2.5.1            | 2.5.2       |
-  | gstama/merge            | 1.0.2            | 1.0.3       |
-  | uLTRA/index             | 0.0.4.2          | 0.1         |
-  | uLTRA/align             | 0.0.4.2          | 0.1         |
-  | samtools                | 1.17             | 1.17        |
-  | gnu/sort                | ----             | 8.25        |
+  | isoseq3 | 3.8.1 | 3.8.2 |
+  | lima | 2.6.0 | 2.7.1 |
+  | bamtools/convert | 2.5.1 | 2.5.2 |
+  | gstama/merge | 1.0.2 | 1.0.3 |
+  | uLTRA/index | 0.0.4.2 | 0.1 |
+  | uLTRA/align | 0.0.4.2 | 0.1 |
+  | samtools | 1.17 | 1.17 |
+  | gnu/sort | ---- | 8.25 |
 
 ### `Dependencies`
 

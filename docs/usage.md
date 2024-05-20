@@ -6,29 +6,48 @@
 
 ## Introduction
 
-This pipeline has been designed to analyse several samples or sequencing runs at the same time. It reads all samples from a samplesheet file and parallelizes computation for each of them.
+This pipeline has been designed to analyse several samples or sequencing runs at the same time.
+It reads all samples from a samplesheet file and parallelizes computation for each of them.
+
+Depending on your on data, you might not need to run the isoseq preprocessing.
+This step can be skipped by setting the `--entrypoint` parameter to `map` and starting the analysis from the mapping step.
+By default, the entrypoint is set to `isoseq` and the full pipeline is run.
 
 ### Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use `--input` parameter to specify its location.
+You will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline.
+Use `--input` parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
 ```
 
-The samplesheet is a comma-separated file with 3 columns, and a header row as shown in the examples below.
-
-```console
-sample,bam,pbi
-sample1,sample1.subreads.bam,sample1.subreads.bam.pbi
-sample2,sample2.subreads.bam,sample2.subreads.bam.pbi
-```
+The samplesheet is a comma-separated file with 4 columns, and a header row as shown in the examples below.
 
 | Column   | Description                                                                                                                                                               |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sample` | Custom sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                              |
 | `bam`    | Full path to isoseq subreads in `bam` format.                                                                                                                             |
 | `pbi`    | Full path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be compose of bam file name with the `.pbi` extension. |
+| `reads`  | Set of long reads to analyse in fasta format. The file must be gziped (.fa.gz).                                                                                           |
+
+Starting from `pbccs` (`isoseq` entrypoint), the columns `sample`, `bam`, `pbi` are mandatory.
+The `reads` column must be set to `None`.
+
+```console
+sample,bam,pbi,reads
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,None
+sample2,sample2.subreads.bam,sample2.subreads.bam.pbi,None
+```
+
+If the `map` entrypoint is used, the `reads` column must be filled with the long reads file and `sample` must be set.
+The `bam` and `pbi` columns have to be set to `None`.
+
+```console
+sample,bam,pbi,reads
+sample1,None,None,sample1.fa.gz
+sample2,None,None,sample2.fa.gz
+```
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 

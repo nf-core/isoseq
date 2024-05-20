@@ -60,11 +60,11 @@ First, prepare a samplesheet with your input data that looks as follows:
 `samplesheet.csv`:
 
 ```csv
-sample,bam,pbi
-sample1,sample1.subreads.bam,sample1.subreads.bam.pbi
+sample,bam,pbi,reads
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,None
 ```
 
-Each row represents a pair of rqw subreads and it's associated pacbio index (pbi) file fastq files.
+Each row represents a pair of raw subreads and it's associated pacbio index (pbi) file fastq files.
 
 Now, you can run the pipeline using:
 

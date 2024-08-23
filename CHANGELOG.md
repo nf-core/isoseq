@@ -3,14 +3,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v2.0.0 - Sapphire Duck [20/05/2024]
+## v2.0.0 - Sapphire Duck [23/08/2024]
 
+New entrypoint option to skip isoseq pre-processing.
 Update the pipeline to nf-core 2.14.1.
 Update modules.
 
 ### `Added`
 
-A new entreypoint system has been implemented to allow the user to choose which step to run.
+A new entreypoint system has been implemented to allow the user where to start the analysis.
 The `isoseq` entrypoint runs the full pipeline.
 The `map` entrypoint runs the pipeline from the mapping step.
 This new `entreypoint` option make possible to use the isoseq pipeline for analysis PacBio data when subreads are not provided, or for users who want to benefit from the mapping + TAMA analysis for their Nanopore data.
@@ -26,6 +27,8 @@ This new `entreypoint` option make possible to use the isoseq pipeline for analy
   | isoseq           | 3.8.2            | 4.0.0       |
   | lima             | 2.7.1            | 2.9.0       |
   | minimap2/align   | 2.24             | 2.28        |
+  | gnu/sort         | 8.25             | 9.3         |
+  | multiqc          | 1.21             | 1.24.1      |
 
 ### `Dependencies`
 

@@ -12,12 +12,12 @@
                     },
                     "custom/dumpsoftwareversions": {
                         "branch": "master",
-                        "git_sha": "de45447d060b8c8b98575bc637a4a575fd0638e1",
+                        "git_sha": "82024cf6325d2ee194e7f056d841ecad2f6856e9",
                         "installed_by": ["modules"]
                     },
                     "gnu/sort": {
                         "branch": "master",
-                        "git_sha": "ca199cfe5aa4f1ea3c41302158f0af2cfaa58957",
+                        "git_sha": "a3cc42943548378b726610f45bb5a79ab3f0b633",
                         "installed_by": ["modules"]
                     },
                     "gstama/collapse": {
@@ -37,7 +37,7 @@
                     },
                     "gunzip": {
                         "branch": "master",
-                        "git_sha": "3a5fef109d113b4997c9822198664ca5f2716208",
+                        "git_sha": "4e5f4687318f24ba944a13609d3ea6ebd890737d",
                         "installed_by": ["modules"]
                     },
                     "isoseq/refine": {
@@ -47,17 +47,17 @@
                     },
                     "lima": {
                         "branch": "master",
-                        "git_sha": "8da47884cbd6c7a8d849f8cf53340511ab00df51",
+                        "git_sha": "b20be35facfc5acdc1259f132ed79339d79e989f",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "72e277acfd9e61a9f1368eafb4a9e83f5bcaa9f5",
+                        "git_sha": "a33ef9475558c6b8da08c5f522ddaca1ec810306",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
+                        "git_sha": "fe9614c5d1d9820dae56a5e30a07ba336db45835",
                         "installed_by": ["modules"]
                     },
                     "pbccs": {

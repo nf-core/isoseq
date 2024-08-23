@@ -142,7 +142,8 @@ workflow ISOSEQ {
         MINIMAP2_ALIGN(                    // Align read against genome
             ch_reads_to_map,
             [ [id:"Dummy"], file(params.fasta) ],
-            Channel.value('bam'),
+            Channel.value(true),
+            Channel.value("bai"),
             Channel.value(false),
             Channel.value(false))
         GSTAMA_COLLAPSE(MINIMAP2_ALIGN.out.bam, SET_FASTA_CHANNEL.out.data) // Clean gene models
@@ -239,7 +240,9 @@ workflow ISOSEQ {
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
         ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList()
+        ch_multiqc_logo.toList(),
+        channel.empty(),
+        channel.empty()
     )
 
     emit:

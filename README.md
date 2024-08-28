@@ -50,6 +50,8 @@ On release, automated continuous integration tests run the pipeline on a full-si
 9. Clean gene models ([`TAMA collapse`](https://github.com/GenomeRIK/tama))
 10. Merge annotations by sample ([`TAMA merge`](https://github.com/GenomeRIK/tama))
 
+---
+
 ## Usage
 
 > [!NOTE]

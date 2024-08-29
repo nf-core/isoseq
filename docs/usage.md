@@ -88,6 +88,14 @@ Two aligners are available. The `uLTRA` aligner helps to detect small exons with
 --aligner '[ultra,minimap2]'
 ```
 
+### Entrypoint
+
+The mapping and the alignment analysis are agnostic to the kind long reads used. If your sequencing company provides pre-computed HiFi reads or you want to use nanopore sequences, you can skip the isoseq preprocessing and start the analysis from the mapping step.
+
+```console
+--entrypoint 'map'
+```
+
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:

@@ -12,7 +12,6 @@ Close (PR25)[https://github.com/nf-core/isoseq/issues/25]
 Close (PR27)[https://github.com/nf-core/isoseq/issues/27]
 Close (PR10)[https://github.com/nf-core/isoseq/issues/10]
 
-
 ### `Added`
 
 A new entreypoint system has been implemented to allow the user where to start the analysis.

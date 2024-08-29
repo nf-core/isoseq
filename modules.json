@@ -27,12 +27,12 @@
                     },
                     "gstama/merge": {
                         "branch": "master",
-                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "git_sha": "3528e946c9f19501d78cf0901d0b57e13e2f6860",
                         "installed_by": ["modules"]
                     },
                     "gstama/polyacleanup": {
                         "branch": "master",
-                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "git_sha": "8684e27e1061f855822ecc77d5099bc08f858784",
                         "installed_by": ["modules"]
                     },
                     "gunzip": {

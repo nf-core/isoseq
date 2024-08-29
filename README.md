@@ -102,6 +102,7 @@ We thank the following people for their extensive assistance in the development 
 - [Mick Watson](https://twitter.com/BioMickWatson) group for their support
 - The nf-core community for their help in the development of this pipeline
 - [James A. Fellows Yates](https://github.com/jfy133) & nf-core for the metro map style components for pipeline graph
+- [Júlia Mir Pedrol](https://github.com/mirpedrol) for debugging help
 
 This pipeline has been developed as part of the GENE-SWitCH project. This project has received funding from the European Union's Horizon 2020 Research and Innovation Programme under the grant agreement n° 817998.
 

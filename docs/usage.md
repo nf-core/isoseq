@@ -40,7 +40,7 @@ sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,None
 sample2,sample2.subreads.bam,sample2.subreads.bam.pbi,None
 ```
 
-If the `map` entrypoint is used, the `reads` column must be filled with the long reads file and `sample` must be set.
+If the `map` entrypoint is used, the `reads` column must be filled with a gzipped fasta file with long reads and `sample` must be set.
 The `bam` and `pbi` columns have to be set to `None`.
 
 ```console

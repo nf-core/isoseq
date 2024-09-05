@@ -8,9 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 New entrypoint option to skip isoseq pre-processing.
 Update the pipeline to nf-core 2.14.1.
 Update modules.
-Close (PR25)[https://github.com/nf-core/isoseq/issues/25]
-Close (PR27)[https://github.com/nf-core/isoseq/issues/27]
-Close (PR10)[https://github.com/nf-core/isoseq/issues/10]
+nf-validation version pinned [PR25](https://github.com/nf-core/isoseq/issues/25)
+Upgrade from isoseq3 to isoseq (version 4) Fix segmentation fault [PR27](https://github.com/nf-core/isoseq/issues/27)
+Add alternative entrypoint [PR10](https://github.com/nf-core/isoseq/issues/10)
 
 ### `Added`
 

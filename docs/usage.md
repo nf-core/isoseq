@@ -6,29 +6,48 @@
 
 ## Introduction
 
-This pipeline has been designed to analyse several samples or sequencing runs at the same time. It reads all samples from a samplesheet file and parallelizes computation for each of them.
+This pipeline has been designed to analyse several samples or sequencing runs at the same time.
+It reads all samples from a samplesheet file and parallelizes computation for each of them.
+
+Depending on your on data, you might not need to run the isoseq preprocessing.
+This step can be skipped by setting the `--entrypoint` parameter to `map` and starting the analysis from the mapping step.
+By default, the entrypoint is set to `isoseq` and the full pipeline is run.
 
 ### Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use `--input` parameter to specify its location.
+You will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline.
+Use `--input` parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
 ```
 
-The samplesheet is a comma-separated file with 3 columns, and a header row as shown in the examples below.
-
-```console
-sample,bam,pbi
-sample1,sample1.subreads.bam,sample1.subreads.bam.pbi
-sample2,sample2.subreads.bam,sample2.subreads.bam.pbi
-```
+The samplesheet is a comma-separated file with 4 columns, and a header row as shown in the examples below.
 
 | Column   | Description                                                                                                                                                               |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sample` | Custom sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                              |
 | `bam`    | Full path to isoseq subreads in `bam` format.                                                                                                                             |
 | `pbi`    | Full path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be compose of bam file name with the `.pbi` extension. |
+| `reads`  | Set of long reads to analyse in fasta format. The file must be gziped (.fa.gz).                                                                                           |
+
+Starting from `pbccs` (`isoseq` entrypoint), the columns `sample`, `bam`, `pbi` are mandatory.
+The `reads` column must be set to `None`.
+
+```console
+sample,bam,pbi,reads
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,None
+sample2,sample2.subreads.bam,sample2.subreads.bam.pbi,None
+```
+
+If the `map` entrypoint is used, the `reads` column must be filled with a gzipped fasta file with long reads and `sample` must be set.
+The `bam` and `pbi` columns have to be set to `None`.
+
+```console
+sample,bam,pbi,reads
+sample1,None,None,sample1.fa.gz
+sample2,None,None,sample2.fa.gz
+```
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
@@ -69,6 +88,14 @@ Two aligners are available. The `uLTRA` aligner helps to detect small exons with
 --aligner '[ultra,minimap2]'
 ```
 
+### Entrypoint
+
+The mapping and the alignment analysis are agnostic to the kind long reads used. If your sequencing company provides pre-computed HiFi reads or you want to use nanopore sequences, you can skip the isoseq preprocessing and start the analysis from the mapping step.
+
+```console
+--entrypoint 'map'
+```
+
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
@@ -92,7 +119,9 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
-> ⚠️ Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
+:::warning
+Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
+:::
 
 The above pipeline run specified with a params file in yaml format:
 
@@ -129,11 +158,15 @@ This version number will be logged in reports when you run the pipeline, so that
 
 To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-> 💡 If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+:::tip
+If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+:::
 
 ## Core Nextflow arguments
 
-> **NB:** These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
+:::note
+These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
+:::
 
 ### `-profile`
 
@@ -141,7 +174,9 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
-> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
+:::info
+We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
+:::
 
 The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
@@ -165,6 +200,8 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
   - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
+- `wave`
+  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow ` 24.03.0-edge` or later).
 - `conda`
   - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
 

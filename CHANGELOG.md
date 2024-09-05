@@ -3,6 +3,40 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v2.0.0 - Sapphire Duck [05/09/2024]
+
+New entrypoint option to skip isoseq pre-processing.
+Update the pipeline to nf-core 2.14.1.
+Update modules.
+nf-validation version pinned [PR25](https://github.com/nf-core/isoseq/issues/25)
+Upgrade from isoseq3 to isoseq (version 4) Fix segmentation fault [PR27](https://github.com/nf-core/isoseq/issues/27)
+Add alternative entrypoint [PR10](https://github.com/nf-core/isoseq/issues/10)
+
+### `Added`
+
+A new entreypoint system has been implemented to allow the user where to start the analysis.
+The `isoseq` entrypoint runs the full pipeline.
+The `map` entrypoint runs the pipeline from the mapping step.
+This new `entreypoint` option make possible to use the isoseq pipeline for analysis PacBio data when subreads are not provided, or for users who want to benefit from the mapping + TAMA analysis for their Nanopore data.
+
+### `Fixed`
+
+- Update modules to their nf-test version (bamtools/convert, custom/dumpsoftwareversions, gnu/sort, gstama/collapse/ gstama/merge, gstama/polyacleanup, gunzip, isoseq/refine, lima, minimap2/align, pbccs,ultra/align, ultra/index)
+- Since isoseq3 switch to version 4, it has been rename isoseq
+
+  | Tool             | Previous version | New version |
+  | ---------------- | ---------------- | ----------- |
+  | bamtools/convert | 2.5.2            | 2.5.2       |
+  | isoseq           | 3.8.2            | 4.0.0       |
+  | lima             | 2.7.1            | 2.9.0       |
+  | minimap2/align   | 2.24             | 2.28        |
+  | gnu/sort         | 8.25             | 9.3         |
+  | multiqc          | 1.21             | 1.24.1      |
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.5 - Byzantium Buzzard [02/08/2023]
 
 Update the pipeline to nf-core 2.9.
@@ -15,7 +49,7 @@ Update the pipeline to nf-core 2.9.
 - Update citations
 - Add background to pipeline png
   | Tool | Previous version | New version |
-  | -------------------- | ---------------- | ----------- |
+  | ----------------------- | ---------------- | ----------- |
   | isoseq3 | 3.8.1 | 3.8.2 |
   | lima | 2.6.0 | 2.7.1 |
   | bamtools/convert | 2.5.1 | 2.5.2 |

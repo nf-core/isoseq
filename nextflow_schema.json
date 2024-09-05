@@ -16,11 +16,18 @@
                     "type": "string",
                     "format": "file-path",
                     "exists": true,
+                    "schema": "assets/schema_input.json",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.csv$",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/isoseq/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open"
                 },
                 "primers": {
                     "type": "string",
@@ -34,12 +41,20 @@
                     "description": "Genome annotation file",
                     "help_text": "Provide a GTF annotation file (sorted by sequence and start) if you set the `--aligner` option to `uLTRA`\nGziped files are accepted. "
                 },
-                "outdir": {
+                "entrypoint": {
                     "type": "string",
-                    "format": "directory-path",
-                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
-                    "fa_icon": "fas fa-folder-open",
-                    "default": "results"
+                    "fa_icon": "fas fa-dungeon",
+                    "description": "Run complete pipeline or TAMA only?",
+                    "enum": ["isoseq", "map"],
+                    "default": "isoseq",
+                    "help_text": "If you don't have the subreads sequences, because of the provider or last PacBio sequencer or because you used Oxford Nanopore, you'll to run the pipeline from the mapping step to advantage of the TAMA processing. \nThis option allows you to change the entry point from subread (--entrypoint isoseq) processing to mapping (--entrypoint map). "
+                },
+                "chunk": {
+                    "type": "integer",
+                    "default": 40,
+                    "description": "If entrypoint 'isoseq', ccs --chunk option, define the number of batches to run in parallel. If entrypoint 'map', split fasta in files of 'chunk' sequences.",
+                    "help_text": "If selected entrypoint is 'isoseq' (default): \nCCS workload can be split into to chunks for a faster running time. \nThis value must be a positive integer greater than 1. \n```bash\n--chunk 1/10 \n```\n\nif selected entrypoint is 'map': the reads files will be split into files of 'chunk' sequences.",
+                    "fa_icon": "fas fa-cog"
                 },
                 "email": {
                     "type": "string",
@@ -61,13 +76,6 @@
             "description": "Use these options to set CCS parameters",
             "default": "",
             "properties": {
-                "chunk": {
-                    "type": "integer",
-                    "default": 40,
-                    "description": "ccs --chunk option, define the number of batches to run in parallel",
-                    "help_text": "CCS workload can be split into to chunks for a faster running time. \nThis value must be a positive integer greater than 1. \n```bash\n--chunk 1/10 \n```",
-                    "fa_icon": "fas fa-cog"
-                },
                 "rq": {
                     "type": "number",
                     "default": 0.9,
@@ -188,14 +196,6 @@
                     "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs. Gziped files are accepted. ",
                     "fa_icon": "far fa-file-code"
                 },
-                "igenomes_base": {
-                    "type": "string",
-                    "format": "directory-path",
-                    "description": "Directory / URL base for iGenomes references.",
-                    "default": "s3://ngi-igenomes/igenomes",
-                    "fa_icon": "fas fa-cloud-download-alt",
-                    "hidden": true
-                },
                 "igenomes_ignore": {
                     "type": "boolean",
                     "description": "Do not load the iGenomes reference config.",
@@ -299,14 +299,12 @@
                     "type": "boolean",
                     "description": "Display help text.",
                     "fa_icon": "fas fa-question-circle",
-                    "default": false,
                     "hidden": true
                 },
                 "version": {
                     "type": "boolean",
                     "description": "Display version and exit.",
                     "fa_icon": "fas fa-question-circle",
-                    "default": false,
                     "hidden": true
                 },
                 "publish_dir_mode": {
@@ -330,7 +328,6 @@
                     "type": "boolean",
                     "description": "Send plain-text email instead of HTML.",
                     "fa_icon": "fas fa-remove-format",
-                    "default": false,
                     "hidden": true
                 },
                 "max_multiqc_email_size": {
@@ -345,7 +342,6 @@
                     "type": "boolean",
                     "description": "Do not use coloured log outputs.",
                     "fa_icon": "fas fa-palette",
-                    "default": false,
                     "hidden": true
                 },
                 "hook_url": {
@@ -384,7 +380,6 @@
                     "type": "boolean",
                     "fa_icon": "far fa-eye-slash",
                     "description": "Show all params when using `--help`",
-                    "default": false,
                     "hidden": true,
                     "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
                 },
@@ -392,7 +387,6 @@
                     "type": "boolean",
                     "fa_icon": "far fa-check-circle",
                     "description": "Validation of parameters fails when an unrecognised parameter is found.",
-                    "default": false,
                     "hidden": true,
                     "help_text": "By default, when an unrecognised parameter is found, it returns a warinig."
                 },
@@ -400,9 +394,15 @@
                     "type": "boolean",
                     "fa_icon": "far fa-check-circle",
                     "description": "Validation of parameters in lenient more.",
-                    "default": false,
                     "hidden": true,
                     "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                },
+                "pipelines_testdata_base_path": {
+                    "type": "string",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Base URL or local path to location of pipeline test dataset files",
+                    "default": "https://raw.githubusercontent.com/nf-core/test-datasets/",
+                    "hidden": true
                 }
             }
         }

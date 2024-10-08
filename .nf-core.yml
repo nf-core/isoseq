@@ -1,2 +1,18 @@
+bump_version: null
+lint:
+  files_unchanged:
+    - .github/workflows/linting.yml
+nf_core_version: 3.0.0
+org_path: null
 repository_type: pipeline
-nf_core_version: "2.14.1"
+template:
+  author: "S\xE9bastien Guizard (@sguizard)"
+  description: Genes and transcripts annotation with Isoseq using uLTRA and TAMA
+  force: false
+  is_nfcore: true
+  name: isoseq
+  org: nf-core
+  outdir: .
+  skip_features: null
+  version: 2.0.1dev
+update: null

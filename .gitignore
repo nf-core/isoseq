@@ -11,3 +11,4 @@ null/
 .idea/
 .vscode
 .nf-test*
+.lineage/

@@ -1,6 +1,6 @@
 {
     "@context": [
-        "https://w3id.org/ro/crate/1.1/context",
+        "https://w3id.org/ro/crate/1.2/context",
         {
             "GithubService": "https://w3id.org/ro/terms/test#GithubService",
             "JenkinsService": "https://w3id.org/ro/terms/test#JenkinsService",
@@ -102,7 +102,7 @@
             },
             "mentions": [
                 {
-                    "@id": "#565befe7-8527-475a-9ccf-ca3288555e41"
+                    "@id": "#3bd20439-b015-44a9-bc5e-f601528ecf26"
                 }
             ],
             "name": "nf-core/isoseq"
@@ -115,7 +115,7 @@
             },
             "conformsTo": [
                 {
-                    "@id": "https://w3id.org/ro/crate/1.1"
+                    "@id": "https://w3id.org/ro/crate/1.2"
                 },
                 {
                     "@id": "https://w3id.org/workflowhub/workflow-ro-crate/1.0"
@@ -130,7 +130,7 @@
                 "ComputationalWorkflow"
             ],
             "dateCreated": "",
-            "dateModified": "2025-11-20T09:31:41Z",
+            "dateModified": "2026-04-28T11:20:49Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
             "keywords": [
                 "nf-core",
@@ -171,14 +171,14 @@
             "url": {
                 "@id": "https://www.nextflow.io/"
             },
-            "version": "!>=25.04.0"
+            "version": "!>=25.10.4"
         },
         {
-            "@id": "#565befe7-8527-475a-9ccf-ca3288555e41",
+            "@id": "#3bd20439-b015-44a9-bc5e-f601528ecf26",
             "@type": "TestSuite",
             "instance": [
                 {
-                    "@id": "#b6f4cebc-bbe0-44ee-bc91-51c83e30d655"
+                    "@id": "#7ce97187-f645-43af-b7e1-50b0974c7389"
                 }
             ],
             "mainEntity": {
@@ -187,7 +187,7 @@
             "name": "Test suite for nf-core/isoseq"
         },
         {
-            "@id": "#b6f4cebc-bbe0-44ee-bc91-51c83e30d655",
+            "@id": "#7ce97187-f645-43af-b7e1-50b0974c7389",
             "@type": "TestInstance",
             "name": "GitHub Actions workflow for testing nf-core/isoseq",
             "resource": "repos/nf-core/isoseq/actions/workflows/nf-test.yml",

@@ -144,14 +144,18 @@ workflow ISOSEQ {
     // CHUNKER_INPUT_FASTAS.out.fastas.view { meta, fa -> println("CHUNKER_INPUT_FASTAS.out.fasta: $meta | $fa") }
 
     // MAPPING: Split samplesheet's fasta files, add them to the queue and run mapping
+    // NOTE: GSTAMA_POLYACLEANUP.out.fasta uses a greedy glob (*.fa.gz) that also captures
+    // the *_tails.fa.gz file. Keep only the main cleaned fasta (restores pre-update behaviour).
+    // TODO: fix upstream polyacleanup module glob and drop this filter.
     GSTAMA_POLYACLEANUP.out.fasta
+        .map { meta, files -> [ meta, [files].flatten().find { !it.name.endsWith('_tails.fa.gz') } ] }
         .concat(CHUNKER_INPUT_FASTAS.out.fastas)
         .set { ch_input_fastas }
     // ch_input_fastas.view { meta, fa -> println("ch_input_fastas.out.fasta: $meta | $fa") }
 
     // Align FLNCs: User can choose between minimap2 and uLTRA aligners
     if (params.aligner == "ultra") {
-        GNU_SORT(SET_GTF_CHANNEL.out.data.map { it -> [ [id:'genome'], it ] } ) // Sort GTF on sequence and start, uLTRA index fails with topological sort
+        GNU_SORT(SET_GTF_CHANNEL.out.data.map { it -> [ [id:'genome'], it, 'gtf' ] } ) // Sort GTF on sequence and start, uLTRA index fails with topological sort
         ULTRA_INDEX(                                                            // Index GTF file before alignment
             SET_FASTA_CHANNEL.out.data.map { it -> [ [id:'genome'], it ] },
             GNU_SORT.out.sorted)
@@ -195,7 +199,7 @@ workflow ISOSEQ {
         .groupTuple()
         .set { ch_tcollapse }
 
-    ch_tcollapse.view { meta, fa -> println("ch_tcollapse: $meta | $fa") }
+    // ch_tcollapse.view { meta, fa -> println("ch_tcollapse: $meta | $fa") }
 
     cap_value = params.capped == true ? channel.value("capped") : channel.value("no_cap")
 
@@ -233,32 +237,27 @@ workflow ISOSEQ {
     )
 
     //
-    // MODULE: Pipeline reporting
-    //
-    ch_versions = ch_versions.mix(PBCCS.out.versions)
-    ch_versions = ch_versions.mix(LIMA.out.versions)
-    ch_versions = ch_versions.mix(ISOSEQ_REFINE.out.versions)
-    ch_versions = ch_versions.mix(BAMTOOLS_CONVERT.out.versions)
-    ch_versions = ch_versions.mix(GSTAMA_POLYACLEANUP.out.versions)
-
-    if (params.aligner == "ultra") {
-        ch_versions = ch_versions.mix(GUNZIP.out.versions)
-        ch_versions = ch_versions.mix(GNU_SORT.out.versions)
-        ch_versions = ch_versions.mix(ULTRA_INDEX.out.versions)
-        ch_versions = ch_versions.mix(ULTRA_ALIGN.out.versions)
-    }
-    else if (params.aligner == "minimap2") {
-        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
-    }
-
-    ch_versions = ch_versions.mix(GSTAMA_COLLAPSE.out.versions)
-    ch_versions = ch_versions.mix(GSTAMA_MERGE.out.versions)
-    ch_versions = ch_versions.mix(GSTAMA_MERGE_ALL.out.versions)
-
-    //
     // Collate and save software versions
     //
-    version_yaml = softwareVersionsToYAML(ch_versions)
+    def topic_versions = channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${outdir}/pipeline_info",
             name: 'nf_core_'  +  'isoseq_software_'  + 'mqc_'  + 'versions.yml',
@@ -280,10 +279,9 @@ workflow ISOSEQ {
     ch_methods_description                = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description))
 
-    ch_multiqc_files = ch_multiqc_files.mix(version_yaml)
+    ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
-    // ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(PBCCS.out.report_json.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.summary.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.counts.collect{it[1]}.ifEmpty([]))

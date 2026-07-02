@@ -102,7 +102,7 @@
             },
             "mentions": [
                 {
-                    "@id": "#3bd20439-b015-44a9-bc5e-f601528ecf26"
+                    "@id": "#e98fb35a-bd7f-4c89-9b92-151413268e4b"
                 }
             ],
             "name": "nf-core/isoseq"
@@ -130,7 +130,7 @@
                 "ComputationalWorkflow"
             ],
             "dateCreated": "",
-            "dateModified": "2026-04-28T11:20:49Z",
+            "dateModified": "2026-04-30T13:33:07Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
             "keywords": [
                 "nf-core",
@@ -174,11 +174,11 @@
             "version": "!>=25.10.4"
         },
         {
-            "@id": "#3bd20439-b015-44a9-bc5e-f601528ecf26",
+            "@id": "#e98fb35a-bd7f-4c89-9b92-151413268e4b",
             "@type": "TestSuite",
             "instance": [
                 {
-                    "@id": "#7ce97187-f645-43af-b7e1-50b0974c7389"
+                    "@id": "#336b335a-296d-4c7d-a26f-ee118db824ce"
                 }
             ],
             "mainEntity": {
@@ -187,7 +187,7 @@
             "name": "Test suite for nf-core/isoseq"
         },
         {
-            "@id": "#7ce97187-f645-43af-b7e1-50b0974c7389",
+            "@id": "#336b335a-296d-4c7d-a26f-ee118db824ce",
             "@type": "TestInstance",
             "name": "GitHub Actions workflow for testing nf-core/isoseq",
             "resource": "repos/nf-core/isoseq/actions/workflows/nf-test.yml",

@@ -1,4 +1,4 @@
-nf_core_version: 4.0.2
+nf_core_version: 4.0.3
 repository_type: pipeline
 template:
   author: "Sébastien Guizard (@sguizard)"
@@ -9,3 +9,8 @@ template:
   org: nf-core
   outdir: .
   version: 2.1.0dev
+lint:
+  files_unchanged:
+    - assets/nf-core-isoseq_logo_light.png
+    - docs/images/nf-core-isoseq_logo_light.png
+    - docs/images/nf-core-isoseq_logo_dark.png

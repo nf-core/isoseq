@@ -106,25 +106,15 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
-
     channel
-        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
-        .map {
-            meta, fastq_1, fastq_2 ->
-                if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-                } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-                }
-        }
-        .groupTuple()
-        .map { samplesheet ->
-            validateInputSamplesheet(samplesheet)
-        }
-        .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
-        }
+        .fromList(
+            samplesheetToList(
+                params.input,
+                "${projectDir}/assets/schema_input.json").withIndex())
+        .flatMap { pair ->
+            def row = pair[0]
+            def counter = pair[1] as int
+            create_samplesheet_channel(row, params.chunk_ccs, counter) }
         .set { ch_samplesheet }
 
     emit:
@@ -292,4 +282,56 @@ def methodsDescriptionText(mqc_methods_yaml) {
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
+}
+
+// Function to get to create samplesheet channel for isoseq entrypoint [ meta, bam, pbi  ]
+def create_samplesheet_channel(row, chunk, counter) {
+    // Check if mandatory seq_data file exists
+    if (!file(row[1]).exists()) {
+        exit 1, "ERROR: Please check input samplesheet -> BAM file does not exist!\n${row[1]}"
+    }
+
+    // returns depends on the starting point
+    if ( row[0].start_from == 'ccs' ) { // pbccs can work on chunks, need to as many entries as defined chunks
+        if (!file(row[2]).exists()) {
+            exit 1, "ERROR: Please check input samplesheet -> PBI file does not exist!\n${row[2]}"
+        }
+
+        return (1..chunk)
+            .collect {
+                [
+                    [
+                        id:row[0].id + "_" + counter,
+                        start_from:row[0].start_from
+                    ],
+                    file(row[1]),
+                    file(row[2])
+                ]
+            }
+
+    }
+    else if ( row[0].start_from in ['lima', 'refine']) {
+        return [ [
+            [
+                id:row[0].id + "_" + counter,
+                start_from:row[0].start_from
+            ],
+            file(row[1]),
+            null
+        ] ]
+    }
+    else if ( row[0].start_from == 'mapping') {
+        return [ [
+            [
+                id:row[0].id + "_" + counter,
+                start_from:row[0].start_from,
+                single_end:true
+            ],
+            file(row[1]),
+            null
+        ] ]
+    }
+    else {
+        exit 1, "ERROR: Please check input samplesheet -> start_from value should be either: ccs, lima, refine, or mapping. (${row[3]})"
+    }
 }

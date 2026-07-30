@@ -1,0 +1,132 @@
+{
+    "-profile test_inputs_refine": {
+        "content": [
+            {
+                "BAMTOOLS_CONVERT": {
+                    "bamtools": "2.5.2"
+                },
+                "GSTAMA_COLLAPSE": {
+                    "gstama": 20211103
+                },
+                "GSTAMA_MERGE": {
+                    "gstama": "0.0.1"
+                },
+                "GSTAMA_POLYACLEANUP": {
+                    "gstama": 20211103
+                },
+                "ISOSEQ_REFINE": {
+                    "isoseq": "4.0.0"
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283",
+                    "samtools": 1.21
+                }
+            },
+            [
+                "03_ISOSEQ_REFINE",
+                "03_ISOSEQ_REFINE/sample3_0.bam",
+                "03_ISOSEQ_REFINE/sample3_0.bam.pbi",
+                "03_ISOSEQ_REFINE/sample3_0.consensusreadset.xml",
+                "03_ISOSEQ_REFINE/sample3_0.filter_summary.report.json",
+                "03_ISOSEQ_REFINE/sample3_0.report.csv",
+                "04_BAMTOOLS_CONVERT",
+                "04_BAMTOOLS_CONVERT/sample3_0.fasta",
+                "05_GSTAMA_POLYACLEANUP",
+                "05_GSTAMA_POLYACLEANUP/sample3_0.chunk.1_tama.fa.gz",
+                "05_GSTAMA_POLYACLEANUP/sample3_0.chunk.1_tama_polya_flnc_report.txt.gz",
+                "05_GSTAMA_POLYACLEANUP/sample3_0.chunk.1_tama_tails.fa.gz",
+                "05_GSTAMA_POLYACLEANUP/sample3_0.chunk.2_tama.fa.gz",
+                "05_GSTAMA_POLYACLEANUP/sample3_0.chunk.2_tama_polya_flnc_report.txt.gz",
+                "05_GSTAMA_POLYACLEANUP/sample3_0.chunk.2_tama_tails.fa.gz",
+                "06_MINIMAP2",
+                "06_MINIMAP2/sample3_0.chunk.1.bam",
+                "06_MINIMAP2/sample3_0.chunk.1.bam.bai",
+                "06_MINIMAP2/sample3_0.chunk.2.bam",
+                "06_MINIMAP2/sample3_0.chunk.2.bam.bai",
+                "07_GSTAMA_COLLAPSE",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_collapsed.bed",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_local_density_error.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_polya.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_read.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_strand_check.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_trans_read.bed",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_trans_report.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_varcov.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.1_variants.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_collapsed.bed",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_local_density_error.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_polya.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_read.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_strand_check.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_trans_read.bed",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_trans_report.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_varcov.txt",
+                "07_GSTAMA_COLLAPSE/sample3_0.chunk.2_variants.txt",
+                "08_GSTAMA_FILELIST",
+                "08_GSTAMA_FILELIST/sample3.tsv",
+                "09_GSTAMA_MERGE",
+                "09_GSTAMA_MERGE/sample3.bed",
+                "09_GSTAMA_MERGE/sample3_gene_report.txt",
+                "09_GSTAMA_MERGE/sample3_merge.txt",
+                "09_GSTAMA_MERGE/sample3_trans_report.txt",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/llms-full.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc.parquet",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_isoseq_software_mqc_versions.yml"
+            ],
+            [
+                "sample3_0.bam:md5,f5476a918c69f1c73a19051353f1bcb4",
+                "sample3_0.bam.pbi:md5,afb9a61ed9f3aa3f589af5c48a2f9f45",
+                "sample3_0.report.csv:md5,8d350f8dba8c928ec8b693f47dc1c096",
+                "sample3_0.fasta:md5,81b607067bac48a5b53281e982acd623",
+                "sample3_0.chunk.1_tama.fa.gz:md5,547bcdc2de2cffc24b5fcc1b5a13bb2f",
+                "sample3_0.chunk.1_tama_polya_flnc_report.txt.gz:md5,d5181d0e3cd99b207032729e345bec15",
+                "sample3_0.chunk.1_tama_tails.fa.gz:md5,db16b89e4737e9a27ca5d8ac7816abba",
+                "sample3_0.chunk.2_tama.fa.gz:md5,eeabbdacda87cf5bfa23b530d4e1a838",
+                "sample3_0.chunk.2_tama_polya_flnc_report.txt.gz:md5,8e2996f18473044831036113c804b1c3",
+                "sample3_0.chunk.2_tama_tails.fa.gz:md5,397d55c45160ffe3a2596a77ec3104f4",
+                "sample3_0.chunk.1.bam:md5,4c237fe51abd08a06855deac9d67fff0",
+                "sample3_0.chunk.1.bam.bai:md5,93f547858b813e0b80491117175ffb0c",
+                "sample3_0.chunk.2.bam:md5,aa743dba9f317b7ec927268c5f441b24",
+                "sample3_0.chunk.2.bam.bai:md5,88c8b677b92e09e3a7c997615f3ad978",
+                "sample3_0.chunk.1_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
+                "sample3_0.chunk.1_local_density_error.txt:md5,bde56c7c2c791918943ea8d6c8c2169a",
+                "sample3_0.chunk.1_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
+                "sample3_0.chunk.1_read.txt:md5,f3fd6b182d7255f35339a0507cd55564",
+                "sample3_0.chunk.1_strand_check.txt:md5,42cc52b2660b1e0b84e1c9ab37a965ec",
+                "sample3_0.chunk.1_trans_read.bed:md5,19cdf0d7d935665da0f96b936c6affc6",
+                "sample3_0.chunk.1_trans_report.txt:md5,35610244e9d495e6f5dee1c6ae0580f8",
+                "sample3_0.chunk.1_varcov.txt:md5,7b77861fe5e8e953d6d193ace2467e12",
+                "sample3_0.chunk.1_variants.txt:md5,a4c518e1dfb7ff762bd7e5c3d7370986",
+                "sample3_0.chunk.2_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
+                "sample3_0.chunk.2_local_density_error.txt:md5,50da2e01c5aeb64595e8aba8957a74d7",
+                "sample3_0.chunk.2_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
+                "sample3_0.chunk.2_read.txt:md5,e8b06298d18b442a1b5b2fe1d2fb94e0",
+                "sample3_0.chunk.2_strand_check.txt:md5,42cc52b2660b1e0b84e1c9ab37a965ec",
+                "sample3_0.chunk.2_trans_read.bed:md5,244ba6d15cbf8bd84d6e3b5d005017dd",
+                "sample3_0.chunk.2_trans_report.txt:md5,35610244e9d495e6f5dee1c6ae0580f8",
+                "sample3_0.chunk.2_varcov.txt:md5,7b77861fe5e8e953d6d193ace2467e12",
+                "sample3_0.chunk.2_variants.txt:md5,a4c518e1dfb7ff762bd7e5c3d7370986",
+                "sample3.tsv:md5,13594e213bd42a105685200e9d4afbfa",
+                "sample3.bed:md5,2376959ce39530c95f0782741d058662",
+                "sample3_gene_report.txt:md5,9fc021aed668882970918e34c80f33a5",
+                "sample3_merge.txt:md5,4d9f5af63bf3cbeec576b19fdaddfa56",
+                "sample3_trans_report.txt:md5,166e969a66faeb156a59250cc2c1d228",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-11T14:36:08.116645913"
+    }
+}

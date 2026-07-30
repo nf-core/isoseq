@@ -10,3 +10,13 @@ multiqc/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/multiqc_report.html
 fastqc/*_fastqc.{html,zip}
 pipeline_info/*.{html,json,txt,yml}
+**/*pickle
+**/*.metrics.json.gz
+**/*.report.json
+**/*_flnc.NEB_5p--NEB_Clontech_3p.consensusreadset.xml
+**/*_flnc.json
+**/*_flnc.consensusreadset.xml
+**/*consensusreadset.xml
+**/*filter_summary.report.json
+**/lima-filter-graph.txt
+**/multiqc_ccs_report.txt

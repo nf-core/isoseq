@@ -5,14 +5,69 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
-                    "fastqc": {
+                    "bamtools/convert": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
+                    "gnu/sort": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
+                    "gstama/collapse": {
+                        "branch": "master",
+                        "git_sha": "ecace0debef350b6636ea603824ae16c1bb29a54",
+                        "installed_by": ["modules"]
+                    },
+                    "gstama/merge": {
+                        "branch": "master",
+                        "git_sha": "ecace0debef350b6636ea603824ae16c1bb29a54",
+                        "installed_by": ["modules"]
+                    },
+                    "gstama/polyacleanup": {
+                        "branch": "master",
+                        "git_sha": "ecace0debef350b6636ea603824ae16c1bb29a54",
+                        "installed_by": ["modules"]
+                    },
+                    "gunzip": {
+                        "branch": "master",
+                        "git_sha": "0902eac3012baaf4f9ab6513c8c55acc9353c96c",
+                        "installed_by": ["modules"]
+                    },
+                    "isoseq/refine": {
+                        "branch": "master",
+                        "git_sha": "17bf175c37d61ae3ba8b1e0bd972f3f880327497",
+                        "installed_by": ["modules"]
+                    },
+                    "lima": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
+                    "minimap2/align": {
+                        "branch": "master",
+                        "git_sha": "135d883a43b1a2324b4112cd270cf22e20835533",
+                        "installed_by": ["modules"]
+                    },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "008f9d3e61209bf995edac3ba531f54e269e1215",
+                        "git_sha": "98403d15b0e50edae1f3fec5eae5e24982f1fade",
+                        "installed_by": ["modules"]
+                    },
+                    "pbccs": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
+                    "ultra/align": {
+                        "branch": "master",
+                        "git_sha": "69993a757b03f6fbc50b06b226c00b5083543574",
+                        "installed_by": ["modules"]
+                    },
+                    "ultra/index": {
+                        "branch": "master",
+                        "git_sha": "69993a757b03f6fbc50b06b226c00b5083543574",
                         "installed_by": ["modules"]
                     }
                 }

@@ -13,21 +13,36 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "fastq_1": {
+            "seq_data": {
                 "type": "string",
+                "pattern": "(^\\S+\\.bam$|^\\S+\\.fa$|^\\S+\\.fa.gz$)",
                 "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "errorMessage": "Sequence data file must be provided, cannot contain spaces and must have extension '.bam' or '.fa'"
             },
-            "fastq_2": {
+            "pbi": {
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "pattern": "^\\S+\\.bam.pbi$",
+                        "format": "file-path"
+                    },
+                    {
+                        "type": "string",
+                        "pattern": "^none$"
+                    }
+                ],
+                "errorMessage": "PacBio Index file for BAM subreads cannot contain spaces and must have extension '.bam.pbi' or being empty"
+            },
+            "start_from": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^ccs|lima|refine|mapping$",
+                "errorMessage": "start_from should be one of: ccs, lima, refine, mapping",
+                "meta": ["start_from"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "seq_data", "start_from"],
+        "dependentRequired": {
+            "start_from": ["sample"]
+        }
     }
 }

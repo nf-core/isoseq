@@ -27,7 +27,7 @@
                     },
                     "gstama/polyacleanup": {
                         "branch": "master",
-                        "git_sha": "ecace0debef350b6636ea603824ae16c1bb29a54",
+                        "git_sha": "82450e2e06bc03df52e8adbe8886de25adb402ee",
                         "installed_by": ["modules"]
                     },
                     "gunzip": {

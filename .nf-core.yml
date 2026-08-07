@@ -1,4 +1,4 @@
-nf_core_version: 4.0.3
+nf_core_version: 4.1.0
 repository_type: pipeline
 template:
   author: "S\xE9bastien Guizard (@sguizard)"
@@ -8,4 +8,4 @@ template:
   name: isoseq
   org: nf-core
   outdir: .
-  version: 2.1.0dev
+  version: 3.0.0

@@ -15,15 +15,15 @@
             },
             "seq_data": {
                 "type": "string",
-                "pattern": "(^\\S+\\.bam$|^\\S+\\.fa$|^\\S+\\.fa.gz$)",
+                "pattern": "^\\S+\\.(bam|fa|fa\\.gz)$",
                 "format": "file-path",
-                "errorMessage": "Sequence data file must be provided, cannot contain spaces and must have extension '.bam' or '.fa'"
+                "errorMessage": "Sequence data file must be provided, cannot contain spaces and must have extension '.bam', '.fa' or '.fa.gz'"
             },
             "pbi": {
                 "anyOf": [
                     {
                         "type": "string",
-                        "pattern": "^\\S+\\.bam.pbi$",
+                        "pattern": "^\\S+\\.bam\\.pbi$",
                         "format": "file-path"
                     },
                     {
@@ -31,18 +31,15 @@
                         "pattern": "^none$"
                     }
                 ],
-                "errorMessage": "PacBio Index file for BAM subreads cannot contain spaces and must have extension '.bam.pbi' or being empty"
+                "errorMessage": "PacBio index for a subreads BAM must have extension '.bam.pbi' and cannot contain spaces. Use 'none' when no index applies."
             },
             "start_from": {
                 "type": "string",
-                "pattern": "^ccs|lima|refine|mapping$",
-                "errorMessage": "start_from should be one of: ccs, lima, refine, mapping",
+                "enum": ["ccs", "lima", "refine", "mapping"],
+                "errorMessage": "start_from must be one of: ccs, lima, refine, mapping",
                 "meta": ["start_from"]
             }
         },
-        "required": ["sample", "seq_data", "start_from"],
-        "dependentRequired": {
-            "start_from": ["sample"]
-        }
+        "required": ["sample", "seq_data", "start_from"]
     }
 }

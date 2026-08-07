@@ -9,10 +9,15 @@
 This pipeline has been designed to analyse several samples or sequencing runs at the same time.
 It reads all samples from a samplesheet file and parallelizes computation for each of them.
 
-Depending on your on data, you might not need to run the isoseq preprocessing.
-This step can be skipped by setting the `--entrypoint` parameter to `map` and starting the analysis from the mapping step.
-By default, the entrypoint is set to `isoseq` and the full pipeline is run.
-The generation of CCS consensuses from raw isoseq subreads can be skipped by directly providing the CCS consensuses and setting the `bam_type` field to `ccs` in the samplesheet.
+Depending on your data, you might not need to run the full Iso-Seq preprocessing.
+Every row of the samplesheet carries a `start_from` value declaring where that sample
+enters the pipeline, so a single run can mix raw subreads with data that has already
+been through CCS, LIMA or refine:
+
+- `ccs` — raw subreads; runs the full pipeline (CCS, LIMA, refine, mapping)
+- `lima` — CCS consensuses; skips CCS generation
+- `refine` — Full Length reads produced by LIMA; skips CCS and LIMA
+- `mapping` — long reads in FASTA; skips Iso-Seq preprocessing entirely
 
 ### Samplesheet input
 
@@ -25,12 +30,12 @@ Use `--input` parameter to specify its location.
 
 The samplesheet is a comma-separated file with 4 columns, and a header row as shown in the examples below.
 
-| Column       | Description                                                                                                                                                                                                                               |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`     | Sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                                                                                                     |
-| `seq_data`   | The path to the sequence file. A BAM file for subreads, Consensus Circular Sequences or Full Length sequences. A fasta file for long reads.                                                                                               |
-| `pbi`        | In case `seq_data` is a subreads BAM, the path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be compose of bam file name with the `.pbi` extension. In the other cases, `none` |
-| `start_from` | The value depend of the seq_data file. `ccs` for subreads, `lima` for ccs sequences, `refine` for Full Length data and `mapping` for long reads.                                                                                          |
+| Column       | Description                                                                                                                                                                                                                                    |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`     | Sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                                                                                                          |
+| `seq_data`   | The path to the sequence file. A BAM file for subreads, Consensus Circular Sequences or Full Length sequences. A fasta file for long reads.                                                                                                    |
+| `pbi`        | In case `seq_data` is a subreads BAM, the path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be composed of the bam file name with the `.pbi` extension. In the other cases, `none` |
+| `start_from` | The value depends on the seq_data file. `ccs` for subreads, `lima` for ccs sequences, `refine` for Full Length data and `mapping` for long reads.                                                                                              |
 
 ```csv
 sample,seq_data,pbi,start_from
@@ -40,7 +45,7 @@ sample3,sample3.fl.primer_5p--primer_3p.bam,none,refine
 sample4,sample4.long_reads.fa.gz,none,mapping
 ```
 
-If multiple cells have been run for the same sample, the sample ID can be used several time in the samplesheet. Each dataset will be annalysed in parallel and then be merge with TAMA.
+If multiple cells have been run for the same sample, the sample ID can be used several times in the samplesheet. Each dataset will be analysed in parallel and then merged with TAMA.
 
 ```csv
 sample,seq_data,pbi,start_from
@@ -50,6 +55,22 @@ sample2,sample1.subreads.bam,sample2.subreads.bam.pbi,ccs
 ```
 
 Some example samplesheets can be found on the [github repository](https://github.com/nf-core/isoseq/tree/master/assets).
+
+### Migrating from version 2.0.0
+
+Version 3.0.0 redefines the samplesheet, so samplesheets written for 2.0.0 will not validate.
+
+| Version 2.0.0                               | Version 3.0.0                           |
+| ------------------------------------------- | --------------------------------------- |
+| `sample,bam,pbi,reads`                      | `sample,seq_data,pbi,start_from`        |
+| separate `bam` and `reads` columns          | one `seq_data` column holding either    |
+| `None` placeholder                          | `none`, lower case, for an absent `pbi` |
+| `--entrypoint isoseq` or `--entrypoint map` | a `start_from` value on every row       |
+
+Two parameter changes also affect existing command lines:
+
+- `--chunk` has been split into `--chunk_ccs` and `--chunk_mapping`, controlling chunking of CCS generation and of mapping independently.
+- `--max_cpus`, `--max_memory` and `--max_time` have been removed by the nf-core template. Set limits with the `resourceLimits` directive in a custom config instead.
 
 ### Primer file
 

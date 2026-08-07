@@ -82,7 +82,7 @@ workflow ISOSEQ {
         SET_GTF_CHANNEL(params.gtf)     // genome gtf
     }
 
-    // Dispatch inputs to redistribute them to their ad hoc entrypoint
+    // Dispatch inputs to redistribute them to their ad hoc starting point
     ch_samplesheet
         .branch { meta, _seq_data, _pbi ->
             ccs    : meta.start_from == "ccs"

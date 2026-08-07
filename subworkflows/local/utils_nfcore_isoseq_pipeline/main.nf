@@ -287,7 +287,7 @@ def methodsDescriptionText(mqc_methods_yaml) {
     return description_html.toString()
 }
 
-// Function to get to create samplesheet channel for isoseq entrypoint [ meta, bam, pbi  ]
+// Function to get samplesheet channel from samplesheet version 2
 def create_samplesheet_channel(row, chunk, counter) {
     // Check if mandatory seq_data file exists
     if (!file(row[1]).exists()) {

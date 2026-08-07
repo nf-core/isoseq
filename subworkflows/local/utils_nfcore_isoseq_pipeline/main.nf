@@ -222,13 +222,17 @@ def genomeExistsError() {
 // Generate methods description for MultiQC
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
             "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
+            "CCS (PacBio),",
+            "Lima (PacBio),",
+            "IsoSeq (PacBio),",
+            "SAMtools (Danecek et al. 2021),",
+            "uLTRA (Sahlin and Mäkinen 2021),",
+            "minimap2 (Li 2018),",
+            "BamTools (Barnett et al. 2011),",
+            "TAMA (Kuo et al. 2020),",
+            "MultiQC (Ewels et al. 2016),",
             "."
         ].join(' ').trim()
 
@@ -236,12 +240,16 @@ def toolCitationText() {
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
+            '<li>PacBio. CCS: Generate highly accurate single-molecule consensus reads. URL: <a href="https://ccs.how/">https://ccs.how/</a></li>',
+            '<li>PacBio. Lima: Demultiplex barcoded PacBio data. URL: <a href="https://lima.how/">https://lima.how/</a></li>',
+            '<li>PacBio. IsoSeq: Characterisation of full-length transcripts. URL: <a href="https://github.com/PacificBiosciences/IsoSeq">https://github.com/PacificBiosciences/IsoSeq</a></li>',
+            '<li>Danecek, P., Bonfield, J. K., Liddle, J., Marshall, J., Ohan, V., Pollard, M. O., Whitwham, A., Keane, T., McCarthy, S. A., Davies, R. M., &amp; Li, H. (2021). Twelve years of SAMtools and BCFtools. GigaScience, 10(2), giab008. doi: <a href="https://doi.org/10.1093/gigascience/giab008">10.1093/gigascience/giab008</a></li>',
+            '<li>Sahlin, K., &amp; M&auml;kinen, V. (2021). Accurate spliced alignment of long RNA sequencing reads. Bioinformatics, btab540. doi: <a href="https://doi.org/10.1093/bioinformatics/btab540">10.1093/bioinformatics/btab540</a></li>',
+            '<li>Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics, 34(18), 3094-3100. doi: <a href="https://doi.org/10.1093/bioinformatics/bty191">10.1093/bioinformatics/bty191</a></li>',
+            '<li>Barnett, D. W., Garrison, E. K., Quinlan, A. R., Str&ouml;mberg, M. P., &amp; Marth, G. T. (2011). BamTools: a C++ API and toolkit for analyzing and managing BAM files. Bioinformatics, 27(12), 1691-1692. doi: <a href="https://doi.org/10.1093/bioinformatics/btr174">10.1093/bioinformatics/btr174</a></li>',
+            '<li>Kuo, R. I., Cheng, Y., Zhang, R., et al. (2020). Illuminating the dark side of the human transcriptome with long read transcript sequencing. BMC Genomics, 21, 751. doi: <a href="https://doi.org/10.1186/s12864-020-07123-7">10.1186/s12864-020-07123-7</a></li>',
+            '<li>Ewels, P., Magnusson, M., Lundin, S., &amp; K&auml;ller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047-3048. doi: <a href="https://doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a></li>'
         ].join(' ').trim()
 
     return reference_text
@@ -268,13 +276,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
-    meta["tool_citations"] = ""
-    meta["tool_bibliography"] = ""
-
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
-
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
     def methods_text = mqc_methods_yaml.text
 

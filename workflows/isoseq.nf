@@ -144,11 +144,7 @@ workflow ISOSEQ {
     // CHUNKER_INPUT_FASTAS.out.fastas.view { meta, fa -> println("CHUNKER_INPUT_FASTAS.out.fasta: $meta | $fa") }
 
     // MAPPING: Split samplesheet's fasta files, add them to the queue and run mapping
-    // NOTE: GSTAMA_POLYACLEANUP.out.fasta uses a greedy glob (*.fa.gz) that also captures
-    // the *_tails.fa.gz file. Keep only the main cleaned fasta (restores pre-update behaviour).
-    // TODO: fix upstream polyacleanup module glob and drop this filter.
     GSTAMA_POLYACLEANUP.out.fasta
-        .map { meta, files -> [ meta, [files].flatten().find { !it.name.endsWith('_tails.fa.gz') } ] }
         .concat(CHUNKER_INPUT_FASTAS.out.fastas)
         .set { ch_input_fastas }
     // ch_input_fastas.view { meta, fa -> println("ch_input_fastas.out.fasta: $meta | $fa") }

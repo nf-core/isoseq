@@ -40,6 +40,25 @@
                 "meta": ["start_from"]
             }
         },
-        "required": ["sample", "seq_data", "start_from"]
+        "required": ["sample", "seq_data", "start_from"],
+        "allOf": [
+            {
+                "if": {
+                    "properties": {
+                        "start_from": { "const": "ccs" }
+                    },
+                    "required": ["start_from"]
+                },
+                "then": {
+                    "required": ["pbi"],
+                    "properties": {
+                        "pbi": {
+                            "pattern": "^\\S+\\.bam\\.pbi$",
+                            "errorMessage": "A PacBio index file ('.bam.pbi') is required when start_from is 'ccs'"
+                        }
+                    }
+                }
+            }
+        ]
     }
 }

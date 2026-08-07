@@ -3,47 +3,67 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v3.0.0 - [07/08/2026]
+## v3.0.0 - Patchwork Zooble [07/08/2026]
+
+> [!WARNING]
+> This is a major release with breaking changes. Samplesheets and command lines written for
+> v2.0.0 will not work unmodified. See the migration notes below.
 
 ### `Added`
 
-- Updated nf-core template to version 3.4.1
-- Remove `skip_lima` and `entrypoint` in favor of the new samplesheet / input file injection system
-- Redefined samplesheet format to allows multiple type inputs (subreads, ccs, full length or long reads fasta)
-
-### `Fixed`
-
-- Update modules (TO BE LISTED)
-
-  | Tool    | Previous version | New version |
-  | ------- | ---------------- | ----------- |
-  | XXXXXXX | XXXXXX           | XXXX        |
-
-### `Dependencies`
-
-### `Deprecated`
-
-## v2.1.0 - [15/01/2025]
-
-### `Added`
-
-- Added an optional field `bam_type` to `schema_input` to allow simultaneous input of both Subreads and CCS sequences [#40](https://github.com/nf-core/isoseq/issues/40)
-- Updated nf-core template to version 3.1.1
-- Added parameter `skip_lima` to allow processing of samples for which `LIMA` has already been applied
+- New samplesheet-driven input system: each row declares its own entry point via `start_from`,
+  allowing subreads, CCS, full-length and long-read FASTA inputs to be mixed in a single run
+  [#40](https://github.com/nf-core/isoseq/issues/40)
+- Support for multiple libraries (cells) per sample, merged with TAMA
+- Input chunking before mapping via the new `chunker` subworkflow, controlled by `chunk_ccs`
+  and `chunk_mapping`
 - Added parameter `tama_merge_all` to allow merging of sample-wise beds into a single annotation bed
+- Updated nf-core template to version 4.0.3
+
+### `Changed`
+
+- **Breaking:** the samplesheet format has been redefined. Columns are now
+  `sample,seq_data,pbi,start_from`, replacing `sample,bam,pbi,reads`. The `seq_data` column
+  takes any supported input file, and `start_from` (`ccs`, `lima`, `refine` or `mapping`)
+  declares where that row enters the pipeline. The `None` placeholder is replaced by `none`
+  for absent `pbi` files.
+- **Breaking:** the `chunk` parameter has been split into `chunk_ccs` and `chunk_mapping`,
+  which independently control chunking of CCS generation and of mapping.
+- Software versions are now collected through Nextflow topic channels instead of a dedicated
+  module.
+
+### `Removed`
+
+- **Breaking:** removed the `--entrypoint` parameter. Per-row `start_from` in the samplesheet
+  replaces it, and is strictly more flexible: entry points can now differ between samples
+  within one run.
+- **Breaking:** removed `--max_cpus`, `--max_memory` and `--max_time`. These were replaced by
+  the `resourceLimits` directive in the nf-core template; set limits in a custom config instead.
+- Removed the `--hook_url` parameter, following the nf-core template.
+- Removed the `custom/dumpsoftwareversions` module.
 
 ### `Fixed`
 
-- Update modules (bamtools/convert, custom/dumpsoftwareversions, gnu/sort, gstama/collapse/ gstama/merge, gstama/polyacleanup, gunzip, isoseq/refine, lima, minimap2/align, multiqc, pbccs, ultra/align, ultra/index)
-
-  | Tool    | Previous version | New version |
-  | ------- | ---------------- | ----------- |
-  | multiqc | 1.24.1           | 1.26        |
-  | lima    | 2.9.0            | 2.12.0      |
+- Updated all nf-core modules to their latest revisions (`bamtools/convert`, `gnu/sort`,
+  `gstama/collapse`, `gstama/merge`, `gstama/polyacleanup`, `gunzip`, `isoseq/refine`, `lima`,
+  `minimap2/align`, `multiqc`, `pbccs`, `ultra/align`, `ultra/index`)
+- Replaced the `utils_nfvalidation_plugin` subworkflow with `utils_nfschema_plugin`, moving
+  parameter validation to `nf-schema` 2.5.1
+- Moved local subworkflows into their own directories to follow nf-core guidelines
 
 ### `Dependencies`
 
+| Tool      | Previous version | New version |
+| --------- | ---------------- | ----------- |
+| coreutils | 9.3              | 9.5         |
+| lima      | 2.9.0            | 2.12.0      |
+| minimap2  | 2.28             | 2.30        |
+| multiqc   | 1.24.1           | 1.35        |
+| samtools  | 1.20             | 1.23.1      |
+
 ### `Deprecated`
+
+- None
 
 ## v2.0.0 - Sapphire Duck [05/09/2024]
 

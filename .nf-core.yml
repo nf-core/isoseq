@@ -8,7 +8,7 @@ template:
   name: isoseq
   org: nf-core
   outdir: .
-  version: 2.1.0dev
+  version: 3.0.0
 lint:
   files_unchanged:
     - assets/nf-core-isoseq_logo_light.png

@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New samplesheet-driven input system: each row declares its own entry point via `start_from`,
   allowing subreads, CCS, full-length and long-read FASTA inputs to be mixed in a single run
-  [#40](https://github.com/nf-core/isoseq/issues/40)
+  [#40](https://github.com/nf-core/isoseq/issues/40), [#57](https://github.com/nf-core/isoseq/issues/57)
 - Support for multiple libraries (cells) per sample, merged with TAMA
 - Input chunking before mapping via the new `chunker` subworkflow, controlled by `chunk_ccs`
   and `chunk_mapping`
@@ -50,6 +50,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced the `utils_nfvalidation_plugin` subworkflow with `utils_nfschema_plugin`, moving
   parameter validation to `nf-schema` 2.5.1
 - Moved local subworkflows into their own directories to follow nf-core guidelines
+- Improved samplesheet validation: `start_from` is now an `enum`, file-extension patterns are
+  correctly anchored, and a `.bam.pbi` index is required when `start_from` is `ccs`
+  [#48](https://github.com/nf-core/isoseq/issues/48)
+- Fixed `CSS` / `CCS` typo in the documentation [#36](https://github.com/nf-core/isoseq/issues/36)
+- Removed a vulnerable artifact pattern from the PR-comment workflow
+  [#61](https://github.com/nf-core/isoseq/pull/61)
 
 ### `Dependencies`
 

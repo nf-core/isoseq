@@ -31,6 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   which independently control chunking of CCS generation and of mapping.
 - Software versions are now collected through Nextflow topic channels instead of a dedicated
   module.
+- `--primers` is no longer unconditionally required. It is only consumed by `LIMA` and
+  `isoseq refine`, so it is now required only when at least one samplesheet row uses
+  `start_from` `ccs`, `lima` or `refine`. Runs where every row uses `mapping` can omit it
+  [#50](https://github.com/nf-core/isoseq/issues/50)
 
 ### `Removed`
 

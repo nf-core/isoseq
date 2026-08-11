@@ -91,6 +91,10 @@ Use the --primers option to specify its location.
 --primers '[path to primers file]'
 ```
 
+The primer file is only used by `LIMA` and `isoseq refine`, so it is required whenever at
+least one samplesheet row uses `start_from` `ccs`, `lima` or `refine`. If every row uses
+`mapping`, neither step runs and `--primers` can be omitted.
+
 ### Reference genome and annotation
 
 The reference genome sequence is mandatory and must be in `FASTA` format.

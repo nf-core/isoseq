@@ -77,7 +77,11 @@ workflow ISOSEQ {
 
     // Value channels initialization
     SET_FASTA_CHANNEL(params.fasta)     // genome fasta
-    SET_PRIMERS_CHANNEL(params.primers) // primers fasta
+    ch_primers = channel.empty()        // primers fasta
+    if (params.primers) {
+        SET_PRIMERS_CHANNEL(params.primers) // primers fasta
+        ch_primers = SET_PRIMERS_CHANNEL.out.data
+    }
     if (params.aligner == "ultra") {
         SET_GTF_CHANNEL(params.gtf)     // genome gtf
     }
@@ -118,14 +122,14 @@ workflow ISOSEQ {
         .concat(ch_seq_data.lima.map { meta, bam, _pbi -> [ meta, bam ] })
         .set { ch_lima_input }
     // ch_lima_input.view { meta, bam -> println("ch_lima_input: $meta | $bam") }
-    LIMA(ch_lima_input, SET_PRIMERS_CHANNEL.out.data)  // Remove primers from CCS
+    LIMA(ch_lima_input, ch_primers)  // Remove primers from CCS
 
     // LIMA: Add the samplesheet's refine inputs to the queue and run isoseq refine
     LIMA.out.bam
         .concat(ch_seq_data.refine.map { meta, bam, _pbi -> [ meta, bam ] })
         .set { ch_isoseq_refine_input }
     // ch_isoseq_refine_input.view { meta, bam -> println("ch_isoseq_refine_input: $meta | $bam") }
-    ISOSEQ_REFINE(ch_isoseq_refine_input, SET_PRIMERS_CHANNEL.out.data) // Discard CCS without polyA tails, remove it from the other
+    ISOSEQ_REFINE(ch_isoseq_refine_input, ch_primers) // Discard CCS without polyA tails, remove it from the other
 
     // Convert bam files to fasta
     BAMTOOLS_CONVERT(ISOSEQ_REFINE.out.bam)        // Convert bam to fasta

@@ -106,11 +106,20 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
+    def samplesheet_rows = samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
+
+    // Primers are consumed only by LIMA and ISOSEQ_REFINE
+    def needs_primers = samplesheet_rows.any { row -> row[0].start_from in ['ccs', 'lima', 'refine'] }
+
+    if (needs_primers && !params.primers) {
+        error(
+            "Missing required parameter --primers.\n" +
+            "A primer FASTA is required when any sample starts from 'ccs', 'lima' or 'refine'.\n" +
+            "It is optional only when every sample uses start_from: 'mapping'.")
+    }
+
     channel
-        .fromList(
-            samplesheetToList(
-                params.input,
-                "${projectDir}/assets/schema_input.json").withIndex())
+        .fromList(samplesheet_rows.withIndex())
         .flatMap { pair ->
             def row = pair[0]
             def counter = pair[1] as int

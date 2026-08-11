@@ -18,8 +18,7 @@
                     "isoseq": "4.0.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.30-r1287"
                 }
             },
             [
@@ -153,20 +152,20 @@
                 "sample3_0.chunk.2_tama.fa.gz:md5,eeabbdacda87cf5bfa23b530d4e1a838",
                 "sample3_0.chunk.2_tama_polya_flnc_report.txt.gz:md5,8e2996f18473044831036113c804b1c3",
                 "sample3_0.chunk.2_tama_tails.fa.gz:md5,397d55c45160ffe3a2596a77ec3104f4",
-                "sample3_0.chunk.1.bam:md5,4c237fe51abd08a06855deac9d67fff0",
-                "sample3_0.chunk.1.bam.bai:md5,93f547858b813e0b80491117175ffb0c",
-                "sample3_0.chunk.2.bam:md5,aa743dba9f317b7ec927268c5f441b24",
-                "sample3_0.chunk.2.bam.bai:md5,88c8b677b92e09e3a7c997615f3ad978",
-                "sample4_1.chunk.1.bam:md5,239c263d7ac96615e397afecc11bee38",
-                "sample4_1.chunk.1.bam.bai:md5,dbc0e98e8834e2d2a2335c1aaab6a34f",
-                "sample4_1.chunk.2.bam:md5,77bbd83c712b672396dc9f4957c752cb",
-                "sample4_1.chunk.2.bam.bai:md5,dd995890d7ab7edf32149b73e45be998",
-                "sample4_1.chunk.3.bam:md5,a001cb3de097f7ba3913a86c3004daee",
-                "sample4_1.chunk.3.bam.bai:md5,b2f632894ae3a5a3d42ee95016e05b32",
-                "sample4_1.chunk.4.bam:md5,c38c7d46e785b20635c37277db4c6a45",
-                "sample4_1.chunk.4.bam.bai:md5,2148247009cc920f668900f4327864fd",
-                "sample4_1.chunk.5.bam:md5,60605fb0eea16dc05871e6d087cfe210",
-                "sample4_1.chunk.5.bam.bai:md5,cd30c54d2bdbc3c1eaf075c119a91fdb",
+                "sample3_0.chunk.1.bam:md5,aaf503203bfce942deedef6d3e04c0ce",
+                "sample3_0.chunk.1.bam.bai:md5,5e8c5a718b311cefc624b5a811919d6d",
+                "sample3_0.chunk.2.bam:md5,4e8c724a2a0788e2ed49a12934c8ca34",
+                "sample3_0.chunk.2.bam.bai:md5,8a489150c452640b87642b1f414e5754",
+                "sample4_1.chunk.1.bam:md5,09bb297eec553dbfe8dd30d63c00c764",
+                "sample4_1.chunk.1.bam.bai:md5,1d86687635c025330c7ab2fca5023804",
+                "sample4_1.chunk.2.bam:md5,6ec403efce4989a77e15d6ec61288ec7",
+                "sample4_1.chunk.2.bam.bai:md5,42d8d58667512186fce633c33ccacb7a",
+                "sample4_1.chunk.3.bam:md5,bc5993f84a3880115521594033e81df0",
+                "sample4_1.chunk.3.bam.bai:md5,bca761f92fba6e5d3a8f5466a98679aa",
+                "sample4_1.chunk.4.bam:md5,d7ef010c4d591672fb90fef823f99483",
+                "sample4_1.chunk.4.bam.bai:md5,76946cd3f1d6ec69608d34f948a2621d",
+                "sample4_1.chunk.5.bam:md5,f1f2e151255e4115cd727e71ef6a94de",
+                "sample4_1.chunk.5.bam.bai:md5,46a2a145b2912f7d43557da1247115d7",
                 "sample3_0.chunk.1_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
                 "sample3_0.chunk.1_local_density_error.txt:md5,bde56c7c2c791918943ea8d6c8c2169a",
                 "sample3_0.chunk.1_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
@@ -243,10 +242,10 @@
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
+        "timestamp": "2026-08-11T17:17:11.977038775",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-11-11T14:36:37.100713428"
+            "nf-test": "0.9.4",
+            "nextflow": "26.04.6"
+        }
     }
 }

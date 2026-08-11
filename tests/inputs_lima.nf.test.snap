@@ -21,8 +21,7 @@
                     "lima": "2.12.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.30-r1287"
                 }
             },
             [
@@ -153,17 +152,8 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
-                "multiqc/multiqc_plots/pdf/lima-filter-graph-cnt.pdf",
-                "multiqc/multiqc_plots/pdf/lima-filter-graph-pct.pdf",
-                "multiqc/multiqc_plots/pdf/multiqc_lima_counts.pdf",
                 "multiqc/multiqc_plots/png",
-                "multiqc/multiqc_plots/png/lima-filter-graph-cnt.png",
-                "multiqc/multiqc_plots/png/lima-filter-graph-pct.png",
-                "multiqc/multiqc_plots/png/multiqc_lima_counts.png",
                 "multiqc/multiqc_plots/svg",
-                "multiqc/multiqc_plots/svg/lima-filter-graph-cnt.svg",
-                "multiqc/multiqc_plots/svg/lima-filter-graph-pct.svg",
-                "multiqc/multiqc_plots/svg/multiqc_lima_counts.svg",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_isoseq_software_mqc_versions.yml"
@@ -198,18 +188,18 @@
                 "sample2_0.chunk.6_tama.fa.gz:md5,34a80800ddc45859c430cf4156158413",
                 "sample2_0.chunk.6_tama_polya_flnc_report.txt.gz:md5,460c9b71e2bb758dad83331aca18d2fd",
                 "sample2_0.chunk.6_tama_tails.fa.gz:md5,a11e5f0f7370a708b31469a42b95b6c1",
-                "sample2_0.chunk.1.bam:md5,a0bc09bb14bce2181ee84aaf0e49a1f0",
-                "sample2_0.chunk.1.bam.bai:md5,be4f1b9f9ab6d8bdab71c1743f798e94",
-                "sample2_0.chunk.2.bam:md5,10e6ae0ca0edfbb2028517fb38aac5de",
-                "sample2_0.chunk.2.bam.bai:md5,288271dee9565600ef474027ce1c0205",
-                "sample2_0.chunk.3.bam:md5,aeb156062ac3ef9f967c745f1fd29f0f",
-                "sample2_0.chunk.3.bam.bai:md5,aadc11e516afff0b50d77c0d510d0e43",
-                "sample2_0.chunk.4.bam:md5,9bd7d7dfc8ac3a13e82e9921ab8f22a6",
-                "sample2_0.chunk.4.bam.bai:md5,a135b318f3a14cba87afb1c9f39cd1ad",
-                "sample2_0.chunk.5.bam:md5,0adb6dd55ce41bd8bebb67f4320f325a",
-                "sample2_0.chunk.5.bam.bai:md5,c601b34dc2a4f59df21448103efdef17",
-                "sample2_0.chunk.6.bam:md5,9076c6f955693ea835a456699c0952b8",
-                "sample2_0.chunk.6.bam.bai:md5,c5398d36c99d6674f20fb5822a75d213",
+                "sample2_0.chunk.1.bam:md5,9b4a8187bfa6ae89617eb01a12757997",
+                "sample2_0.chunk.1.bam.bai:md5,b94998a009ab00e7749464a6b2d994ee",
+                "sample2_0.chunk.2.bam:md5,55b0a519288085d22430f5c02b68e244",
+                "sample2_0.chunk.2.bam.bai:md5,e8fa5bdbd9a83046519f7f165c8b7b36",
+                "sample2_0.chunk.3.bam:md5,ce811ab7939ca0b9e68954a56f1a99ba",
+                "sample2_0.chunk.3.bam.bai:md5,a697b96be7ce8e9d18b6b711547a8584",
+                "sample2_0.chunk.4.bam:md5,bf6d05659ce264894590347f2bcf815d",
+                "sample2_0.chunk.4.bam.bai:md5,7fb1f185cc8415fd6f4054db59fc9b19",
+                "sample2_0.chunk.5.bam:md5,cc915641e18f551fe30513beadeadda1",
+                "sample2_0.chunk.5.bam.bai:md5,d41cfeb11e09ddfff96ecafff5e74829",
+                "sample2_0.chunk.6.bam:md5,f9fca05e386c5155dffaae14967a39e8",
+                "sample2_0.chunk.6.bam.bai:md5,b93ebc2b18e8135a2f495a1cc6bc3272",
                 "sample2_0.chunk.1_collapsed.bed:md5,2a5b07fa24ddcb51259063a76c52acee",
                 "sample2_0.chunk.1_local_density_error.txt:md5,b6fa52ea6fa7f3a7add75dec930cc6b3",
                 "sample2_0.chunk.1_polya.txt:md5,48e49820ebf548cf1547fd7dfd93b753",
@@ -274,10 +264,10 @@
                 "multiqc_lima_summary.txt:md5,26fd02b7a09876ee334251e5afabc5b1"
             ]
         ],
+        "timestamp": "2026-08-11T17:04:14.69381016",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-11-11T14:33:11.701854999"
+            "nf-test": "0.9.4",
+            "nextflow": "26.04.6"
+        }
     }
 }

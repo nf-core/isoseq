@@ -18,8 +18,7 @@
                     "isoseq": "4.0.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.30-r1287"
                 }
             },
             [
@@ -93,10 +92,10 @@
                 "sample3_0.chunk.2_tama.fa.gz:md5,eeabbdacda87cf5bfa23b530d4e1a838",
                 "sample3_0.chunk.2_tama_polya_flnc_report.txt.gz:md5,8e2996f18473044831036113c804b1c3",
                 "sample3_0.chunk.2_tama_tails.fa.gz:md5,397d55c45160ffe3a2596a77ec3104f4",
-                "sample3_0.chunk.1.bam:md5,4c237fe51abd08a06855deac9d67fff0",
-                "sample3_0.chunk.1.bam.bai:md5,93f547858b813e0b80491117175ffb0c",
-                "sample3_0.chunk.2.bam:md5,aa743dba9f317b7ec927268c5f441b24",
-                "sample3_0.chunk.2.bam.bai:md5,88c8b677b92e09e3a7c997615f3ad978",
+                "sample3_0.chunk.1.bam:md5,aaf503203bfce942deedef6d3e04c0ce",
+                "sample3_0.chunk.1.bam.bai:md5,5e8c5a718b311cefc624b5a811919d6d",
+                "sample3_0.chunk.2.bam:md5,4e8c724a2a0788e2ed49a12934c8ca34",
+                "sample3_0.chunk.2.bam.bai:md5,8a489150c452640b87642b1f414e5754",
                 "sample3_0.chunk.1_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
                 "sample3_0.chunk.1_local_density_error.txt:md5,bde56c7c2c791918943ea8d6c8c2169a",
                 "sample3_0.chunk.1_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
@@ -123,10 +122,10 @@
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
+        "timestamp": "2026-08-11T17:15:46.956179261",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-11-11T14:36:08.116645913"
+            "nf-test": "0.9.4",
+            "nextflow": "26.04.6"
+        }
     }
 }

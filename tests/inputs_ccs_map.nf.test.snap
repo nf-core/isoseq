@@ -21,8 +21,7 @@
                     "lima": "2.12.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.30-r1287"
                 },
                 "PBCCS": {
                     "pbccs": "6.4.0"
@@ -295,29 +294,8 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
-                "multiqc/multiqc_plots/pdf/ccs-filter-graph-cnt.pdf",
-                "multiqc/multiqc_plots/pdf/ccs-filter-graph-log.pdf",
-                "multiqc/multiqc_plots/pdf/ccs-filter-graph-pct-log.pdf",
-                "multiqc/multiqc_plots/pdf/ccs-filter-graph-pct.pdf",
-                "multiqc/multiqc_plots/pdf/lima-filter-graph-cnt.pdf",
-                "multiqc/multiqc_plots/pdf/lima-filter-graph-pct.pdf",
-                "multiqc/multiqc_plots/pdf/multiqc_lima_counts.pdf",
                 "multiqc/multiqc_plots/png",
-                "multiqc/multiqc_plots/png/ccs-filter-graph-cnt.png",
-                "multiqc/multiqc_plots/png/ccs-filter-graph-log.png",
-                "multiqc/multiqc_plots/png/ccs-filter-graph-pct-log.png",
-                "multiqc/multiqc_plots/png/ccs-filter-graph-pct.png",
-                "multiqc/multiqc_plots/png/lima-filter-graph-cnt.png",
-                "multiqc/multiqc_plots/png/lima-filter-graph-pct.png",
-                "multiqc/multiqc_plots/png/multiqc_lima_counts.png",
                 "multiqc/multiqc_plots/svg",
-                "multiqc/multiqc_plots/svg/ccs-filter-graph-cnt.svg",
-                "multiqc/multiqc_plots/svg/ccs-filter-graph-log.svg",
-                "multiqc/multiqc_plots/svg/ccs-filter-graph-pct-log.svg",
-                "multiqc/multiqc_plots/svg/ccs-filter-graph-pct.svg",
-                "multiqc/multiqc_plots/svg/lima-filter-graph-cnt.svg",
-                "multiqc/multiqc_plots/svg/lima-filter-graph-pct.svg",
-                "multiqc/multiqc_plots/svg/multiqc_lima_counts.svg",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_isoseq_software_mqc_versions.yml"
@@ -408,26 +386,26 @@
                 "sample1_0.chunk5_tama.fa.gz:md5,098f3846cf39d3d7b5b1f2e2a8269778",
                 "sample1_0.chunk5_tama_polya_flnc_report.txt.gz:md5,e1ab002d18f3e66637354e605bf0230d",
                 "sample1_0.chunk5_tama_tails.fa.gz:md5,63aa1ecd22740aa311500f4f537a0082",
-                "sample1_0.chunk1.bam:md5,cb23da165bc855dce45d9ed6ea2ad7c4",
-                "sample1_0.chunk1.bam.bai:md5,7ba72d8bba4a966a1c6a57c6f64ace87",
-                "sample1_0.chunk2.bam:md5,6c05d165d1a14a4fe333bb717dfe3017",
-                "sample1_0.chunk2.bam.bai:md5,16884a9ac85f5d387ed050fc7d9c372b",
-                "sample1_0.chunk3.bam:md5,789bc3b4ce52e307d1ed259cea6a9939",
-                "sample1_0.chunk3.bam.bai:md5,08e6a98c7eef2f0c416ee15a8ed350f4",
-                "sample1_0.chunk4.bam:md5,52375dacc5b439e6ab77ff663ecfbcee",
-                "sample1_0.chunk4.bam.bai:md5,64bc75d45abe42c2e2324dd60a48260c",
-                "sample1_0.chunk5.bam:md5,b92ef80f819b8dfd988639f9655ba871",
-                "sample1_0.chunk5.bam.bai:md5,9cb90a9e1f74a5c6fc1a913598556000",
-                "sample4_1.chunk.1.bam:md5,239c263d7ac96615e397afecc11bee38",
-                "sample4_1.chunk.1.bam.bai:md5,dbc0e98e8834e2d2a2335c1aaab6a34f",
-                "sample4_1.chunk.2.bam:md5,77bbd83c712b672396dc9f4957c752cb",
-                "sample4_1.chunk.2.bam.bai:md5,dd995890d7ab7edf32149b73e45be998",
-                "sample4_1.chunk.3.bam:md5,a001cb3de097f7ba3913a86c3004daee",
-                "sample4_1.chunk.3.bam.bai:md5,b2f632894ae3a5a3d42ee95016e05b32",
-                "sample4_1.chunk.4.bam:md5,c38c7d46e785b20635c37277db4c6a45",
-                "sample4_1.chunk.4.bam.bai:md5,2148247009cc920f668900f4327864fd",
-                "sample4_1.chunk.5.bam:md5,60605fb0eea16dc05871e6d087cfe210",
-                "sample4_1.chunk.5.bam.bai:md5,cd30c54d2bdbc3c1eaf075c119a91fdb",
+                "sample1_0.chunk1.bam:md5,e27289767c801a738fbb0f3e4bdc8eb7",
+                "sample1_0.chunk1.bam.bai:md5,e5ab4182b701707067a88cba9183610b",
+                "sample1_0.chunk2.bam:md5,798d177b2973661e4d4cf3b6374a5505",
+                "sample1_0.chunk2.bam.bai:md5,7e0581080d5d977332c35f0f3edbf3ee",
+                "sample1_0.chunk3.bam:md5,767792fd7aba0ff0068a4eafe7a33bda",
+                "sample1_0.chunk3.bam.bai:md5,c07c137301196e216ce12b7f3e1563bb",
+                "sample1_0.chunk4.bam:md5,52be2c2011318ee7e4275e5973f70d8b",
+                "sample1_0.chunk4.bam.bai:md5,de6974612391fa22632258447c937d42",
+                "sample1_0.chunk5.bam:md5,4af39d50a51b93463c651116306e6e5b",
+                "sample1_0.chunk5.bam.bai:md5,9969919336bad08a2df829b8a534479e",
+                "sample4_1.chunk.1.bam:md5,09bb297eec553dbfe8dd30d63c00c764",
+                "sample4_1.chunk.1.bam.bai:md5,1d86687635c025330c7ab2fca5023804",
+                "sample4_1.chunk.2.bam:md5,6ec403efce4989a77e15d6ec61288ec7",
+                "sample4_1.chunk.2.bam.bai:md5,42d8d58667512186fce633c33ccacb7a",
+                "sample4_1.chunk.3.bam:md5,bc5993f84a3880115521594033e81df0",
+                "sample4_1.chunk.3.bam.bai:md5,bca761f92fba6e5d3a8f5466a98679aa",
+                "sample4_1.chunk.4.bam:md5,d7ef010c4d591672fb90fef823f99483",
+                "sample4_1.chunk.4.bam.bai:md5,76946cd3f1d6ec69608d34f948a2621d",
+                "sample4_1.chunk.5.bam:md5,f1f2e151255e4115cd727e71ef6a94de",
+                "sample4_1.chunk.5.bam.bai:md5,46a2a145b2912f7d43557da1247115d7",
                 "sample1_0.chunk1_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
                 "sample1_0.chunk1_local_density_error.txt:md5,bde56c7c2c791918943ea8d6c8c2169a",
                 "sample1_0.chunk1_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
@@ -535,10 +513,10 @@
                 "multiqc_lima_summary.txt:md5,11e5253acb7b8d344a4747f5796cf995"
             ]
         ],
+        "timestamp": "2026-08-11T17:01:39.172314247",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-11-11T14:32:25.252500947"
+            "nf-test": "0.9.4",
+            "nextflow": "26.04.6"
+        }
     }
 }

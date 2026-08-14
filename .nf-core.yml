@@ -1,8 +1,3 @@
-lint:
-  files_unchanged:
-    - assets/nf-core-isoseq_logo_light.png
-    - docs/images/nf-core-isoseq_logo_light.png
-    - docs/images/nf-core-isoseq_logo_dark.png
 nf_core_version: 4.1.0
 repository_type: pipeline
 template:

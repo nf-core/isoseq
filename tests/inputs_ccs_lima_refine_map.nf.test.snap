@@ -380,8 +380,29 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
+                "multiqc/multiqc_plots/pdf/ccs-filter-graph-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/ccs-filter-graph-log.pdf",
+                "multiqc/multiqc_plots/pdf/ccs-filter-graph-pct-log.pdf",
+                "multiqc/multiqc_plots/pdf/ccs-filter-graph-pct.pdf",
+                "multiqc/multiqc_plots/pdf/lima-filter-graph-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/lima-filter-graph-pct.pdf",
+                "multiqc/multiqc_plots/pdf/multiqc_lima_counts.pdf",
                 "multiqc/multiqc_plots/png",
+                "multiqc/multiqc_plots/png/ccs-filter-graph-cnt.png",
+                "multiqc/multiqc_plots/png/ccs-filter-graph-log.png",
+                "multiqc/multiqc_plots/png/ccs-filter-graph-pct-log.png",
+                "multiqc/multiqc_plots/png/ccs-filter-graph-pct.png",
+                "multiqc/multiqc_plots/png/lima-filter-graph-cnt.png",
+                "multiqc/multiqc_plots/png/lima-filter-graph-pct.png",
+                "multiqc/multiqc_plots/png/multiqc_lima_counts.png",
                 "multiqc/multiqc_plots/svg",
+                "multiqc/multiqc_plots/svg/ccs-filter-graph-cnt.svg",
+                "multiqc/multiqc_plots/svg/ccs-filter-graph-log.svg",
+                "multiqc/multiqc_plots/svg/ccs-filter-graph-pct-log.svg",
+                "multiqc/multiqc_plots/svg/ccs-filter-graph-pct.svg",
+                "multiqc/multiqc_plots/svg/lima-filter-graph-cnt.svg",
+                "multiqc/multiqc_plots/svg/lima-filter-graph-pct.svg",
+                "multiqc/multiqc_plots/svg/multiqc_lima_counts.svg",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_isoseq_software_mqc_versions.yml"
@@ -678,9 +699,9 @@
                 "multiqc_lima_summary.txt:md5,ab0445a6efcf301bc96362c62743c273"
             ]
         ],
-        "timestamp": "2026-08-11T16:53:48.130450341",
+        "timestamp": "2026-08-14T08:52:30.859472422",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
     }

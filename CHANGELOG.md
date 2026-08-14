@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Input chunking before mapping via the new `chunker` subworkflow, controlled by `chunk_ccs`
   and `chunk_mapping`
 - Added parameter `tama_merge_all` to allow merging of sample-wise beds into a single annotation bed
-- Updated nf-core template to version 4.0.3
+- Updated nf-core template to version 4.1.0
 
 ### `Changed`
 

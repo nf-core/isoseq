@@ -20,3 +20,5 @@ pipeline_info/*.{html,json,txt,yml}
 **/*filter_summary.report.json
 **/lima-filter-graph.txt
 **/multiqc_ccs_report.txt
+**/*.bam
+**/*.bam.bai

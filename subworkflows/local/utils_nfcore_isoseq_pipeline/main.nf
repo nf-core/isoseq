@@ -186,6 +186,9 @@ workflow PIPELINE_COMPLETION {
 //
 def validateInputParameters() {
     genomeExistsError()
+    if (!params.fasta) {
+        error("Missing genome. \nA genome to annotate must be provided with the --fasta or --genome option.\n")
+    }
 }
 
 //

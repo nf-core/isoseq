@@ -142,6 +142,7 @@
                 "pipeline_info/nf_core_isoseq_software_mqc_versions.yml"
             ],
             [
+                "sample3_0.bam:md5,f5476a918c69f1c73a19051353f1bcb4",
                 "sample3_0.bam.pbi:md5,afb9a61ed9f3aa3f589af5c48a2f9f45",
                 "sample3_0.report.csv:md5,8d350f8dba8c928ec8b693f47dc1c096",
                 "sample3_0.fasta:md5,81b607067bac48a5b53281e982acd623",
@@ -151,6 +152,20 @@
                 "sample3_0.chunk.2_tama.fa.gz:md5,eeabbdacda87cf5bfa23b530d4e1a838",
                 "sample3_0.chunk.2_tama_polya_flnc_report.txt.gz:md5,8e2996f18473044831036113c804b1c3",
                 "sample3_0.chunk.2_tama_tails.fa.gz:md5,397d55c45160ffe3a2596a77ec3104f4",
+                "sample3_0.chunk.1.bam:md5,aaf503203bfce942deedef6d3e04c0ce",
+                "sample3_0.chunk.1.bam.bai:md5,5e8c5a718b311cefc624b5a811919d6d",
+                "sample3_0.chunk.2.bam:md5,4e8c724a2a0788e2ed49a12934c8ca34",
+                "sample3_0.chunk.2.bam.bai:md5,8a489150c452640b87642b1f414e5754",
+                "sample4_1.chunk.1.bam:md5,09bb297eec553dbfe8dd30d63c00c764",
+                "sample4_1.chunk.1.bam.bai:md5,1d86687635c025330c7ab2fca5023804",
+                "sample4_1.chunk.2.bam:md5,6ec403efce4989a77e15d6ec61288ec7",
+                "sample4_1.chunk.2.bam.bai:md5,42d8d58667512186fce633c33ccacb7a",
+                "sample4_1.chunk.3.bam:md5,bc5993f84a3880115521594033e81df0",
+                "sample4_1.chunk.3.bam.bai:md5,bca761f92fba6e5d3a8f5466a98679aa",
+                "sample4_1.chunk.4.bam:md5,d7ef010c4d591672fb90fef823f99483",
+                "sample4_1.chunk.4.bam.bai:md5,76946cd3f1d6ec69608d34f948a2621d",
+                "sample4_1.chunk.5.bam:md5,f1f2e151255e4115cd727e71ef6a94de",
+                "sample4_1.chunk.5.bam.bai:md5,46a2a145b2912f7d43557da1247115d7",
                 "sample3_0.chunk.1_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
                 "sample3_0.chunk.1_local_density_error.txt:md5,bde56c7c2c791918943ea8d6c8c2169a",
                 "sample3_0.chunk.1_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
@@ -227,7 +242,7 @@
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
-        "timestamp": "2026-08-14T15:19:28.888109344",
+        "timestamp": "2026-08-17T08:16:32.257336103",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

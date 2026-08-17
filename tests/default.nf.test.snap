@@ -388,11 +388,11 @@
                 "sample1_0.chunk3_tama.fa:md5,5c831ec6cfb2061fc5e158c524689947",
                 "sample1_0.chunk4_tama.fa:md5,5e2b0b58badab17820a2823261f62a4e",
                 "sample1_0.chunk5_tama.fa:md5,098f3846cf39d3d7b5b1f2e2a8269778",
-                "sample1_0.chunk1.bam:md5,f3d181168896729d297ee7f57cf1e42a",
-                "sample1_0.chunk2.bam:md5,6256f1d45e12d0bb5601d36fe1ed51e6",
-                "sample1_0.chunk3.bam:md5,9cd9398a2afaa3c59bcca47204029a5a",
-                "sample1_0.chunk4.bam:md5,96e4ee97d5a523a38e2d01f76b9dd6fb",
-                "sample1_0.chunk5.bam:md5,f72951036fb3214d9e34b2b6361580f3",
+                "sample1_0.chunk1.bam:md5,595bcb7de157f68633751b48c9b6c4cb",
+                "sample1_0.chunk2.bam:md5,1366a3c12f77821f6f2556d2c84e80da",
+                "sample1_0.chunk3.bam:md5,49443360d21815b48a579ffbb8ac638e",
+                "sample1_0.chunk4.bam:md5,3f65986b3b863899730a7bfd50560cc0",
+                "sample1_0.chunk5.bam:md5,47e46f70eeecf0544633fb600ecff5d7",
                 "sample1_0.chunk1_collapsed.bed:md5,33f6bd7b72aa2957bbf0ceffc9ff1b32",
                 "sample1_0.chunk1_local_density_error.txt:md5,4bd7bc1b618ccfaa1eb0673bbca68f54",
                 "sample1_0.chunk1_polya.txt:md5,628ea62b918fc4f31e109f724d714a66",
@@ -452,7 +452,7 @@
                 "multiqc_lima_summary.txt:md5,11e5253acb7b8d344a4747f5796cf995"
             ]
         ],
-        "timestamp": "2026-08-17T10:41:23.098667074",
+        "timestamp": "2026-08-17T17:45:04.674828891",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

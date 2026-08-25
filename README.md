@@ -5,25 +5,26 @@
   </picture>
 </h1>
 
-[![GitHub Actions CI Status](https://github.com/nf-core/isoseq/actions/workflows/ci.yml/badge.svg)](https://github.com/nf-core/isoseq/actions/workflows/ci.yml)
-[![GitHub Actions Linting Status](https://github.com/nf-core/isoseq/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/isoseq/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/isoseq/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.7116979-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.7116979)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Open_In_GitHub_Codespaces-black?labelColor=grey&logo=github)](https://github.com/codespaces/new/nf-core/isoseq)
+[![GitHub Actions CI Status](https://github.com/nf-core/isoseq/actions/workflows/nf-test.yml/badge.svg)](https://github.com/nf-core/isoseq/actions/workflows/nf-test.yml)
+[![GitHub Actions Linting Status](https://github.com/nf-core/isoseq/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/isoseq/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/isoseq/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.13694618-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.13694618)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
-[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/isoseq/results)
-[![DOI](https://zenodo.org/badge/499464196.svg)](https://zenodo.org/badge/latestdoi/499464196)
+[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.15194138-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.15194138)
 
-[![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)](https://www.nextflow.io/)
+[![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-4.1.0-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.1.0)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/nf-core/isoseq)
 
-[![Get help on Slack](http://img.shields.io/badge/slack-nf--core%20%23isoseq-4A154B?labelColor=000000&logo=slack)](https://nfcore.slack.com/channels/isoseq)[![Follow on Twitter](http://img.shields.io/badge/twitter-%40nf__core-1DA1F2?labelColor=000000&logo=twitter)](https://twitter.com/nf_core)[![Follow on Mastodon](https://img.shields.io/badge/mastodon-nf__core-6364ff?labelColor=FFFFFF&logo=mastodon)](https://mstdn.science/@nf_core)[![Watch on YouTube](http://img.shields.io/badge/youtube-nf--core-FF0000?labelColor=000000&logo=youtube)](https://www.youtube.com/c/nf-core)
+[![Get help on Slack](http://img.shields.io/badge/slack-nf--core%20%23isoseq-4A154B?labelColor=000000&logo=slack)](https://nfcore.slack.com/channels/isoseq)[![Follow on Bluesky](https://img.shields.io/badge/bluesky-%40nf__core-1185fe?labelColor=000000&logo=bluesky)](https://bsky.app/profile/nf-co.re)[![Follow on Mastodon](https://img.shields.io/badge/mastodon-nf__core-6364ff?labelColor=FFFFFF&logo=mastodon)](https://mstdn.science/@nf_core)[![Watch on YouTube](http://img.shields.io/badge/youtube-nf--core-FF0000?labelColor=000000&logo=youtube)](https://www.youtube.com/c/nf-core)
 
 ## Introduction
 
 **nf-core/isoseq** is a bioinformatics best-practice analysis pipeline for Isoseq gene annotation with uLTRA and TAMA. Starting from raw isoseq subreads, the pipeline:
 
-- Generates the Circular Consensus Sequences (CSS)
+- Generates the Circular Consensus Sequences (CCS)
 
 - Clean and polish CCS to create Full Length Non Chimeric (FLNC) reads
 
@@ -39,8 +40,8 @@ On release, automated continuous integration tests run the pipeline on a full-si
 
 ## Pipeline summary
 
-1. Generate CCS consensuses from raw isoseq subreads ([`PBCCS`](https://github.com/PacificBiosciences/ccs))
-2. Remove primer sequences from consensuses ([`LIMA`](https://github.com/pacificbiosciences/barcoding/))
+1. Generate CCS consensuses from raw isoseq subreads (Optional, [`PBCCS`](https://github.com/PacificBiosciences/ccs))
+2. Remove primer sequences from consensuses (Optional, [`LIMA`](https://github.com/pacificbiosciences/barcoding/))
 3. Detect and remove chimeric reads ([`ISOSEQ3 REFINE`](https://github.com/PacificBiosciences/IsoSeq))
 4. Convert bam file into fasta file ([`BAMTOOLS CONVERT`](https://github.com/pezmaster31/bamtools))
 5. Select reads with a polyA tail and trim it ([`GSTAMA_POLYACLEANUP`](https://github.com/GenomeRIK/tama))
@@ -53,18 +54,22 @@ On release, automated continuous integration tests run the pipeline on a full-si
 ## Usage
 
 > [!NOTE]
-> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
+> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/get_started/environment_setup/overview) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/get_started/run-your-first-pipeline) with `-profile test` before running the workflow on actual data.
 
 First, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
 ```csv
-sample,bam,pbi,reads
-sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,None
+sample,seq_data,pbi,start_from
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,ccs
+sample2,sample2.ccs.bam,none,lima
+sample3,sample3.fl.primer_5p--primer_3p.bam,none,refine
+sample4,sample4.long_reads.fa.gz,none,mapping
 ```
 
-Each row represents a pair of raw subreads and it's associated pacbio index (pbi) file fastq files.
+The file list all datasets to analyse. Those datasets can be raw subreads, Circular Consensus Sequences (CCS), Full Length sequences produced by LIMA (Pacbio software suite), or long reads sequence Pacbio Hifi (or Oxford Nanopore long reads!)
+The first column define the sample ID, the second sequence data file, the third PacBio Index file (subreads only) and the program where to start the analysis.
 
 Now, you can run the pipeline using:
 
@@ -78,8 +83,7 @@ nextflow run nf-core/isoseq \
 ```
 
 > [!WARNING]
-> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
-> see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
+> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/running/run-pipelines#using-parameter-files).
 
 For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/isoseq/usage) and the [parameter documentation](https://nf-co.re/isoseq/parameters).
 
@@ -103,12 +107,13 @@ We thank the following people for their extensive assistance in the development 
 - The nf-core community for their help in the development of this pipeline
 - [James A. Fellows Yates](https://github.com/jfy133) & nf-core for the metro map style components for pipeline graph
 - [Júlia Mir Pedrol](https://github.com/mirpedrol) for debugging help
+- [Usman Rashid](https://github.com/GallVp) for his contributions on pipeline development
 
 This pipeline has been developed as part of the GENE-SWitCH project. This project has received funding from the European Union's Horizon 2020 Research and Innovation Programme under the grant agreement n° 817998.
 
 ## Contributions and Support
 
-If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
+If you would like to contribute to this pipeline, please see the [contributing guidelines](docs/CONTRIBUTING.md).
 
 For further information or help, don't hesitate to get in touch on the [Slack `#isoseq` channel](https://nfcore.slack.com/channels/isoseq) (you can join with [this invite](https://nf-co.re/join/slack)).
 

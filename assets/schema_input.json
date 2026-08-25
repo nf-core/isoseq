@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/isoseq/master/assets/schema_input.json",
     "title": "nf-core/isoseq pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
@@ -13,28 +13,52 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "bam": {
+            "seq_data": {
                 "type": "string",
+                "pattern": "^\\S+\\.(bam|fa|fa\\.gz)$",
                 "format": "file-path",
-                "exists": false,
-                "pattern": "(^\\S+\\.bam$|^None$)",
-                "errorMessage": "Subreads BAM file must be provided, cannot contain spaces and must have extension '.bam' or being 'None' if the entrypoint is 'map'"
+                "errorMessage": "Sequence data file must be provided, cannot contain spaces and must have extension '.bam', '.fa' or '.fa.gz'"
             },
             "pbi": {
-                "type": "string",
-                "format": "file-path",
-                "exists": false,
-                "pattern": "(^\\S+\\.bam\\.pbi$|^None$)",
-                "errorMessage": "PacBio Index file for BAM subreads cannot contain spaces and must have extension '.bam.pbi' or being 'None' if the entrypoint is 'map'"
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "pattern": "^\\S+\\.bam\\.pbi$",
+                        "format": "file-path"
+                    },
+                    {
+                        "type": "string",
+                        "pattern": "^none$"
+                    }
+                ],
+                "errorMessage": "PacBio index for a subreads BAM must have extension '.bam.pbi' and cannot contain spaces. Use 'none' when no index applies."
             },
-            "reads": {
+            "start_from": {
                 "type": "string",
-                "format": "file-path",
-                "exists": false,
-                "pattern": "(^\\S+\\.fa\\.gz$|^None$)",
-                "errorMessage": "Long reads file cannot contain spaces and must have extension '.bam.pbi' or being 'None' if the entrypoint is 'isoseq'"
+                "enum": ["ccs", "lima", "refine", "mapping"],
+                "errorMessage": "start_from must be one of: ccs, lima, refine, mapping",
+                "meta": ["start_from"]
             }
         },
-        "required": ["sample"]
+        "required": ["sample", "seq_data", "start_from"],
+        "allOf": [
+            {
+                "if": {
+                    "properties": {
+                        "start_from": { "const": "ccs" }
+                    },
+                    "required": ["start_from"]
+                },
+                "then": {
+                    "required": ["pbi"],
+                    "properties": {
+                        "pbi": {
+                            "pattern": "^\\S+\\.bam\\.pbi$",
+                            "errorMessage": "A PacBio index file ('.bam.pbi') is required when start_from is 'ccs'"
+                        }
+                    }
+                }
+            }
+        ]
     }
 }

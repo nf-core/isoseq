@@ -3,6 +3,78 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v3.0.0 - Patchwork Zooble [07/08/2026]
+
+> [!WARNING]
+> This is a major release with breaking changes. Samplesheets and command lines written for
+> v2.0.0 will not work unmodified. See the migration notes below.
+
+### `Added`
+
+- New samplesheet-driven input system: each row declares its own entry point via `start_from`,
+  allowing subreads, CCS, full-length and long-read FASTA inputs to be mixed in a single run
+  [#40](https://github.com/nf-core/isoseq/issues/40), [#57](https://github.com/nf-core/isoseq/issues/57)
+- Support for multiple libraries (cells) per sample, merged with TAMA
+- Input chunking before mapping via the new `chunker` subworkflow, controlled by `chunk_ccs`
+  and `chunk_mapping`
+- Added parameter `tama_merge_all` to allow merging of sample-wise beds into a single annotation bed
+- Updated nf-core template to version 4.1.0
+
+### `Changed`
+
+- **Breaking:** the samplesheet format has been redefined. Columns are now
+  `sample,seq_data,pbi,start_from`, replacing `sample,bam,pbi,reads`. The `seq_data` column
+  takes any supported input file, and `start_from` (`ccs`, `lima`, `refine` or `mapping`)
+  declares where that row enters the pipeline. The `None` placeholder is replaced by `none`
+  for absent `pbi` files.
+- **Breaking:** the `chunk` parameter has been split into `chunk_ccs` and `chunk_mapping`,
+  which independently control chunking of CCS generation and of mapping.
+- Software versions are now collected through Nextflow topic channels instead of a dedicated
+  module.
+- `--primers` is no longer unconditionally required. It is only consumed by `LIMA` and
+  `isoseq refine`, so it is now required only when at least one samplesheet row uses
+  `start_from` `ccs`, `lima` or `refine`. Runs where every row uses `mapping` can omit it
+  [#50](https://github.com/nf-core/isoseq/issues/50)
+
+### `Removed`
+
+- **Breaking:** removed the `--entrypoint` parameter. Per-row `start_from` in the samplesheet
+  replaces it, and is strictly more flexible: entry points can now differ between samples
+  within one run.
+- **Breaking:** removed `--max_cpus`, `--max_memory` and `--max_time`. These were replaced by
+  the `resourceLimits` directive in the nf-core template; set limits in a custom config instead.
+- Removed the `--hook_url` parameter, following the nf-core template.
+- Removed the `custom/dumpsoftwareversions` module.
+
+### `Fixed`
+
+- Updated all nf-core modules to their latest revisions (`bamtools/convert`, `gnu/sort`,
+  `gstama/collapse`, `gstama/merge`, `gstama/polyacleanup`, `gunzip`, `isoseq/refine`, `lima`,
+  `minimap2/align`, `multiqc`, `pbccs`, `ultra/align`, `ultra/index`)
+- Replaced the `utils_nfvalidation_plugin` subworkflow with `utils_nfschema_plugin`, moving
+  parameter validation to `nf-schema` 2.5.1
+- Moved local subworkflows into their own directories to follow nf-core guidelines
+- Improved samplesheet validation: `start_from` is now an `enum`, file-extension patterns are
+  correctly anchored, and a `.bam.pbi` index is required when `start_from` is `ccs`
+  [#48](https://github.com/nf-core/isoseq/issues/48)
+- Fixed `CSS` / `CCS` typo in the documentation [#36](https://github.com/nf-core/isoseq/issues/36)
+- Removed a vulnerable artifact pattern from the PR-comment workflow
+  [#61](https://github.com/nf-core/isoseq/pull/61)
+
+### `Dependencies`
+
+| Tool      | Previous version | New version |
+| --------- | ---------------- | ----------- |
+| coreutils | 9.3              | 9.5         |
+| lima      | 2.9.0            | 2.12.0      |
+| minimap2  | 2.28             | 2.30        |
+| multiqc   | 1.24.1           | 1.35        |
+| samtools  | 1.20             | 1.23.1      |
+
+### `Deprecated`
+
+- None
+
 ## v2.0.0 - Sapphire Duck [05/09/2024]
 
 New entrypoint option to skip isoseq pre-processing.
@@ -48,16 +120,16 @@ Update the pipeline to nf-core 2.9.
 - Add gnu/sort to sort annotation before uLTRA index
 - Update citations
 - Add background to pipeline png
-  | Tool | Previous version | New version |
-  | ----------------------- | ---------------- | ----------- |
-  | isoseq3 | 3.8.1 | 3.8.2 |
-  | lima | 2.6.0 | 2.7.1 |
-  | bamtools/convert | 2.5.1 | 2.5.2 |
-  | gstama/merge | 1.0.2 | 1.0.3 |
-  | uLTRA/index | 0.0.4.2 | 0.1 |
-  | uLTRA/align | 0.0.4.2 | 0.1 |
-  | samtools | 1.17 | 1.17 |
-  | gnu/sort | ---- | 8.25 |
+  | Tool             | Previous version | New version |
+  | ---------------- | ---------------- | ----------- |
+  | isoseq3          | 3.8.1            | 3.8.2       |
+  | lima             | 2.6.0            | 2.7.1       |
+  | bamtools/convert | 2.5.1            | 2.5.2       |
+  | gstama/merge     | 1.0.2            | 1.0.3       |
+  | uLTRA/index      | 0.0.4.2          | 0.1         |
+  | uLTRA/align      | 0.0.4.2          | 0.1         |
+  | samtools         | 1.17             | 1.17        |
+  | gnu/sort         | ----             | 8.25        |
 
 ### `Dependencies`
 

@@ -9,9 +9,15 @@
 This pipeline has been designed to analyse several samples or sequencing runs at the same time.
 It reads all samples from a samplesheet file and parallelizes computation for each of them.
 
-Depending on your on data, you might not need to run the isoseq preprocessing.
-This step can be skipped by setting the `--entrypoint` parameter to `map` and starting the analysis from the mapping step.
-By default, the entrypoint is set to `isoseq` and the full pipeline is run.
+Depending on your data, you might not need to run the full Iso-Seq preprocessing.
+Every row of the samplesheet carries a `start_from` value declaring where that sample
+enters the pipeline, so a single run can mix raw subreads with data that has already
+been through CCS, LIMA or refine:
+
+- `ccs` — raw subreads; runs the full pipeline (CCS, LIMA, refine, mapping)
+- `lima` — CCS consensuses; skips CCS generation
+- `refine` — Full Length reads produced by LIMA; skips CCS and LIMA
+- `mapping` — long reads in FASTA; skips Iso-Seq preprocessing entirely
 
 ### Samplesheet input
 
@@ -24,32 +30,47 @@ Use `--input` parameter to specify its location.
 
 The samplesheet is a comma-separated file with 4 columns, and a header row as shown in the examples below.
 
-| Column   | Description                                                                                                                                                               |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample` | Custom sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                              |
-| `bam`    | Full path to isoseq subreads in `bam` format.                                                                                                                             |
-| `pbi`    | Full path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be compose of bam file name with the `.pbi` extension. |
-| `reads`  | Set of long reads to analyse in fasta format. The file must be gziped (.fa.gz).                                                                                           |
+| Column       | Description                                                                                                                                                                                                                                    |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`     | Sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                                                                                                          |
+| `seq_data`   | The path to the sequence file. A BAM file for subreads, Consensus Circular Sequences or Full Length sequences. A fasta file for long reads.                                                                                                    |
+| `pbi`        | In case `seq_data` is a subreads BAM, the path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be composed of the bam file name with the `.pbi` extension. In the other cases, `none` |
+| `start_from` | The value depends on the seq_data file. `ccs` for subreads, `lima` for ccs sequences, `refine` for Full Length data and `mapping` for long reads.                                                                                              |
 
-Starting from `pbccs` (`isoseq` entrypoint), the columns `sample`, `bam`, `pbi` are mandatory.
-The `reads` column must be set to `None`.
-
-```console
-sample,bam,pbi,reads
-sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,None
-sample2,sample2.subreads.bam,sample2.subreads.bam.pbi,None
+```csv
+sample,seq_data,pbi,start_from
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,ccs
+sample2,sample2.ccs.bam,none,lima
+sample3,sample3.fl.primer_5p--primer_3p.bam,none,refine
+sample4,sample4.long_reads.fa.gz,none,mapping
 ```
 
-If the `map` entrypoint is used, the `reads` column must be filled with a gzipped fasta file with long reads and `sample` must be set.
-The `bam` and `pbi` columns have to be set to `None`.
+If multiple cells have been run for the same sample, the sample ID can be used several times in the samplesheet. Each dataset will be analysed in parallel and then merged with TAMA.
 
-```console
-sample,bam,pbi,reads
-sample1,None,None,sample1.fa.gz
-sample2,None,None,sample2.fa.gz
+```csv
+sample,seq_data,pbi,start_from
+sample1,sample1_cell1.subreads.bam,sample1_cell1.subreads.bam.pbi,ccs
+sample1,sample1_cell2.subreads.bam,sample1_cell2.subreads.bam.pbi,ccs
+sample2,sample1.subreads.bam,sample2.subreads.bam.pbi,ccs
 ```
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+Some example samplesheets can be found on the [github repository](https://github.com/nf-core/isoseq/tree/master/assets).
+
+### Migrating from version 2.0.0
+
+Version 3.0.0 redefines the samplesheet, so samplesheets written for 2.0.0 will not validate.
+
+| Version 2.0.0                               | Version 3.0.0                           |
+| ------------------------------------------- | --------------------------------------- |
+| `sample,bam,pbi,reads`                      | `sample,seq_data,pbi,start_from`        |
+| separate `bam` and `reads` columns          | one `seq_data` column holding either    |
+| `None` placeholder                          | `none`, lower case, for an absent `pbi` |
+| `--entrypoint isoseq` or `--entrypoint map` | a `start_from` value on every row       |
+
+Two parameter changes also affect existing command lines:
+
+- `--chunk` has been split into `--chunk_ccs` and `--chunk_mapping`, controlling chunking of CCS generation and of mapping independently.
+- `--max_cpus`, `--max_memory` and `--max_time` have been removed by the nf-core template. Set limits with the `resourceLimits` directive in a custom config instead.
 
 ### Primer file
 
@@ -70,6 +91,10 @@ Use the --primers option to specify its location.
 --primers '[path to primers file]'
 ```
 
+The primer file is only used by `LIMA` and `isoseq refine`, so it is required whenever at
+least one samplesheet row uses `start_from` `ccs`, `lima` or `refine`. If every row uses
+`mapping`, neither step runs and `--primers` can be omitted.
+
 ### Reference genome and annotation
 
 The reference genome sequence is mandatory and must be in `FASTA` format.
@@ -86,14 +111,6 @@ Two aligners are available. The `uLTRA` aligner helps to detect small exons with
 
 ```console
 --aligner '[ultra,minimap2]'
-```
-
-### Entrypoint
-
-The mapping and the alignment analysis are agnostic to the kind long reads used. If your sequencing company provides pre-computed HiFi reads or you want to use nanopore sequences, you can skip the isoseq preprocessing and start the analysis from the mapping step.
-
-```console
---entrypoint 'map'
 ```
 
 ## Running the pipeline
@@ -119,9 +136,8 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
-:::warning
-Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
-:::
+> [!WARNING]
+> Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/running/run-pipelines#configuring-pipelines), other infrastructural tweaks (such as output directories), or module arguments (args).
 
 The above pipeline run specified with a params file in yaml format:
 
@@ -129,9 +145,9 @@ The above pipeline run specified with a params file in yaml format:
 nextflow run nf-core/isoseq -profile docker -params-file params.yaml
 ```
 
-with `params.yaml` containing:
+with:
 
-```yaml
+```yaml title="params.yaml"
 input: './samplesheet.csv'
 outdir: './results/'
 genome: 'GRCh37'
@@ -150,23 +166,21 @@ nextflow pull nf-core/isoseq
 
 ### Reproducibility
 
-It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
+It is a good idea to specify the pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
 First, go to the [nf-core/isoseq releases page](https://github.com/nf-core/isoseq/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
-To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
+To further assist in reproducibility, you can use share and reuse [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-:::tip
-If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
-:::
+> [!TIP]
+> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
-:::note
-These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
-:::
+> [!NOTE]
+> These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen)
 
 ### `-profile`
 
@@ -174,16 +188,15 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
-:::info
-We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
-:::
+> [!IMPORTANT]
+> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
 
-The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
+The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to check if your system is supported, please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
 Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
-If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer enviroment.
+If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
 - `test`
   - A profile with a complete configuration for automated testing
@@ -197,11 +210,11 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `shifter`
   - A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
 - `charliecloud`
-  - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
+  - A generic configuration profile to be used with [Charliecloud](https://charliecloud.io/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
 - `wave`
-  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow ` 24.03.0-edge` or later).
+  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow `24.03.0-edge` or later).
 - `conda`
   - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
 
@@ -219,21 +232,21 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 ### Resource requests
 
-Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the steps in the pipeline, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher requests (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
+Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the pipeline steps, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher resources request (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
 
-To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
+To change the resource requests, please see the [max resources](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#set-max-resources) and [customise process resources](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#customize-process-resources) section of the nf-core website.
 
 ### Custom Containers
 
-In some cases you may wish to change which container or conda environment a step of the pipeline uses for a particular tool. By default nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However in some cases the pipeline specified version maybe out of date.
+In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
 
-To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
+To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#update-tool-versions) section of the nf-core website.
 
 ### Custom Tool Arguments
 
 A pipeline might not always support every possible argument or option of a particular tool used in pipeline. Fortunately, nf-core pipelines provide some freedom to users to insert additional parameters that the pipeline does not include by default.
 
-To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) section of the nf-core website.
+To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#modifying-tool-arguments) section of the nf-core website.
 
 ### nf-core/configs
 
@@ -242,14 +255,6 @@ In most cases, you will only need to create a custom config as a one-off but if 
 See the main [Nextflow documentation](https://www.nextflow.io/docs/latest/config.html) for more information about creating your own configuration files.
 
 If you have any questions or issues please send us a message on [Slack](https://nf-co.re/join/slack) on the [`#configs` channel](https://nfcore.slack.com/channels/configs).
-
-## Azure Resource Requests
-
-To be used with the `azurebatch` profile by specifying the `-profile azurebatch`.
-We recommend providing a compute `params.vm_type` of `Standard_D16_v3` VMs by default but these options can be changed if required.
-
-Note that the choice of VM size depends on your quota and the overall workload during the analysis.
-For a thorough list, please refer the [Azure Sizes for virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes).
 
 ## Running in the background
 

@@ -9,7 +9,7 @@
 [![GitHub Actions CI Status](https://github.com/nf-core/isoseq/actions/workflows/nf-test.yml/badge.svg)](https://github.com/nf-core/isoseq/actions/workflows/nf-test.yml)
 [![GitHub Actions Linting Status](https://github.com/nf-core/isoseq/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/isoseq/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/isoseq/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.13694618-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.13694618)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
-[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.7116979-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.7116979)
+[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.15194138-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.15194138)
 
 [![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
 [![nf-core template version](https://img.shields.io/badge/nf--core_template-4.1.0-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.1.0)

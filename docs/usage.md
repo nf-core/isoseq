@@ -32,7 +32,7 @@ The samplesheet is a comma-separated file with 4 columns, and a header row as sh
 
 | Column       | Description                                                                                                                                                                                                                                    |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`     | Sample name. Spaces in sample names are automatically converted to underscores (`_`).                                                                                                                                                          |
+| `sample`     | Sample name. It must not contain spaces. Output files are prefixed with `<sample>_<N>` where `N` is the 0-based row number in the samplesheet (see [output documentation](output.md)).                                                          |
 | `seq_data`   | The path to the sequence file. A BAM file for subreads, Consensus Circular Sequences or Full Length sequences. A fasta file for long reads.                                                                                                    |
 | `pbi`        | In case `seq_data` is a subreads BAM, the path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be composed of the bam file name with the `.pbi` extension. In the other cases, `none` |
 | `start_from` | The value depends on the seq_data file. `ccs` for subreads, `lima` for ccs sequences, `refine` for Full Length data and `mapping` for long reads.                                                                                              |
@@ -67,10 +67,12 @@ Version 3.0.0 redefines the samplesheet, so samplesheets written for 2.0.0 will 
 | `None` placeholder                          | `none`, lower case, for an absent `pbi` |
 | `--entrypoint isoseq` or `--entrypoint map` | a `start_from` value on every row       |
 
-Two parameter changes also affect existing command lines:
+Other changes that affect existing setups:
 
+- The minimum Nextflow version is now `25.10.4` (it was `23.04.0`).
 - `--chunk` has been split into `--chunk_ccs` and `--chunk_mapping`, controlling chunking of CCS generation and of mapping independently.
 - `--max_cpus`, `--max_memory` and `--max_time` have been removed by the nf-core template. Set limits with the `resourceLimits` directive in a custom config instead.
+- Output files are now prefixed with `<sample>_<N>`, where `N` is the 0-based row number in the samplesheet, and rows starting from `lima`, `refine` or `mapping` are split into `<sample>_<N>.chunk.<X>.*` files before mapping. Only the TAMA merge outputs keep the plain sample name. Scripts that pick up files by name after the run need updating; see the [output documentation](output.md#file-naming).
 
 ### Primer file
 
@@ -118,7 +120,7 @@ Two aligners are available. The `uLTRA` aligner helps to detect small exons with
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run nf-core/isoseq --input ./samplesheet.csv --outdir ./results --primers primers.fasta --fasta genome.fasta -profile docker
+nextflow run nf-core/isoseq --input ./samplesheet.csv --outdir ./results --primers primers.fasta --fasta genome.fasta --aligner minimap2 -profile docker
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
@@ -151,6 +153,8 @@ with:
 input: './samplesheet.csv'
 outdir: './results/'
 genome: 'GRCh37'
+primers: './primers.fasta'
+aligner: 'minimap2'
 <...>
 ```
 

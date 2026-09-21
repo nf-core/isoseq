@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v3.0.0 - Patchwork Zooble [07/08/2026]
+## v3.0.0 - Patchwork Zooble [21/09/2026]
 
 > [!WARNING]
 > This is a major release with breaking changes. Samplesheets and command lines written for
@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   for absent `pbi` files.
 - **Breaking:** the `chunk` parameter has been split into `chunk_ccs` and `chunk_mapping`,
   which independently control chunking of CCS generation and of mapping.
+- **Breaking:** the minimum Nextflow version is now `25.10.4` (was `23.04.0`).
+- **Breaking:** output files are now prefixed with `<sample>_<N>`, `N` being the 0-based row
+  number in the samplesheet, so that several rows can share a sample name. Rows starting from
+  `lima`, `refine` or `mapping` are split before mapping and their files are named
+  `<sample>_<N>.chunk.<X>.*`. TAMA merge outputs keep the plain sample name. See the
+  [output documentation](docs/output.md#file-naming).
 - Software versions are now collected through Nextflow topic channels instead of a dedicated
   module.
 - `--primers` is no longer unconditionally required. It is only consumed by `LIMA` and
@@ -58,6 +64,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   correctly anchored, and a `.bam.pbi` index is required when `start_from` is `ccs`
   [#48](https://github.com/nf-core/isoseq/issues/48)
 - Fixed `CSS` / `CCS` typo in the documentation [#36](https://github.com/nf-core/isoseq/issues/36)
+- The documented `ccs` options `min_passes`, `min_snr`, `top_passes`, `min_length` and
+  `max_length` are now actually passed to `PBCCS` (only `rq` was before)
 - Removed a vulnerable artifact pattern from the PR-comment workflow
   [#61](https://github.com/nf-core/isoseq/pull/61)
 

@@ -79,7 +79,8 @@ nextflow run nf-core/isoseq \
    --input samplesheet.csv \
    --outdir <OUTDIR> \
    --genome <GENOME NAME (e.g. GRCh37)> \
-   --primers <PRIMER FASTA>
+   --primers <PRIMER FASTA> \
+   --aligner <minimap2/ultra>
 ```
 
 > [!WARNING]

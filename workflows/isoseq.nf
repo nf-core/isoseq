@@ -136,7 +136,7 @@ workflow ISOSEQ {
     // BAMTOOLS_CONVERT.out.data.view { meta, fa -> println("BAMTOOLS_CONVERT.out.data: $meta | $fa") }
 
     // Split fastas into chunks
-    CHUNKER_BAMTOOLS_OUT(BAMTOOLS_CONVERT.out.data, params.chunk_mapping, false, false) // false, false == no need to decompress input, don't compress output
+    CHUNKER_BAMTOOLS_OUT(BAMTOOLS_CONVERT.out.data, params.chunk_mapping, false) // false == don't compress output
     // CHUNKER_BAMTOOLS_OUT.out.fastas.view { meta, fa -> println("CHUNKER_BAMTOOLS_OUT.out.fasta: $meta | $fa") }
 
     // GSTAMA_POLYACLEANUP: Convert to fasta and run polyAcleanup
@@ -144,7 +144,8 @@ workflow ISOSEQ {
     // GSTAMA_POLYACLEANUP.out.fasta.view { meta, fa -> println("GSTAMA_POLYACLEANUP.out.fasta: $meta | $fa") }
 
     // Split user fasta and add them the main channel
-    CHUNKER_INPUT_FASTAS(ch_seq_data.mapping.map { meta, fasta, _pbi -> [ meta, fasta ] }, params.chunk_mapping, true, false)
+    // Chunks are gzipped so they match GSTAMA_POLYACLEANUP's output and can go through GUNZIP when --aligner ultra
+    CHUNKER_INPUT_FASTAS(ch_seq_data.mapping.map { meta, fasta, _pbi -> [ meta, fasta ] }, params.chunk_mapping, true) // true == compress output
     // CHUNKER_INPUT_FASTAS.out.fastas.view { meta, fa -> println("CHUNKER_INPUT_FASTAS.out.fasta: $meta | $fa") }
 
     // MAPPING: Split samplesheet's fasta files, add them to the queue and run mapping
@@ -190,7 +191,7 @@ workflow ISOSEQ {
 
     GSTAMA_COLLAPSE.out.bed // replace id with the former sample id and group files by sample
         .map { meta, file ->
-            def sample = meta.id_former.replaceAll(/_\d+/, '')
+            def sample = meta.id_former.replaceAll(/_\d+$/, '') // strip only the trailing samplesheet row counter
             [
                 [ id:sample ],
                 file

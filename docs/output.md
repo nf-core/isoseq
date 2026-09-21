@@ -16,13 +16,24 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [BAMTOOLS CONVERT](#bamtools-convert) - Convert bam file into fasta file
 - [TAMA POLYA CLEAN UP](#tama-polya-clean-up) - Detect and trim polyA tails reads
 - [GUNZIP](#gunzip) - Decompress FLNC fastas (uLTRA path only)
-- [ULTRA or MINIMAP2](#ultra-minimap2) - Map FLNCs on genome
-- [BIOPERL](#bioperl) - Remove spurious alignments (uLTRA path only, [Issue #11](https://github.com/ksahlin/ultra/issues/11))
-- [SAMTOOLS SORT](#samtools-sort) - Sort alignment and convert sam file into bam file
-- [TAMA FILE LIST](#tama-file-list) - Prepare list file for TAMA collapse
+- [ULTRA INDEX](#ultra-index) - Index the genome annotation (uLTRA path only)
+- [ULTRA or MINIMAP2](#ultra-or-minimap2) - Map FLNCs on genome
 - [TAMA COLLAPSE](#tama-collapse) - Clean gene models
+- [TAMA FILE LIST](#tama-file-list) - Prepare list file for TAMA merge
 - [TAMA MERGE](#tama-merge) - Merge all annotations into one for each sample with TAMA merge
+- [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
+
+### File naming
+
+Every samplesheet row gets its own prefix, `<sample>_<N>`, where `N` is the 0-based row number in the samplesheet. This keeps the runs apart when the same sample name is used on several rows (e.g. several SMRT cells of one sample). In this document, `<sample>` stands for this `<sample>_<N>` prefix.
+
+Data are then processed in chunks so steps can run in parallel:
+
+- rows starting from `ccs` are split by `ccs` itself, and their files are named `<sample>.chunk<X>.*` (`X` from 1 to `--chunk_ccs`),
+- rows starting from `lima`, `refine` or `mapping` are split into fasta chunks of `--chunk_mapping` sequences before mapping, and their files are named `<sample>.chunk.<X>.*`.
+
+The chunks are merged back by TAMA merge, whose outputs are named after the original sample name (`<sample>` without the `_<N>` suffix): all rows sharing a sample name end up in a single annotation.
 
 ### CCS
 
@@ -47,6 +58,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - `02_LIMA/`
   - `<sample>.chunk<X>_flnc.json`: Metadata about generated xml file
+  - `<sample>.chunk<X>_flnc.consensusreadset.xml`: Metadata about the input sequences
   - `<sample>.chunk<X>_flnc.lima.clips`: Clipped sequences
   - `<sample>.chunk<X>_flnc.lima.counts`: Statistics about detected primers pairs
   - `<sample>.chunk<X>_flnc.lima.guess`: Statistics about detected primers pairs
@@ -65,12 +77,14 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 <details markdown="1">
 <summary>Output files</summary>
 
-- `03_ISOSEQ3_REFINE/`
-  - `<sample>.chunk<X>.bam`: Sequences sequences
+- `03_ISOSEQ_REFINE/`
+  - `<sample>.chunk<X>.bam`: Selected sequences
   - `<sample>.chunk<X>.bam.pbi`: Pacbio index of selected sequences
   - `<sample>.chunk<X>.consensusreadset.xml`: Metadata
-  - `<sample>.chunk<X>.filter_summary.json`: Number of Full Length, Full Length Non Chimeric, Full Length Non Chimeric PolyA
+  - `<sample>.chunk<X>.filter_summary.report.json`: Number of Full Length, Full Length Non Chimeric, Full Length Non Chimeric PolyA
   - `<sample>.chunk<X>.report.csv`: Primers and insert length of each read
+
+Rows starting from `lima` or `refine` are not chunked at this stage: their files are named `<sample>.*` (no `chunk<X>`).
 
 </details>
 
@@ -84,6 +98,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - `04_BAMTOOLS_CONVERT/`
   - `<sample>.chunk<X>.fasta`: The reads in fasta format.
 
+Rows starting from `lima` or `refine` are not chunked at this stage: their files are named `<sample>.fasta`.
+
 </details>
 
 [BAMTOOLS CONVERT](https://github.com/pezmaster31/bamtools) convert reads in BAM format into fasta format.
@@ -95,7 +111,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - `05_GSTAMA_POLYACLEANUP/`
   - `<sample>.chunk<X>_tama.fa.gz`: The polyA tail free reads.
-  - `<sample>.chunk<X>_polya_flnc_report.txt.gz`: Length of removed tails.
+  - `<sample>.chunk<X>_tama_polya_flnc_report.txt.gz`: Length of removed tails.
   - `<sample>.chunk<X>_tama_tails.fa.gz`: Sequence of removed tails.
 
 </details>
@@ -108,11 +124,25 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 <summary>Output files</summary>
 
 - `06.1_GUNZIP/`
-  - `<sample>.chunk<X>_tama.fa`: The polyA tail free reads uncompressed.
+  - `<sample>.chunk<X>_tama.fa`: The polyA tail free reads uncompressed, or the fasta chunks of rows starting from `mapping`.
 
 </details>
 
 [GUNZIP](https://www.gnu.org/software/gzip/) Uncompress FLNCs for their alignment with uLTRA (gzip not handled by uLTRA yet).
+
+### ULTRA INDEX
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `ULTRA_INDEX/`
+  - `genome.gtf`: The genome annotation sorted by sequence and start position.
+  - `database.db`: The uLTRA index database.
+  - `*.pickle`: The uLTRA index files.
+
+</details>
+
+[uLTRA](https://github.com/ksahlin/ultra) index of the genome annotation, computed once and shared by all alignments (uLTRA path only).
 
 ### ULTRA or MINIMAP2
 
@@ -120,42 +150,19 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 <summary>Output files</summary>
 
 - `06.2_ULTRA/` or `06_MINIMAP2/`
-  - `<sample>.chunk<X>.sam`: The aligned reads.
+  - `<sample>.chunk<X>.bam`: The aligned reads, sorted.
+  - `<sample>.chunk<X>.bam.bai`: The index of the aligned reads (minimap2 only).
 
 </details>
 
-[`MINIMAP2`](https://github.com/lh3/minimap2) or [`uLTRA`](https://github.com/ksahlin/ultra) aligns reads ont the genome.
-
-### BIOPERL
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `06.3_PERL_BIOPERL/`
-  - `<sample>.chunk<X>_filtered.sam`: The aligned reads with spurious alignments removed.
-
-</details>
-
-[BIOPERL](https://bioperl.org/) Some CIGAR string sometimes with a gap (N). This can happen when using GFF file converted to GTF file. See [Issue #11](https://github.com/ksahlin/ultra/issues/11) from uLTRA repo.
-
-### SAMTOOLS SORT
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `07_SAMTOOLS_SORT/`
-  - `<sample>.chunk<X>_sorted.bam`: The sorted aligned reads.
-
-</details>
-
-[SAMTOOLS SORT](http://www.htslib.org/doc/samtools-sort.html) sort the aligned reads and convert the sam file in bam file.
+[`MINIMAP2`](https://github.com/lh3/minimap2) or [`uLTRA`](https://github.com/ksahlin/ultra) aligns reads on the genome.
 
 ### TAMA COLLAPSE
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `08_GSTAMA_COLLAPSE/`
+- `07_GSTAMA_COLLAPSE/`
   - `<sample>.chunk<X>_collapsed.bed`: This is a bed12 format file containing the final collapsed version of your transcriptome
   - `<sample>.chunk<X>_local_density_error.txt`: This file contains the log of filtering for local density error around the splice junctions
   - `<sample>.chunk<X>_polya.txt`: This file contains the reads with potential poly A truncation
@@ -175,8 +182,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 <details markdown="1">
 <summary>Output files</summary>
 
-- `09_GSTAMA_FILELIST/`
+- `08_GSTAMA_FILELIST/`
   - `<sample>.tsv`: A tsv listing bed files to merge with TAMA merge
+  - `all_samples.tsv`: A tsv listing bed files from all samples to merge with TAMA merge
 
 </details>
 
@@ -187,7 +195,7 @@ TAMA FILELIST is a home script for generating input file list for TAMA merge.
 <details markdown="1">
 <summary>Output files</summary>
 
-- `10_GSTAMA_MERGE/`
+- `09_GSTAMA_MERGE/`
   - `<sample>.bed`: This is the main merged annotation file.
   - `<sample>_gene_report.txt`: This contains a report of the genes from the merged file.
   - `<sample>_merge.txt`: This contains a bed12 format file which shows the coordinates of each input transcript matched to the merged transcript ID.
@@ -195,7 +203,7 @@ TAMA FILELIST is a home script for generating input file list for TAMA merge.
 
 </details>
 
-[TAMA MERGE](https://github.com/GenomeRIK/tama/wiki/Tama-Merge) TAMA Merge is a tool that allows you to merge multiple transcriptomes while maintaining source information.
+[TAMA MERGE](https://github.com/GenomeRIK/tama/wiki/Tama-Merge) TAMA Merge is a tool that allows you to merge multiple transcriptomes while maintaining source information. When there are two or more samples, output files corresponding to `all_samples` are also stored if `--tama_merge_all` parameter is set.
 
 ### MultiQC
 
@@ -219,11 +227,9 @@ Results generated by MultiQC collate pipeline QC from supported tools e.g. FastQ
 <summary>Output files</summary>
 
 - `pipeline_info/`
-  - Reports generated by Nextflow: `execution_report.html`, `execution_timeline.html`, `execution_trace.txt` and `pipeline_dag.dot`/`pipeline_dag.svg`.
-  - Reports generated by the pipeline: `pipeline_report.html`, `pipeline_report.txt` and `software_versions.yml`. The `pipeline_report*` files will only be present if the `--email` / `--email_on_fail` parameter's are used when running the pipeline.
-  - Reformatted samplesheet files used as input to the pipeline: `samplesheet.valid.csv`.
-  - Parameters used by the pipeline run: `params.json`.
+  - Reports generated by Nextflow: `execution_report_<date>.html`, `execution_timeline_<date>.html`, `execution_trace_<date>.txt` and `pipeline_dag_<date>.html`.
+  - Reports generated by the pipeline: `pipeline_report.html`, `pipeline_report.txt` and `nf_core_isoseq_software_mqc_versions.yml`. The `pipeline_report*` files will only be present if the `--email` / `--email_on_fail` parameter's are used when running the pipeline.
 
 </details>
 
-[Nextflow](https://www.nextflow.io/docs/latest/tracing.html) provides excellent functionality for generating various reports relevant to the running and execution of the pipeline. This will allow you to troubleshoot errors with the running of the pipeline, and also provide you with other information such as launch commands, run times and resource usage.
+[Nextflow](https://docs.seqera.io/platform-cloud/reports/overview) provides excellent functionality for generating various reports relevant to the running and execution of the pipeline. This will allow you to troubleshoot errors with the running of the pipeline, and also provide you with other information such as launch commands, run times and resource usage.

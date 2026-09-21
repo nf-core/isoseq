@@ -1,4 +1,39 @@
 {
+    "summary": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.fl.lima.summary:md5,bcbcaaaca418bdeb91141c81715ca420"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-12T12:34:25.47480559"
+    },
+    "LIMA - Primer Removal - Input => bam": {
+        "content": [
+            {
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-12T12:34:25.504600431"
+    },
     "fastqgz": {
         "content": [
             [
@@ -6,10 +41,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:01.98256"
+        "timestamp": "2026-02-12T12:34:25.885991815"
     },
     "counts": {
         "content": [
@@ -23,10 +58,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:00.491188"
+        "timestamp": "2026-02-12T12:34:25.40513167"
     },
     "clips": {
         "content": [
@@ -40,10 +75,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:02.19417"
+        "timestamp": "2026-02-12T12:34:25.951132172"
     },
     "LIMA - Primer Removal - Input => fq.gz - stub": {
         "content": [
@@ -85,7 +120,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     
@@ -156,8 +195,12 @@
                         "dummy.summary:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -165,10 +208,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:43.376049"
+        "timestamp": "2026-02-12T12:35:52.451468526"
     },
     "LIMA - Primer Removal - Input => fq.gz": {
         "content": [
@@ -220,7 +263,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     [
@@ -331,8 +378,12 @@
                         "test.fl.lima.summary:md5,e91d3c386aaf4effa63f33ee2eb7da2a"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -340,10 +391,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:13.306885"
+        "timestamp": "2026-02-12T12:35:15.500956685"
     },
     "LIMA - Primer Removal - Input => fq": {
         "content": [
@@ -395,7 +446,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     [
@@ -506,8 +561,12 @@
                         "test.fl.lima.summary:md5,e91d3c386aaf4effa63f33ee2eb7da2a"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -515,10 +574,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:07.559264"
+        "timestamp": "2026-02-12T12:35:03.038935069"
     },
     "LIMA - Primer Removal - Input => fa.gz - stub": {
         "content": [
@@ -560,7 +619,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     
@@ -631,8 +694,12 @@
                         "dummy.summary:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -640,10 +707,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:30.69067"
+        "timestamp": "2026-02-12T12:35:37.745197933"
     },
     "fasta": {
         "content": [
@@ -652,56 +719,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:01.262691"
-    },
-    "bam": {
-        "content": [
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test.fl.NEB_5p--NEB_Clontech_3p.bam:md5,d3de1934aa8fb39e961345916b3ae57b"
-                ]
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-01-17T11:35:00.822221"
-    },
-    "fastq": {
-        "content": [
-            [
-                
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-01-17T11:35:01.752773"
-    },
-    "summary": {
-        "content": [
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test.fl.lima.summary:md5,bcbcaaaca418bdeb91141c81715ca420"
-                ]
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-01-17T11:35:00.704932"
+        "timestamp": "2026-02-12T12:34:25.681651786"
     },
     "LIMA - Primer Removal - Input => fq - stub": {
         "content": [
@@ -743,7 +764,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     
@@ -814,8 +839,12 @@
                         "dummy.summary:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -823,10 +852,27 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:37.019064"
+        "timestamp": "2026-02-12T12:35:45.365210245"
+    },
+    "bam": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.fl.NEB_5p--NEB_Clontech_3p.bam:md5,59b04f200c309b0a60a3f182d22f6910"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-12T12:34:25.523508284"
     },
     "LIMA - Primer Removal - Input => bam - stub": {
         "content": [
@@ -868,7 +914,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     
@@ -939,8 +989,12 @@
                         "dummy.summary:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -948,10 +1002,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:18.958286"
+        "timestamp": "2026-02-12T12:35:22.965691216"
     },
     "LIMA - Primer Removal - Input => fa - stub": {
         "content": [
@@ -993,7 +1047,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     
@@ -1064,8 +1122,12 @@
                         "dummy.summary:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -1073,10 +1135,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:25.020259"
+        "timestamp": "2026-02-12T12:35:30.433815019"
     },
     "fastagz": {
         "content": [
@@ -1085,22 +1147,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:01.493258"
-    },
-    "versions": {
-        "content": [
-            [
-                "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-01-17T11:35:00.76398"
+        "timestamp": "2026-02-12T12:34:25.749681972"
     },
     "guess": {
         "content": [
@@ -1114,10 +1164,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:02.396472"
+        "timestamp": "2026-02-12T12:34:26.026327633"
     },
     "pbi": {
         "content": [
@@ -1126,15 +1176,15 @@
                     {
                         "id": "test"
                     },
-                    "test.fl.NEB_5p--NEB_Clontech_3p.bam.pbi:md5,b531dcf8afc5f6c1caf40c7affb6a90c"
+                    "test.fl.NEB_5p--NEB_Clontech_3p.bam.pbi:md5,851cf26eb54e4399cba5241db969dc0c"
                 ]
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:01.042955"
+        "timestamp": "2026-02-12T12:34:25.612906854"
     },
     "report": {
         "content": [
@@ -1148,10 +1198,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-01-17T11:35:00.626772"
+        "timestamp": "2026-02-12T12:34:25.422692879"
     },
     "LIMA - Primer Removal - Input => fa": {
         "content": [
@@ -1203,7 +1253,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     [
@@ -1222,7 +1276,12 @@
                     ]
                 ],
                 "6": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.fl.NEB_5p--NEB_Clontech_3p.fasta:md5,d4eea419961c205ef84ef39176e30ef3"
+                    ]
                 ],
                 "7": [
                     
@@ -1258,7 +1317,12 @@
                     ]
                 ],
                 "fasta": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.fl.NEB_5p--NEB_Clontech_3p.fasta:md5,d4eea419961c205ef84ef39176e30ef3"
+                    ]
                 ],
                 "fastagz": [
                     
@@ -1304,8 +1368,12 @@
                         "test.fl.lima.summary:md5,03be2311ba4afb878d8e547ab38c11eb"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -1313,10 +1381,22 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:46:54.854736"
+        "timestamp": "2026-02-12T12:34:38.412905201"
+    },
+    "fastq": {
+        "content": [
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-12T12:34:25.819717953"
     },
     "LIMA - Primer Removal - Input => fa.gz": {
         "content": [
@@ -1368,7 +1448,11 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "4": [
                     [
@@ -1390,7 +1474,12 @@
                     
                 ],
                 "7": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.fl.NEB_5p--NEB_Clontech_3p.fasta.gz:md5,d4eea419961c205ef84ef39176e30ef3"
+                    ]
                 ],
                 "8": [
                     
@@ -1426,7 +1515,12 @@
                     
                 ],
                 "fastagz": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.fl.NEB_5p--NEB_Clontech_3p.fasta.gz:md5,d4eea419961c205ef84ef39176e30ef3"
+                    ]
                 ],
                 "fastq": [
                     
@@ -1469,8 +1563,12 @@
                         "test.fl.lima.summary:md5,03be2311ba4afb878d8e547ab38c11eb"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,1a47b30bece32a2fcd9a70f9356dc30d"
+                "versions_lima": [
+                    [
+                        "LIMA",
+                        "lima",
+                        "2.12.0"
+                    ]
                 ],
                 "xml": [
                     
@@ -1478,9 +1576,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2024-05-13T08:47:01.506833"
+        "timestamp": "2026-02-12T12:34:50.42113371"
     }
 }

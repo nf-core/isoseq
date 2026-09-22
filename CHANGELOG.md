@@ -20,10 +20,13 @@ Patch release fixing reference genome resolution when `--genome` is used.
   attributes were assigned with `params.fasta = getGenomeAttribute('fasta')` in `main.nf`, which
   on the Nextflow versions supported by this pipeline (>= 25.10.4) only populates the entry
   script's parameters: included subworkflows and workflows still saw `params.fasta` as
-  undefined. The lookup now happens in `nextflow.config`, so the resolved values are visible
-  everywhere. Explicit `--fasta`/`--gtf` values still take precedence over the iGenomes ones.
-  This affected the `test_full` profile and any user run driven by `--genome`; runs passing
-  `--fasta` directly (including the `test` profile) were not affected.
+  undefined. The reference files are now resolved in the entry workflow, once all config files
+  (including those given with `-c`) are loaded, and passed down explicitly to the `ISOSEQ`
+  workflow instead of being read from `params`. This also covers a `--genome` key defined, or
+  selected, in a custom config given with `-c`. Explicit `--fasta`/`--gtf` values still take
+  precedence over the iGenomes ones. This affected the `test_full` profile and any user run
+  driven by `--genome`; runs passing `--fasta` directly (including the `test` profile) were not
+  affected.
 - Declared `fasta` and `gtf` as pipeline parameters in `nextflow.config`, removing the
   `WARN: Access to undefined parameter` messages emitted at startup
 

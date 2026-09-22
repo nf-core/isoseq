@@ -18,6 +18,7 @@
 include { ISOSEQ } from './workflows/isoseq'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_isoseq_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_isoseq_pipeline'
+include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_isoseq_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,6 +33,8 @@ workflow NFCORE_ISOSEQ {
 
     take:
     samplesheet // channel: samplesheet read in from --input
+    fasta       //  string: path to the genome fasta
+    gtf         //  string: path to the genome gtf
 
     main:
 
@@ -40,6 +43,8 @@ workflow NFCORE_ISOSEQ {
     //
     ISOSEQ (
         samplesheet,
+        fasta,
+        gtf,
         params.multiqc_config,
         params.multiqc_logo,
         params.multiqc_methods_description,
@@ -72,12 +77,21 @@ workflow {
         params.show_hidden
     )
 
+    //
+    // Resolve reference files: --fasta/--gtf take precedence over the --genome (iGenomes) ones.
+    // Done here, once all config files (including -c ones) are loaded, and passed down
+    // explicitly, as params assigned in the entry script are not visible to included workflows.
+    //
+    def fasta = params.fasta ?: getGenomeAttribute('fasta')
+    def gtf   = params.gtf   ?: getGenomeAttribute('gtf')
 
     //
     // WORKFLOW: Run main workflow
     //
     NFCORE_ISOSEQ (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.samplesheet,
+        fasta,
+        gtf
     )
 
     //

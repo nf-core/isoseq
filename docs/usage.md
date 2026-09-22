@@ -6,58 +6,121 @@
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+This pipeline has been designed to analyse several samples or sequencing runs at the same time.
+It reads all samples from a samplesheet file and parallelizes computation for each of them.
 
-## Samplesheet input
+Depending on your data, you might not need to run the full Iso-Seq preprocessing.
+Every row of the samplesheet carries a `start_from` value declaring where that sample
+enters the pipeline, so a single run can mix raw subreads with data that has already
+been through CCS, LIMA or refine:
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
+- `ccs` — raw subreads; runs the full pipeline (CCS, LIMA, refine, mapping)
+- `lima` — CCS consensuses; skips CCS generation
+- `refine` — Full Length reads produced by LIMA; skips CCS and LIMA
+- `mapping` — long reads in FASTA; skips Iso-Seq preprocessing entirely
+
+### Samplesheet input
+
+You will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline.
+Use `--input` parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
 ```
 
-### Multiple runs of the same sample
+The samplesheet is a comma-separated file with 4 columns, and a header row as shown in the examples below.
 
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
+| Column       | Description                                                                                                                                                                                                                                    |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`     | Sample name. It must not contain spaces. Output files are prefixed with `<sample>_<N>` where `N` is the 0-based row number in the samplesheet (see [output documentation](output.md)).                                                         |
+| `seq_data`   | The path to the sequence file. A BAM file for subreads, Consensus Circular Sequences or Full Length sequences. A fasta file for long reads.                                                                                                    |
+| `pbi`        | In case `seq_data` is a subreads BAM, the path to Pacbio index generated with [pbindex](https://github.com/pacificbiosciences/pbbam/). File's name must be composed of the bam file name with the `.pbi` extension. In the other cases, `none` |
+| `start_from` | The value depends on the seq_data file. `ccs` for subreads, `lima` for ccs sequences, `refine` for Full Length data and `mapping` for long reads.                                                                                              |
 
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
+```csv
+sample,seq_data,pbi,start_from
+sample1,sample1.subreads.bam,sample1.subreads.bam.pbi,ccs
+sample2,sample2.ccs.bam,none,lima
+sample3,sample3.fl.primer_5p--primer_3p.bam,none,refine
+sample4,sample4.long_reads.fa.gz,none,mapping
 ```
 
-### Full samplesheet
+If multiple cells have been run for the same sample, the sample ID can be used several times in the samplesheet. Each dataset will be analysed in parallel and then merged with TAMA.
 
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
-
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
-
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
+```csv
+sample,seq_data,pbi,start_from
+sample1,sample1_cell1.subreads.bam,sample1_cell1.subreads.bam.pbi,ccs
+sample1,sample1_cell2.subreads.bam,sample1_cell2.subreads.bam.pbi,ccs
+sample2,sample1.subreads.bam,sample2.subreads.bam.pbi,ccs
 ```
 
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+Some example samplesheets can be found on the [github repository](https://github.com/nf-core/isoseq/tree/master/assets).
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+### Migrating from version 2.0.0
+
+Version 3.0.0 redefines the samplesheet, so samplesheets written for 2.0.0 will not validate.
+
+| Version 2.0.0                               | Version 3.0.0                           |
+| ------------------------------------------- | --------------------------------------- |
+| `sample,bam,pbi,reads`                      | `sample,seq_data,pbi,start_from`        |
+| separate `bam` and `reads` columns          | one `seq_data` column holding either    |
+| `None` placeholder                          | `none`, lower case, for an absent `pbi` |
+| `--entrypoint isoseq` or `--entrypoint map` | a `start_from` value on every row       |
+
+Other changes that affect existing setups:
+
+- The minimum Nextflow version is now `25.10.4` (it was `23.04.0`).
+- `--chunk` has been split into `--chunk_ccs` and `--chunk_mapping`, controlling chunking of CCS generation and of mapping independently.
+- `--max_cpus`, `--max_memory` and `--max_time` have been removed by the nf-core template. Set limits with the `resourceLimits` directive in a custom config instead.
+- Output files are now prefixed with `<sample>_<N>`, where `N` is the 0-based row number in the samplesheet, and rows starting from `lima`, `refine` or `mapping` are split into `<sample>_<N>.chunk.<X>.*` files before mapping. Only the TAMA merge outputs keep the plain sample name. Scripts that pick up files by name after the run need updating; see the [output documentation](output.md#file-naming).
+
+### Primer file
+
+The primer files must be in `FASTA` format. The isoseq3 tutorial suggest to trim polyA from primer sequences to address `LIMA` polyA issue.
+However, this will discard a significant number of valid transcripts. To avoid this drawback, Richard Kuo suggest to conserve primer's polyA stretches, run `LIMA` without `--require-polya` and use TAMA's `tama_flnc_polya_cleanup.py` script. [[twitter thread](https://twitter.com/GenomeRIK/status/1179788262187110401)]
+
+```console
+>5p
+>primer_5p
+TGGATTGATATGTAATACGACTCACTATAG
+>primer_3p
+AAAAAAAAAAAAAAAAAACGCCTGAGA
+```
+
+Use the --primers option to specify its location.
+
+```console
+--primers '[path to primers file]'
+```
+
+The primer file is only used by `LIMA` and `isoseq refine`, so it is required whenever at
+least one samplesheet row uses `start_from` `ccs`, `lima` or `refine`. If every row uses
+`mapping`, neither step runs and `--primers` can be omitted.
+
+### Reference genome and annotation
+
+The reference genome sequence is mandatory and must be in `FASTA` format.
+The reference genome annotation in `GTF` format is required if `uLTRA` aligner is selected.
+
+```console
+--fasta '[path to genome file]'
+--gtf '[path to annotation file]'
+```
+
+### Aligners
+
+Two aligners are available. The `uLTRA` aligner helps to detect small exons with the help of reference genome. However if no annotation is available for your genome you can use minimap2.
+
+```console
+--aligner '[ultra,minimap2]'
+```
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run nf-core/isoseq --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
+nextflow run nf-core/isoseq --input ./samplesheet.csv --outdir ./results --primers primers.fasta --fasta genome.fasta --aligner minimap2 -profile docker
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
@@ -90,6 +153,8 @@ with:
 input: './samplesheet.csv'
 outdir: './results/'
 genome: 'GRCh37'
+primers: './primers.fasta'
+aligner: 'minimap2'
 <...>
 ```
 

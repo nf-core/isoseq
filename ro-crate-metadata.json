@@ -1,6 +1,6 @@
 {
     "@context": [
-        "https://w3id.org/ro/crate/1.2/context",
+        "https://w3id.org/ro/crate/1.1/context",
         {
             "GithubService": "https://w3id.org/ro/terms/test#GithubService",
             "JenkinsService": "https://w3id.org/ro/terms/test#JenkinsService",
@@ -42,6 +42,9 @@
                 },
                 {
                     "@id": "modules/"
+                },
+                {
+                    "@id": "modules/local/"
                 },
                 {
                     "@id": "modules/nf-core/"
@@ -112,7 +115,7 @@
             },
             "conformsTo": [
                 {
-                    "@id": "https://w3id.org/ro/crate/1.2"
+                    "@id": "https://w3id.org/ro/crate/1.1"
                 },
                 {
                     "@id": "https://w3id.org/workflowhub/workflow-ro-crate/1.0"
@@ -121,8 +124,12 @@
         },
         {
             "@id": "main.nf",
-            "@type": ["File", "SoftwareSourceCode", "ComputationalWorkflow"],
-            "contributor": [
+            "@type": [
+                "File",
+                "SoftwareSourceCode",
+                "ComputationalWorkflow"
+            ],
+            "author": [
                 {
                     "@id": "#fc815c01-3fad-4fd5-8e28-ffe4b66e71f2"
                 }
@@ -130,9 +137,26 @@
             "dateCreated": "",
             "dateModified": "2026-09-01T12:58:23Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
-            "keywords": ["nf-core", "nextflow", "isoseq", "isoseq-3", "rna", "tama", "ultra"],
-            "license": ["MIT"],
-            "name": ["nf-core/isoseq"],
+            "keywords": [
+                "nf-core",
+                "nextflow",
+                "isoseq",
+                "isoseq-3",
+                "rna",
+                "tama",
+                "ultra"
+            ],
+            "license": [
+                "MIT"
+            ],
+            "maintainer": [
+                {
+                    "@id": "https://orcid.org/0000-0001-5116-4150"
+                }
+            ],
+            "name": [
+                "nf-core/isoseq"
+            ],
             "programmingLanguage": {
                 "@id": "https://w3id.org/workflowhub/workflow-ro-crate#nextflow"
             },
@@ -209,6 +233,11 @@
             "@id": "modules/",
             "@type": "Dataset",
             "description": "Modules used by the pipeline"
+        },
+        {
+            "@id": "modules/local/",
+            "@type": "Dataset",
+            "description": "Pipeline-specific modules"
         },
         {
             "@id": "modules/nf-core/",
@@ -299,7 +328,9 @@
         {
             "@id": "#fc815c01-3fad-4fd5-8e28-ffe4b66e71f2",
             "@type": "Person",
-            "name": "Sébastien Guizard (@sguizard)"
+            "email": "sguizard@ed.ac.uk",
+            "name": "S\u00e9bastien Guizard",
+            "url": "https://github.com/sguizard"
         }
     ]
 }

@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v3.0.1 - Mended Zooble [22/09/2026]
+
+Patch release fixing reference genome resolution when `--genome` is used.
+
+### `Added`
+
+- Added `manifest.diagram`, pointing at the pipeline metro map so that it is displayed on the
+  pipeline's nf-co.re and Seqera Platform pages
+
+### `Fixed`
+
+- Runs using `--genome` (or any iGenomes key) failed immediately with
+  `Missing genome. A genome to annotate must be provided with the --fasta or --genome option.`,
+  even though the parameter summary showed the expected `fasta` and `gtf` paths. The iGenomes
+  attributes were assigned with `params.fasta = getGenomeAttribute('fasta')` in `main.nf`, which
+  on the Nextflow versions supported by this pipeline (>= 25.10.4) only populates the entry
+  script's parameters: included subworkflows and workflows still saw `params.fasta` as
+  undefined. The lookup now happens in `nextflow.config`, so the resolved values are visible
+  everywhere. Explicit `--fasta`/`--gtf` values still take precedence over the iGenomes ones.
+  This affected the `test_full` profile and any user run driven by `--genome`; runs passing
+  `--fasta` directly (including the `test` profile) were not affected.
+- Declared `fasta` and `gtf` as pipeline parameters in `nextflow.config`, removing the
+  `WARN: Access to undefined parameter` messages emitted at startup
+
 ## v3.0.0 - Patchwork Zooble [21/09/2026]
 
 > [!WARNING]

@@ -64,6 +64,8 @@ workflow ISOSEQ {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    genome_fasta   //  string: path to the genome fasta
+    genome_gtf     //  string: path to the genome gtf
     multiqc_config
     multiqc_logo
     multiqc_methods_description
@@ -76,14 +78,14 @@ workflow ISOSEQ {
     ch_multiqc_files = channel.empty()
 
     // Value channels initialization
-    SET_FASTA_CHANNEL(params.fasta)     // genome fasta
+    SET_FASTA_CHANNEL(genome_fasta)     // genome fasta
     ch_primers = channel.empty()        // primers fasta
     if (params.primers) {
         SET_PRIMERS_CHANNEL(params.primers) // primers fasta
         ch_primers = SET_PRIMERS_CHANNEL.out.data
     }
     if (params.aligner == "ultra") {
-        SET_GTF_CHANNEL(params.gtf)     // genome gtf
+        SET_GTF_CHANNEL(genome_gtf)     // genome gtf
     }
 
     // Dispatch inputs to redistribute them to their ad hoc starting point
@@ -181,7 +183,7 @@ workflow ISOSEQ {
     else if (params.aligner == "minimap2") {
         MINIMAP2_ALIGN(                    // Align read against genome
             ch_input_fastas,
-            [ [id:'genome'], file(params.fasta) ],
+            [ [id:'genome'], file(genome_fasta) ],
             channel.value(true),
             channel.value("bai"),
             channel.value(false),

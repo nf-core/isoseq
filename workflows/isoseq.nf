@@ -215,7 +215,7 @@ workflow ISOSEQ {
         .join( GSTAMA_FILELIST.out.tsv )
         .set { ch_tmerge_in }
 
-    GSTAMA_MERGE(ch_tmerge_in.map { [ it[0], it[1] ] }, ch_tmerge_in.map { it[2] }) // Merge all bed files from one sample into a uniq bed file
+    GSTAMA_MERGE(ch_tmerge_in.map { meta, bed, _tsv -> [ meta, bed ] }, ch_tmerge_in.map { _meta, _bed, tsv -> tsv }) // Merge all bed files from one sample into a uniq bed file
 
     // Merge all bed files from all samples into a uniq bed file
     ( params.tama_merge_all ? GSTAMA_MERGE.out.bed : channel.empty() )
@@ -284,9 +284,9 @@ workflow ISOSEQ {
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
-    ch_multiqc_files = ch_multiqc_files.mix(PBCCS.out.report_json.collect{it[1]}.ifEmpty([]))
-    ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.summary.collect{it[1]}.ifEmpty([]))
-    ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.counts.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(PBCCS.out.report_json.collect { row -> row[1] }.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.summary.collect { row -> row[1] }.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(LIMA.out.counts.collect { row -> row[1] }.ifEmpty([]))
 
     MULTIQC (
         ch_multiqc_files.flatten().collect().map { files ->

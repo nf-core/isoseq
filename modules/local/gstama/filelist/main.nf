@@ -17,7 +17,6 @@ process GSTAMA_FILELIST {
     path "versions.yml"           , emit: versions
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     for i in *.bed

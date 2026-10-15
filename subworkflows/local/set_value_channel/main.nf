@@ -12,7 +12,7 @@ workflow SET_VALUE_CHANNEL {
     if (infile =~ /.gz$/) {
         GUNZIP([[], file(infile)])
             .gunzip
-            .map { it[1] }
+            .map { _meta, unzipped -> unzipped }
             .set { data }
     }
     else {

@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v3.0.2dev - [date]
+
+### `Dependencies`
+
+- Bumped `nf-schema` from 2.5.1 to 3.0.0 and updated the `utils_nfschema_plugin` subworkflow
+- **Breaking:** the minimum Nextflow version is now `26.04.0` (was `25.10.4`), as required by
+  `nf-schema` 3.0.0
+
 ## v3.0.1 - Mended Zooble [22/09/2026]
 
 Patch release fixing reference genome resolution when `--genome` is used.

@@ -3,7 +3,7 @@ lint:
     - assets/nf-core-isoseq_logo_light.png
     - docs/images/nf-core-isoseq_logo_light.png
     - docs/images/nf-core-isoseq_logo_dark.png
-nf_core_version: 4.1.0
+nf_core_version: 4.2.1
 repository_type: pipeline
 template:
   author: "S\xE9bastien Guizard (@sguizard)"
@@ -13,4 +13,4 @@ template:
   name: isoseq
   org: nf-core
   outdir: .
-  version: 3.0.0
+  version: 3.0.1

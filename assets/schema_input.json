@@ -13,52 +13,21 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "seq_data": {
+            "fastq_1": {
                 "type": "string",
-                "pattern": "^\\S+\\.(bam|fa|fa\\.gz)$",
                 "format": "file-path",
-                "errorMessage": "Sequence data file must be provided, cannot contain spaces and must have extension '.bam', '.fa' or '.fa.gz'"
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
-            "pbi": {
-                "anyOf": [
-                    {
-                        "type": "string",
-                        "pattern": "^\\S+\\.bam\\.pbi$",
-                        "format": "file-path"
-                    },
-                    {
-                        "type": "string",
-                        "pattern": "^none$"
-                    }
-                ],
-                "errorMessage": "PacBio index for a subreads BAM must have extension '.bam.pbi' and cannot contain spaces. Use 'none' when no index applies."
-            },
-            "start_from": {
+            "fastq_2": {
                 "type": "string",
-                "enum": ["ccs", "lima", "refine", "mapping"],
-                "errorMessage": "start_from must be one of: ccs, lima, refine, mapping",
-                "meta": ["start_from"]
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             }
         },
-        "required": ["sample", "seq_data", "start_from"],
-        "allOf": [
-            {
-                "if": {
-                    "properties": {
-                        "start_from": { "const": "ccs" }
-                    },
-                    "required": ["start_from"]
-                },
-                "then": {
-                    "required": ["pbi"],
-                    "properties": {
-                        "pbi": {
-                            "pattern": "^\\S+\\.bam\\.pbi$",
-                            "errorMessage": "A PacBio index file ('.bam.pbi') is required when start_from is 'ccs'"
-                        }
-                    }
-                }
-            }
-        ]
+        "required": ["sample", "fastq_1"]
     }
 }

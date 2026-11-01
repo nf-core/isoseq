@@ -45,8 +45,8 @@
         ],
         "timestamp": "2026-05-11T23:14:32.80541933",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.03.2",
+            "nf-test": "0.9.5"
         }
     },
     "test-gstama-merge": {
@@ -95,8 +95,8 @@
         ],
         "timestamp": "2026-05-11T23:14:24.624282272",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.03.2",
+            "nf-test": "0.9.5"
         }
     }
 }

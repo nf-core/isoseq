@@ -37,8 +37,8 @@
         ],
         "timestamp": "2026-07-29T15:42:39.619928488",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.04.6",
+            "nf-test": "0.9.5"
         }
     },
     "test-gstama-polyacleanup -- stub": {
@@ -79,8 +79,8 @@
         ],
         "timestamp": "2026-07-29T15:42:48.519457766",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.04.6",
+            "nf-test": "0.9.5"
         }
     }
 }

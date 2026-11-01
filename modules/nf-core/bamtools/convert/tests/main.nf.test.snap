@@ -38,8 +38,8 @@
         ],
         "timestamp": "2026-03-11T18:52:31.973880179",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_pileup": {
@@ -81,8 +81,8 @@
         ],
         "timestamp": "2026-03-11T18:53:23.017380988",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_yaml": {
@@ -124,8 +124,8 @@
         ],
         "timestamp": "2026-03-11T18:53:50.989109105",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_yaml - stub": {
@@ -164,14 +164,12 @@
                     ]
                 ]
             },
-            [
-                
-            ]
+            []
         ],
         "timestamp": "2026-03-11T18:54:05.904431089",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_fasta": {
@@ -213,8 +211,8 @@
         ],
         "timestamp": "2026-03-11T18:52:44.670839319",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_fastq": {
@@ -256,8 +254,8 @@
         ],
         "timestamp": "2026-03-11T18:52:56.91010697",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_json": {
@@ -299,8 +297,8 @@
         ],
         "timestamp": "2026-03-11T18:53:09.39949925",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     },
     "test_bamtools_convert_sam": {
@@ -342,8 +340,8 @@
         ],
         "timestamp": "2026-03-11T18:53:35.676586302",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.4"
         }
     }
 }

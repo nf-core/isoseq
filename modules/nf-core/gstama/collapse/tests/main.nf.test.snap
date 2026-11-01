@@ -85,8 +85,8 @@
         ],
         "timestamp": "2026-05-11T22:55:53.631912293",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.03.2",
+            "nf-test": "0.9.5"
         }
     },
     "test-gstama-collapse": {
@@ -175,8 +175,8 @@
         ],
         "timestamp": "2026-05-11T22:57:16.945475905",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.03.2",
+            "nf-test": "0.9.5"
         }
     }
 }

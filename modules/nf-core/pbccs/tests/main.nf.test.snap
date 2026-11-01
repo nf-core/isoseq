@@ -53,8 +53,8 @@
         ],
         "timestamp": "2026-08-04T11:54:37.539447047",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.04.6",
+            "nf-test": "0.9.5"
         }
     },
     "PacBio pbccs - Compute CSS test - stub": {
@@ -111,8 +111,8 @@
         ],
         "timestamp": "2026-08-04T11:50:21.212231706",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.04.6",
+            "nf-test": "0.9.5"
         }
     }
 }

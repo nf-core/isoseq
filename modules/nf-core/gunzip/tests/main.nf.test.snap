@@ -36,8 +36,8 @@
         ],
         "timestamp": "2026-04-15T15:20:52.59447",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.4",
+            "nf-test": "0.9.5"
         }
     },
     "Should run without failures - prefix - stub": {
@@ -77,8 +77,8 @@
         ],
         "timestamp": "2026-01-19T17:21:56.633550769",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.2",
+            "nf-test": "0.9.3"
         }
     },
     "Should run without failures - stub": {
@@ -86,9 +86,7 @@
             {
                 "0": [
                     [
-                        [
-                            
-                        ],
+                        [],
                         "test_1.fastq:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
@@ -101,9 +99,7 @@
                 ],
                 "gunzip": [
                     [
-                        [
-                            
-                        ],
+                        [],
                         "test_1.fastq:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
@@ -118,8 +114,8 @@
         ],
         "timestamp": "2026-01-19T17:21:51.435621199",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.2",
+            "nf-test": "0.9.3"
         }
     },
     "Should run without failures": {
@@ -127,9 +123,7 @@
             {
                 "0": [
                     [
-                        [
-                            
-                        ],
+                        [],
                         "test_1.fastq:md5,4161df271f9bfcd25d5845a1e220dbec"
                     ]
                 ],
@@ -142,9 +136,7 @@
                 ],
                 "gunzip": [
                     [
-                        [
-                            
-                        ],
+                        [],
                         "test_1.fastq:md5,4161df271f9bfcd25d5845a1e220dbec"
                     ]
                 ],
@@ -159,8 +151,8 @@
         ],
         "timestamp": "2026-01-19T17:21:40.613975821",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.2",
+            "nf-test": "0.9.3"
         }
     },
     "Should run without failures - prefix": {
@@ -200,8 +192,8 @@
         ],
         "timestamp": "2026-01-19T17:21:46.086880414",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.2",
+            "nf-test": "0.9.3"
         }
     }
 }

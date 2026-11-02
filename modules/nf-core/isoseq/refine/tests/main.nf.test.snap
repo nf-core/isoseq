@@ -37,8 +37,8 @@
         ],
         "timestamp": "2026-06-03T14:05:40.492223379",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.3",
+            "nf-test": "0.9.5"
         }
     },
     "PacBio isoseq refine - Chimeras Removing test - stub": {
@@ -95,8 +95,8 @@
         ],
         "timestamp": "2026-06-03T14:05:45.050914829",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.3",
+            "nf-test": "0.9.5"
         }
     }
 }
